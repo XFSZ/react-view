@@ -22,6 +22,13 @@ library.push(
   },
 );
 
+
+
+// export interface IpageSize{
+//   width:'1366'
+//   height:'768'
+// }
+
 export type dooringContextType = 'h5' | 'pc';
 
 export interface IdooringContextType {

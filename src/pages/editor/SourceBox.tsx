@@ -216,8 +216,8 @@ const SourceBox = memo((props: SourceBoxProps) => {
     };
   }, []);
   const opacity = isOver ? 0.7 : 1;
-  const width = '800px';
-  const height = '800px';
+  let width = '800px';
+  let height = '800px';
   const render = useMemo(() => {
     return (
       <Draggable
