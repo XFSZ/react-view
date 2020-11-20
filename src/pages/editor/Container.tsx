@@ -60,7 +60,7 @@ const Container = (props: {
     if (context.theme === 'h5') {
       return template1;
     } else {
-      return template2;
+     // return template2;
     }
   }, [context.theme]);
 
@@ -68,7 +68,7 @@ const Container = (props: {
     if (context.theme === 'h5') {
       return mediaTpl1;
     } else {
-      return mediaTpl2;
+    //  return mediaTpl2;
     }
   }, [context.theme]);
 
@@ -76,7 +76,7 @@ const Container = (props: {
     if (context.theme === 'h5') {
       return graphTpl1;
     } else {
-      return graphTpl2;
+    //  return graphTpl2;
     }
   }, [context.theme]);
 
@@ -218,8 +218,9 @@ const Container = (props: {
             transform: rightColla ? 'translate(100%,0)' : 'translate(0,0)',
           }}
         >
+            {console.log("this is curPoint : ", curPoint)}
           {
-          
+        
           pointData.length && curPoint ? (
             <>
               <div className={styles.tit}>属性设置</div>
