@@ -11,7 +11,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 require('codemirror/mode/xml/xml');
 require('codemirror/mode/javascript/javascript');
 
-const serverUrl = isDev ? 'http://localhost:3000' : 'http://localhost:3000';
+const serverUrl = isDev ? 'http://192.168.1.5:8000/' : 'http://localhost:3000';
 
 let html = `<!DOCTYPE html>
 <html lang="en">

@@ -10,7 +10,7 @@ export default defineConfig({
   },
   devtool: 'source-map',
   antd: {},
-  title: '趣谈前端-h5-dooring',
+  title: '大屏系统',
   // exportStatic: {},
   base: '/',
   publicPath: '/',
@@ -20,7 +20,7 @@ export default defineConfig({
     {
       exact: false,
       path: '/',
-      component: '@/layouts/index',
+     // component: '@/layouts/index',
       routes: [
         {
           path: '/',

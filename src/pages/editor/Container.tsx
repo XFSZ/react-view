@@ -218,7 +218,9 @@ const Container = (props: {
             transform: rightColla ? 'translate(100%,0)' : 'translate(0,0)',
           }}
         >
-          {pointData.length && curPoint ? (
+          {
+          
+          pointData.length && curPoint ? (
             <>
               <div className={styles.tit}>属性设置</div>
               <FormEditor

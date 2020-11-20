@@ -79,7 +79,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
             <span>模版名称：</span>
             <Input ref={iptRef} />
           </div>
-          <div className={styles.formIpt}>
+          {/* <div className={styles.formIpt}>
             <span>封面设置：</span>
             <Button
               type="primary"
@@ -96,7 +96,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
           <div className={styles.formIpt}>
             <span>访问链接：</span>
             <Input disabled value="暂未开放，保存之后可以在模版库中访问" />
-          </div>
+          </div> */}
         </div>
       ),
       okText: '保存',
@@ -174,7 +174,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
   };
   const handleSaveCode = () => {
     Modal.confirm({
-      title: '确定要下载吗? 每人每天只能下载2次哦~',
+      title: '确定要下载吗? ',
       okText: '确定',
       cancelText: '取消',
       onOk() {
@@ -227,12 +227,12 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
         <div className={styles.backBtn} onClick={toBack}>
           <ArrowLeftOutlined />
         </div>
-        <div className={styles.logo}></div>
+        {/* <div className={styles.logo}></div> */}
       </div>
       <div className={styles.controlArea}>
-        <Button type="primary" style={{ marginRight: '9px' }} onClick={useTemplate}>
+        {/* <Button type="primary" style={{ marginRight: '9px' }} onClick={useTemplate}>
           模版库
-        </Button>
+        </Button> */}
         <Button
           type="link"
           style={{ marginRight: '9px' }}
@@ -272,7 +272,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
         >
           <FileAddOutlined />
         </Button>
-        <MyPopover content={content()} directions="BOTTOM">
+        {/* <MyPopover content={content()} directions="BOTTOM">
           <Button
             type="link"
             style={{ marginRight: '9px' }}
@@ -281,7 +281,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
           >
             <MobileOutlined />
           </Button>
-        </MyPopover>
+        </MyPopover> */}
         <Button
           type="link"
           style={{ marginRight: '9px' }}
@@ -303,7 +303,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
         <Button type="link" style={{ marginRight: '9px' }} title="重做" onClick={redohandler}>
           <RedoOutlined />
         </Button>
-        <Tooltip placement="bottom" title="一键生成海报分享图">
+        {/* <Tooltip placement="bottom" title="一键生成海报分享图">
           <Badge dot offset={[-18, 10]}>
             <Button
               type="link"
@@ -314,11 +314,11 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
               <InstagramOutlined />
             </Button>
           </Badge>
-        </Tooltip>
+        </Tooltip> */}
         <Button type="link" onClick={toPreview} disabled={!pointData.length}>
           预览
         </Button>
-        <Button
+        {/* <Button
           type="link"
           style={{ marginRight: '9px' }}
           onClick={toHelp}
@@ -326,7 +326,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
           title="使用帮助"
         >
           帮助
-        </Button>
+        </Button> */}
       </div>
       <div className={styles.btnArea}>
         {/* 隐藏pc端切换, 保证代码纯粹 */}
@@ -340,14 +340,14 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
           <Select.Option value="h5">h5模式</Select.Option>
           <Select.Option value="pc">pc模式</Select.Option>
         </Select> */}
-        <Button type="primary" ghost onClick={toOnlineCoding} style={{ marginRight: '12px' }}>
+        {/* <Button type="primary" ghost onClick={toOnlineCoding} style={{ marginRight: '12px' }}>
           <CodeOutlined />
           在线编程
         </Button>
         <Button type="primary" ghost onClick={toVipLogin} style={{ marginRight: '12px' }}>
           <SketchOutlined />
           会员登录
-        </Button>
+        </Button> */}
       </div>
       <Modal
         title="生成封面中...(长时间未反应请点右侧按钮重试)"

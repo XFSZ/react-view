@@ -15,7 +15,7 @@ const { TabPane } = Tabs;
 const Home = () => {
   const handleGo = (type: string) => {
     if (type === 'H5') {
-      history.push('/editor?tid=123456');
+      history.push('/editor?tid=1');
     } else if (type === 'PC') {
       message.error('该功能暂未开放, 敬请关注...');
     } else {
@@ -80,14 +80,14 @@ const Home = () => {
             <MobileOutlined />
             <div>制作H5页面</div>
           </div>
-          <div className={styles.card} onClick={() => handleGo('online')}>
+          {/* <div className={styles.card} onClick={() => handleGo('online')}>
             <CodeOutlined />
             <div>在线编程</div>
           </div>
           <div className={styles.card} onClick={() => handleGo('PC')}>
             <ConsoleSqlOutlined />
             <div>制作可视化大屏</div>
-          </div>
+          </div> */}
         </div>
         <footer className={styles.footer}>
           <div>
