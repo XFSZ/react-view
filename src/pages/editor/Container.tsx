@@ -208,6 +208,7 @@ const Container = (props: {
 
   const ref = useRef<HTMLDivElement>(null);
   const renderRight = useMemo(() => {
+
     if (context.theme === 'h5') {
       return (
         <div
@@ -218,7 +219,7 @@ const Container = (props: {
             transform: rightColla ? 'translate(100%,0)' : 'translate(0,0)',
           }}
         >
-            {console.log("this is curPoint : ", curPoint)}
+            {console.log("ref : ",ref)}
           {
         
           pointData.length && curPoint ? (
@@ -352,6 +353,7 @@ const Container = (props: {
   });
 
   const mousedownfn = useMemo(() => {
+   
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === containerRef.current) {
         setDiffMove({
@@ -366,6 +368,7 @@ const Container = (props: {
   }, []);
 
   const mousemovefn = useMemo(() => {
+   
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (diffmove.move) {
         let diffx: number;
@@ -392,6 +395,7 @@ const Container = (props: {
   }, [diffmove.move, diffmove.start.x, diffmove.start.y]);
 
   const mouseupfn = useMemo(() => {
+    
     return () => {
       setDiffMove({
         start: { x: 0, y: 0 },
@@ -420,6 +424,9 @@ const Container = (props: {
     if (diffmove.move && containerRef.current) {
       containerRef.current.style.cursor = 'move';
     } else {
+      dispatch({
+        type: 'editorModal/nullPointData',
+      });
       containerRef.current!.style.cursor = 'default';
     }
   }, [diffmove.move]);

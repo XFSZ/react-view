@@ -68,6 +68,14 @@ export default {
         pointData,
       };
     },
+    nullPointData(state){
+      const pointData = state.pointData;
+      return {
+        ...state,
+        pointData,
+        curPoint: null,
+      };
+    },
     delPointData(state, { payload }) {
       const { id } = payload;
       const pointData = state.pointData.filter(item => item.id !== id);

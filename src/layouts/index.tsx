@@ -119,9 +119,11 @@ export default function Layout({ children }: IRouteComponentProps) {
           }}
           onMouseEnter={() => {
             //0初始，1点击 2移入
+            console.log(" onMouseEnter  ")
             setNum(2);
           }}
           onMouseLeave={() => {
+            console.log(" onMouseLeave  ")
             setNum(pre => (pre === 2 ? 0 : pre));
           }}
         >

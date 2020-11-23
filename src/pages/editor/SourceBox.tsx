@@ -227,7 +227,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
           setDragState({ x: data.x, y: data.y });
         }}
       >
-        <div className={styles.canvasBox} style={{width,height}}>
+        <div className={styles.canvasBox}  style={{width,height}}>
           <MenuProvider id="menu_id">
             <div
               style={{
