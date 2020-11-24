@@ -34,7 +34,6 @@ const SourceBox = memo((props: SourceBoxProps) => {
   let pointData = pstate ? pstate.pointData : [];
   const cpointData = cstate ? cstate.pointData : [];
   const [canvasRect, setCanvasRect] = useState<number[]>([]);
-  //console.log(canvasRect)
   const [isShowTip, setIsShowTip] = useState(true);
   // const [clonePointData, setPointData] = useState(pointData);
   // const [isMenu, setIsMenu] = useState(false);
@@ -224,10 +223,6 @@ const SourceBox = memo((props: SourceBoxProps) => {
   useEffect(()=>{
     try{
     if(panelData.id && panelData.id==='0'){
-      console.log("panelData : ",panelData)
-      //const panelItemWidth = pstate.pointData[0].item.width +"px";
-     // const panelItemHeight = pstate.pointData[0].item.height +"px";
-    // console.log("what : ",panelData)
       setPanelWidth(panelData.item.config.width +"px")
       setPanelHeight( panelData.item.config.height +"px")
       setCanvasRect([panelData.item.config.width, panelData.item.config.height]);
@@ -248,12 +243,12 @@ const SourceBox = memo((props: SourceBoxProps) => {
           setDragState({ x: data.x, y: data.y });
         }}
       >
-        <div className={styles.canvasBox}  style={{width :panelWidth,height:panelHeight}}>
+        <div className={styles.canvasBox}  style={{width :panelWidth,height:panelHeight,backgroundColor:'red',}}>
           <MenuProvider id="menu_id">
             <div
               style={{
                 transform: `scale(${scaleNum})`,
-                position: 'relative',
+                position: 'relative',  
                 width: '100%',
                 height: '100%',
               }}
