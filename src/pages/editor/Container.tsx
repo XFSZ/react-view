@@ -410,6 +410,7 @@ const Container = (props: {
    
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === containerRef.current) {
+       // console.log("containerRef : ",containerRef.current)
         setDiffMove({
           start: {
             x: e.clientX,

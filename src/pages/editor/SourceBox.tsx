@@ -34,6 +34,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   let pointData = pstate ? pstate.pointData : [];
   const cpointData = cstate ? cstate.pointData : [];
   const [canvasRect, setCanvasRect] = useState<number[]>([]);
+  //console.log(canvasRect)
   const [isShowTip, setIsShowTip] = useState(true);
   // const [clonePointData, setPointData] = useState(pointData);
   // const [isMenu, setIsMenu] = useState(false);
@@ -48,6 +49,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
         col = 24, // 网格列数
         cellHeight = 2,
         w = item.type === 'Icon' ? 3 : col;
+        console.log("pointRect : ",pointRect)
       // 转换成网格规则的坐标和大小
       let gridY = Math.ceil(y / cellHeight);
       if (context.theme === 'h5') {
@@ -111,6 +113,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
 
   const onDragStart: ItemCallback = useMemo(() => {
     return (layout, oldItem, newItem, placeholder, e, element) => {
+     // console.log("newItem : ",newItem)
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({
         type: 'editorModal/modPointData',
@@ -200,7 +203,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
     ),
     [onConTextClick],
   );
-
+   //h5 Rect 
   useEffect(() => {
     let { width, height } = document.getElementById(canvasId)!.getBoundingClientRect();
     setCanvasRect([width, height]);
@@ -220,14 +223,15 @@ const SourceBox = memo((props: SourceBoxProps) => {
   // const [backgroundColor,setBackgroundColor] = useState('#eee') 
   useEffect(()=>{
     try{
-    if(panelData.item){
-      
+    if(panelData.id && panelData.id==='0'){
+      console.log("panelData : ",panelData)
       //const panelItemWidth = pstate.pointData[0].item.width +"px";
      // const panelItemHeight = pstate.pointData[0].item.height +"px";
-     console.log("what : ",panelData)
+    // console.log("what : ",panelData)
       setPanelWidth(panelData.item.config.width +"px")
       setPanelHeight( panelData.item.config.height +"px")
-      console.log("hello : ",panelWidth,panelHeight)
+      setCanvasRect([panelData.item.config.width, panelData.item.config.height]);
+    //  console.log("hello : ",panelWidth,panelHeight)
     }
   }catch (e
   ){
@@ -259,6 +263,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
                 className={styles.canvas}
                 style={{
                   opacity,width :panelWidth,height:panelHeight
+              //  width :panelWidth,height:panelHeight
                 }}
                 ref={drop}
               >

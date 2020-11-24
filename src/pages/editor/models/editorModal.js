@@ -85,7 +85,7 @@ export default {
       return {
         ...state,
         pointData,
-        curPoint: null,
+        curPoint: state.pointData[0],
       };
     },
     clearAll(state) {
