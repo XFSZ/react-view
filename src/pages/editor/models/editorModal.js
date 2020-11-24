@@ -21,7 +21,9 @@ export default {
   },
   reducers: {
     addPointData(state, { payload }) {
+      console.log("payload : ",payload)
       let pointData = [...state.pointData, payload];
+      console.log("pointData of panel : ",pointData)
       overSave('userData', pointData);
       return {
         ...state,
@@ -73,7 +75,7 @@ export default {
       return {
         ...state,
         pointData,
-        curPoint: null,
+        curPoint: state.pointData[0],
       };
     },
     delPointData(state, { payload }) {

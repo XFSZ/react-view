@@ -24,7 +24,7 @@ import schemaH5 from 'components/BasicShop/schema';
 import { ActionCreators, StateWithHistory } from 'redux-undo';
 import { dooringContext } from '@/layouts';
 import { throttle } from '@/utils/tool';
-
+import { uuid } from '@/utils/tool';
 import styles from './index.less';
 
 const { TabPane } = Tabs;
@@ -41,8 +41,12 @@ const Container = (props: {
   const [rightColla, setRightColla] = useState(true);
   const { pstate, cstate, dispatch } = props;
   const pointData = pstate ? pstate.pointData : [];
+ // const pointData = pstate ? pstate.pointData :[{"id":"0","item":{"type":"Panel","config":{"text":"页面1","color":"rgba(60,60,60,1)","width":1366,"height":768},"h":"0px","editableEl":[{"key":"text","name":"文字","type":"Text"},{"key":"color","name":"背景颜色","type":"Color"},{"key":"width","name":"宽","type":"Number"},{"key":"height","name":"高","type":"Number"}],"category":"basePanel","x":0,"w":"0px"},"point":{"i":"x-0","x":0,"y":0,"w":1,"h":1,"isBounded":true},"status":"initCanvas"}]
+   
   const cpointData = cstate ? cstate.pointData : [];
-
+  //  useEffect(()=>{
+  //   props.pstate =[{"id":"0","item":{"type":"Panel","config":{"text":"页面1","color":"rgba(60,60,60,1)","width":1366,"height":768},"h":"0px","editableEl":[{"key":"text","name":"文字","type":"Text"},{"key":"color","name":"背景颜色","type":"Color"},{"key":"width","name":"宽","type":"Number"},{"key":"height","name":"高","type":"Number"}],"category":"basePanel","x":0,"w":"0px"},"point":{"i":"x-0","x":0,"y":0,"w":1,"h":1,"isBounded":true},"status":"initCanvas"}]
+  //  })
   const changeCollapse = useMemo(() => {
     return (c: boolean) => {
       setCollapsed(c);
@@ -57,6 +61,7 @@ const Container = (props: {
   const curPoint = pstate ? pstate.curPoint : {};
 
   const template = useMemo(() => {
+    return template1;
     if (context.theme === 'h5') {
       return template1;
     } else {
@@ -65,6 +70,7 @@ const Container = (props: {
   }, [context.theme]);
 
   const mediaTpl = useMemo(() => {
+    return mediaTpl1;
     if (context.theme === 'h5') {
       return mediaTpl1;
     } else {
@@ -73,6 +79,7 @@ const Container = (props: {
   }, [context.theme]);
 
   const graphTpl = useMemo(() => {
+    return graphTpl1;
     if (context.theme === 'h5') {
       return graphTpl1;
     } else {
@@ -83,6 +90,37 @@ const Container = (props: {
   // 指定画布的id
   let canvasId = 'js_canvas';
 
+  const [panelItem, setPanleItem] = useState({
+    type: "Panel",
+    config: schemaH5["Panel" as keyof typeof schemaH5].config,
+    h: '0px',
+    editableEl: schemaH5["Panel" as keyof typeof schemaH5].editData,
+    category: "basePanel",
+    x:  0,
+    w:'0px'
+  });
+
+  useEffect(() => {
+     
+    if(pstate.pointData.length===0){
+      console.log("init of  pstate  : ",pstate)
+     // console.log("pstate.pointData : ",pstate)
+    const w = 1;
+    // pstate.pointData = []
+      dispatch({
+        type: 'editorModal/addPointData',
+        payload: {
+          id: '0',
+          item:panelItem,
+          point: { i: `x-${0}`, x: 0, y: 0, w:1, h: 1, isBounded: true },
+          status: 'initCanvas',
+        },
+      });
+      console.log("pstate.pointData : ",pstate)
+      
+    }
+   
+  });
   const backSize = () => {
     setScale(1);
     setDragState({ x: 0, y: 0 });
@@ -177,6 +215,9 @@ const Container = (props: {
     });
   };
 
+
+
+
   useEffect(() => {
     if (window.innerWidth < 1024) {
       props.history.push('/mobileTip');
@@ -219,10 +260,11 @@ const Container = (props: {
             transform: rightColla ? 'translate(100%,0)' : 'translate(0,0)',
           }}
         >
-            {console.log("ref : ",ref)}
+           
           {
         
           pointData.length && curPoint ? (
+            
             <>
               <div className={styles.tit}>属性设置</div>
               <FormEditor
@@ -235,13 +277,28 @@ const Container = (props: {
               />
             </>
           ) : (
-            <div style={{ paddingTop: '100px' }}>
-              <Result
-                status="404"
-                title="还没有数据哦"
-                subTitle="赶快拖拽组件来生成你的H5页面吧～"
-              />
-            </div>
+            <>
+            <div className={styles.tit}>属性设置</div>
+            {/* 
+               <>
+               {console.log("curPoint : ",curPoint)}
+            <FormEditor
+              config={pstate.pointData[0].item.editableEl}
+              uid={'0'}
+              defaultValue={pstate.pointData[0].item.config}
+              onSave={handleFormSave}
+              onDel={handleDel}
+              rightPannelRef={ref}
+            />
+          </> */}
+             <div style={{ paddingTop: '100px' }}>
+             <Result
+                 status="404"
+                 title="还没有数据哦"
+                 subTitle="赶快拖拽组件来生成你的H5页面吧～"
+               />
+             </div>
+             </>
           )}
         </div>
       );
@@ -544,5 +601,6 @@ const Container = (props: {
 };
 
 export default connect((state: StateWithHistory<any>) => {
+  console.log("pstate : ",state.present.editorModal)
   return { pstate: state.present.editorModal, cstate: state.present.editorPcModal };
 })(Container);
