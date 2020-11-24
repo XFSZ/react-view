@@ -278,7 +278,7 @@ const Container = (props: {
             <div className={styles.tit}>属性设置</div>
             {/* 
                <>
-               {console.log("curPoint : ",curPoint)}
+              
             <FormEditor
               config={pstate.pointData[0].item.editableEl}
               uid={'0'}
@@ -410,7 +410,6 @@ const Container = (props: {
    
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === containerRef.current) {
-       // console.log("containerRef : ",containerRef.current)
         setDiffMove({
           start: {
             x: e.clientX,
@@ -600,6 +599,5 @@ const Container = (props: {
 };
 
 export default connect((state: StateWithHistory<any>) => {
-  //console.log("pstate : ",state.present.editorModal)
   return { pstate: state.present.editorModal, cstate: state.present.editorPcModal };
 })(Container);

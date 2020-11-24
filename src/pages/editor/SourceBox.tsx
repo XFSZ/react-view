@@ -48,7 +48,6 @@ const SourceBox = memo((props: SourceBoxProps) => {
         col = 24, // 网格列数
         cellHeight = 2,
         w = item.type === 'Icon' ? 3 : col;
-        console.log("pointRect : ",pointRect)
       // 转换成网格规则的坐标和大小
       let gridY = Math.ceil(y / cellHeight);
       if (context.theme === 'h5') {
@@ -112,7 +111,6 @@ const SourceBox = memo((props: SourceBoxProps) => {
 
   const onDragStart: ItemCallback = useMemo(() => {
     return (layout, oldItem, newItem, placeholder, e, element) => {
-     // console.log("newItem : ",newItem)
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({
         type: 'editorModal/modPointData',
@@ -226,7 +224,6 @@ const SourceBox = memo((props: SourceBoxProps) => {
       setPanelWidth(panelData.item.config.width +"px")
       setPanelHeight( panelData.item.config.height +"px")
       setCanvasRect([panelData.item.config.width, panelData.item.config.height]);
-    //  console.log("hello : ",panelWidth,panelHeight)
     }
   }catch (e
   ){

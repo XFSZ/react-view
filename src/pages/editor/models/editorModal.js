@@ -21,9 +21,7 @@ export default {
   },
   reducers: {
     addPointData(state, { payload }) {
-      console.log("payload : ",payload)
       let pointData = [...state.pointData, payload];
-      console.log("pointData of panel : ",pointData)
       overSave('userData', pointData);
       return {
         ...state,
