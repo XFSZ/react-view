@@ -68,7 +68,7 @@ const FormEditor = (props: FormEditorProps) => {
           <React.Fragment key={i}>
             {item.type === 'Number' && (
               <Form.Item label={item.name} name={item.key}>
-                <InputNumber max={item.range && item.range[1]} />
+                <InputNumber style={{width:'64px'}}   max={item.range && item.range[1]} />
               </Form.Item>
             )}
             {item.type === 'Text' && (

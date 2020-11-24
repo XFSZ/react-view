@@ -217,6 +217,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   const opacity = isOver ? 0.7 : 1;
   const [panelWidth,setPanelWidth] = useState('1920px')
   const [panelHeight,setPanelHeight] = useState('1080px')
+  // const [backgroundColor,setBackgroundColor] = useState('#eee') 
   useEffect(()=>{
     try{
     if(panelData.item){
@@ -302,6 +303,8 @@ const SourceBox = memo((props: SourceBoxProps) => {
     pointData,
     scaleNum,
     setDragState,
+    panelWidth,
+    panelHeight,
   ]);
 
   return (
