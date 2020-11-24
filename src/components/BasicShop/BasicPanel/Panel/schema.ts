@@ -25,7 +25,7 @@ import {
     editData: [
       {
         key: 'text',
-        name: '文字',
+        name: '名称',
         type: 'Text',
       },
       {

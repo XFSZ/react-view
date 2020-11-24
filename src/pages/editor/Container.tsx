@@ -103,9 +103,7 @@ const Container = (props: {
   useEffect(() => {
      
     if(pstate.pointData.length===0){
-      console.log("init of  pstate  : ",pstate)
-     // console.log("pstate.pointData : ",pstate)
-    const w = 1;
+
     // pstate.pointData = []
       dispatch({
         type: 'editorModal/addPointData',
@@ -116,7 +114,6 @@ const Container = (props: {
           status: 'initCanvas',
         },
       });
-      console.log("pstate.pointData : ",pstate)
       
     }
    
@@ -556,6 +553,7 @@ const Container = (props: {
             scaleNum={scaleNum}
             canvasId={canvasId}
             allType={allType}
+            panelData={curPoint}
           />
           <CanvasControl scaleNum={scaleNum} handleSlider={handleSlider} backSize={backSize} />
         </div>
@@ -601,6 +599,6 @@ const Container = (props: {
 };
 
 export default connect((state: StateWithHistory<any>) => {
-  console.log("pstate : ",state.present.editorModal)
+  //console.log("pstate : ",state.present.editorModal)
   return { pstate: state.present.editorModal, cstate: state.present.editorPcModal };
 })(Container);

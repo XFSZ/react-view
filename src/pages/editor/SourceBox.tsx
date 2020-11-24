@@ -15,6 +15,7 @@ interface SourceBoxProps {
   pstate: { pointData: { id: string; item: any; point: any; isMenu?: any }[]; curPoint: any };
   cstate: { pointData: { id: string; item: any; point: any }[]; curPoint: any };
   scaleNum: number;
+  panelData:{ id: string; item: any; point: any; isMenu?: any };
   canvasId: string;
   allType: string[];
   dispatch: Dispatch;
@@ -28,12 +29,10 @@ interface SourceBoxProps {
 }
 
 const SourceBox = memo((props: SourceBoxProps) => {
-  const { pstate, scaleNum, canvasId, allType, dispatch, dragState, setDragState, cstate } = props;
+  const { pstate, scaleNum, canvasId, allType, dispatch, dragState, setDragState, cstate,panelData } = props;
   const context = useContext(dooringContext);
-  console.log( "canvasId : ",canvasId)
   let pointData = pstate ? pstate.pointData : [];
   const cpointData = cstate ? cstate.pointData : [];
-
   const [canvasRect, setCanvasRect] = useState<number[]>([]);
   const [isShowTip, setIsShowTip] = useState(true);
   // const [clonePointData, setPointData] = useState(pointData);
@@ -41,8 +40,6 @@ const SourceBox = memo((props: SourceBoxProps) => {
   const [{ isOver }, drop] = useDrop({
     accept: allType,
     drop: (item: { h: number; type: string; x: number }, monitor) => {
-     // console.log("item : ",item)
-    //  console.log("monitor : ",monitor)
       let parentDiv = document.getElementById(canvasId),
         pointRect = parentDiv!.getBoundingClientRect(),
         top = pointRect.top,
@@ -221,17 +218,22 @@ const SourceBox = memo((props: SourceBoxProps) => {
   const [panelWidth,setPanelWidth] = useState('1920px')
   const [panelHeight,setPanelHeight] = useState('1080px')
   useEffect(()=>{
-    if(pstate.pointData[0].item){
+    try{
+    if(panelData.item){
       
       //const panelItemWidth = pstate.pointData[0].item.width +"px";
      // const panelItemHeight = pstate.pointData[0].item.height +"px";
-     console.log("what : ",pstate.pointData[0].item.width )
-      setPanelWidth(pstate.pointData[0].item.width +"px")
-      setPanelHeight( pstate.pointData[0].item.height +"px")
+     console.log("what : ",panelData)
+      setPanelWidth(panelData.item.config.width +"px")
+      setPanelHeight( panelData.item.config.height +"px")
       console.log("hello : ",panelWidth,panelHeight)
     }
+  }catch (e
+  ){
+    console.log(e)
+  }
 
-  },[panelWidth,panelHeight,pstate.pointData])
+  },[panelWidth,panelHeight,panelData])
   const render = useMemo(() => {
     return (
       <Draggable
