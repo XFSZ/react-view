@@ -12,10 +12,10 @@ import { Menu, Item, MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { dooringContext } from '@/layouts';
 interface SourceBoxProps {
-  pstate: { pointData: { id: string; item: any; point: any; isMenu?: any }[]; curPoint: any };
+  pstate: { pointData: { id: string; item: any; point: any; isMenu?: any; visibility:string }[]; curPoint: any };
   cstate: { pointData: { id: string; item: any; point: any }[]; curPoint: any };
   scaleNum: number;
-  panelData:{ id: string; item: any; point: any; isMenu?: any };
+  panelData: { id: string; item: any; point: any; isMenu?: any };
   canvasId: string;
   allType: string[];
   dispatch: Dispatch;
@@ -29,10 +29,20 @@ interface SourceBoxProps {
 }
 
 const SourceBox = memo((props: SourceBoxProps) => {
-  const { pstate, scaleNum, canvasId, allType, dispatch, dragState, setDragState, cstate,panelData } = props;
+  const {
+    pstate,
+    scaleNum,
+    canvasId,
+    allType,
+    dispatch,
+    dragState,
+    setDragState,
+    cstate,
+    panelData,
+  } = props;
   const context = useContext(dooringContext);
   let pointData = pstate ? pstate.pointData : [];
-  console.log("all : ",pstate)
+  //console.log('all : ', pstate);
   const cpointData = cstate ? cstate.pointData : [];
   const [canvasRect, setCanvasRect] = useState<number[]>([]);
   const [isShowTip, setIsShowTip] = useState(true);
@@ -40,7 +50,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   // const [isMenu, setIsMenu] = useState(false);
   const [{ isOver }, drop] = useDrop({
     accept: allType,
-    drop: (item: { h: number; type: string; x: number ,config:{id:string} }, monitor) => {
+    drop: (item: { h: number; type: string; x: number; config: { id: string } }, monitor) => {
       let parentDiv = document.getElementById(canvasId),
         pointRect = parentDiv!.getBoundingClientRect(),
         top = pointRect.top,
@@ -49,12 +59,12 @@ const SourceBox = memo((props: SourceBoxProps) => {
         col = 24, // 网格列数
         cellHeight = 2,
         w = item.type === 'Icon' ? 3 : col;
-       
+
       // 转换成网格规则的坐标和大小
       let gridY = Math.ceil(y / cellHeight);
       if (context.theme === 'h5') {
-       const uid= uuid(6, 10);
-       item.config.id=uid;
+        const uid = uuid(6, 10);
+        item.config.id = uid;
         dispatch({
           type: 'editorModal/addPointData',
           payload: {
@@ -204,7 +214,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
     ),
     [onConTextClick],
   );
-   //h5 Rect 
+  //h5 Rect
   useEffect(() => {
     let { width, height } = document.getElementById(canvasId)!.getBoundingClientRect();
     setCanvasRect([width, height]);
@@ -219,22 +229,54 @@ const SourceBox = memo((props: SourceBoxProps) => {
     };
   }, []);
   const opacity = isOver ? 0.7 : 1;
-  const [panelWidth,setPanelWidth] = useState('1920px')
-  const [panelHeight,setPanelHeight] = useState('1080px')
-  // const [backgroundColor,setBackgroundColor] = useState('#eee') 
-  useEffect(()=>{
-    try{
-    if(panelData.id && panelData.id==='0'){
-      setPanelWidth(panelData.item.config.width +"px")
-      setPanelHeight( panelData.item.config.height +"px")
-      setCanvasRect([panelData.item.config.width, panelData.item.config.height]);
+  const [panelWidth, setPanelWidth] = useState('1920px');
+  const [panelHeight, setPanelHeight] = useState('1080px');
+  // const [backgroundColor,setBackgroundColor] = useState('#eee')
+  useEffect(() => {
+    try {
+      if (panelData.id && panelData.id === '0') {
+        setPanelWidth(panelData.item.config.width + 'px');
+        setPanelHeight(panelData.item.config.height + 'px');
+        setCanvasRect([panelData.item.config.width, panelData.item.config.height]);
+      }
+    } catch (e) {
+      console.log(e);
     }
-  }catch (e
-  ){
-    console.log(e)
+  }, [panelWidth, panelHeight, panelData]);
+
+  //{const val = pstate.pointData[0].item.config.layers.map(va => {if(va.zIndex ===value.item.config.zIndex){return va}});
+
+  // const render = useMemo(() => {
+
+  // })
+  function renderval(value: { id: string; item: any; point: any; isMenu?: any; visibility: string; }) {
+    if(pstate.pointData[0].item.config.layerList &&value.id!=='0'){
+      console.log("hehe : ",pstate.pointData[0].item.config.layerList);
+      for (let i = 0;i<pstate.pointData[0].item.config.layerList.length;i++){
+        const va = pstate.pointData[0].item.config.layerList[i];
+        console.log("va : ",va);
+        if (va.zIndex === value.item.config.zIndex) {
+          console.log("va : ",va);
+          return va.visibility;
+        }
+      }
+
+
+  //  const val =  pstate.pointData[0].item.config.layerList.filter((va: { zIndex: any; visibility: number; }) => {
+  //     if (va.zIndex === value.item.config.zIndex) {
+  //       console.log("va : ",va);
+  //       return va.visibility;
+  //     }
+  //     else{
+  //       return 0;
+  //     }
+  //   });
+   
+  }
+  console.log("hah ");
+    return 0;
   }
 
-  },[panelWidth,panelHeight,panelData])
   const render = useMemo(() => {
     return (
       <Draggable
@@ -244,12 +286,16 @@ const SourceBox = memo((props: SourceBoxProps) => {
           setDragState({ x: data.x, y: data.y });
         }}
       >
-        <div className={styles.canvasBox}  style={{width :panelWidth,height:panelHeight,backgroundColor:'red',}}>
+       
+        <div
+          className={styles.canvasBox}
+          style={{ width: panelWidth, height: panelHeight, backgroundColor: 'red' }}
+        >
           <MenuProvider id="menu_id">
             <div
               style={{
                 transform: `scale(${scaleNum})`,
-                position: 'relative',  
+                position: 'relative',
                 width: '100%',
                 height: '100%',
               }}
@@ -258,8 +304,10 @@ const SourceBox = memo((props: SourceBoxProps) => {
                 id={canvasId}
                 className={styles.canvas}
                 style={{
-                  opacity,width :panelWidth,height:panelHeight
-              //  width :panelWidth,height:panelHeight
+                  opacity,
+                  width: panelWidth,
+                  height: panelHeight,
+                  //  width :panelWidth,height:panelHeight
                 }}
                 ref={drop}
               >
@@ -274,21 +322,20 @@ const SourceBox = memo((props: SourceBoxProps) => {
                     onDragStart={onDragStart}
                     onResizeStop={onResizeStop}
                   >
-                  {pointData.map(value => 
-                   // if(pstate.pointData[0].item.config.layers[num].zIndex)
-                    // if(pstate.pointData[0].item.config.layers[num].visibility)
-                  // if(value.item.config.zIndex)
-                     ( 
+                    {pointData.map(value => (
+                      // if(pstate.pointData[0].item.config.layers[num].zIndex)
+                      // if(pstate.pointData[0].item.config.layers[num].visibility)
+                      // if(value.item.config.zIndex)
+                        <div
+                          className={value.isMenu ? styles.selected : styles.dragItem}
+                          key={value.id}
+                          data-grid={value.point}
+                         style={{ visibility: renderval(value)===1 ? "visible":"hidden"}}
+                        >
+                          <DynamicEngine {...value.item} isTpl={false} />
+                        </div>
                      
-                     <div
-                        className={value.isMenu ? styles.selected : styles.dragItem}
-                        key={value.id}
-                        data-grid={value.point}
-                        style = {{visibility:"visible"}}
-                      >
-                        <DynamicEngine {...value.item} isTpl={false} />
-                      </div>
-                  ))}
+                    ))}
                     {/* {pointData.map(value => (
                       <div
                         className={value.isMenu ? styles.selected : styles.dragItem}
