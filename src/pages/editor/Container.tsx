@@ -257,7 +257,7 @@ const Container = (props: {
             transform: rightColla ? 'translate(100%,0)' : 'translate(0,0)',
           }}
         >
-           
+          {/* {console.log("curPoint : ",curPoint)} */}
           {
         
           pointData.length && curPoint ? (

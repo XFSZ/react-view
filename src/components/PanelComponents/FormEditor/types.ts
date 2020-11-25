@@ -57,6 +57,23 @@ export type TDataListDefaultTypeItem = {
 
 export type TDataListDefaultType = Array<TDataListDefaultTypeItem>;
 
+///////////////////
+export interface ILayerDataListConfigType {
+  key: string;
+  name: string;
+  type: 'LayerList';
+  cropRate: number;
+}
+
+export type TLayerDataListDefaultTypeItem = {
+  id: string;
+  zIndex: number;
+  visibility:number
+  desc: string;
+  type?: number;
+};
+
+export type TLayerDataListDefaultType = Array<TLayerDataListDefaultTypeItem>;
 ////////////////////
 export interface IColorConfigType {
   key: string;

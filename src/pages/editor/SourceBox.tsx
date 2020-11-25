@@ -32,6 +32,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   const { pstate, scaleNum, canvasId, allType, dispatch, dragState, setDragState, cstate,panelData } = props;
   const context = useContext(dooringContext);
   let pointData = pstate ? pstate.pointData : [];
+  console.log("all : ",pstate)
   const cpointData = cstate ? cstate.pointData : [];
   const [canvasRect, setCanvasRect] = useState<number[]>([]);
   const [isShowTip, setIsShowTip] = useState(true);
@@ -39,7 +40,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   // const [isMenu, setIsMenu] = useState(false);
   const [{ isOver }, drop] = useDrop({
     accept: allType,
-    drop: (item: { h: number; type: string; x: number }, monitor) => {
+    drop: (item: { h: number; type: string; x: number ,config:{id:string} }, monitor) => {
       let parentDiv = document.getElementById(canvasId),
         pointRect = parentDiv!.getBoundingClientRect(),
         top = pointRect.top,
@@ -48,13 +49,16 @@ const SourceBox = memo((props: SourceBoxProps) => {
         col = 24, // 网格列数
         cellHeight = 2,
         w = item.type === 'Icon' ? 3 : col;
+       
       // 转换成网格规则的坐标和大小
       let gridY = Math.ceil(y / cellHeight);
       if (context.theme === 'h5') {
+       const uid= uuid(6, 10);
+       item.config.id=uid;
         dispatch({
           type: 'editorModal/addPointData',
           payload: {
-            id: uuid(6, 10),
+            id: uid,
             item,
             point: { i: `x-${pointData.length}`, x: 0, y: gridY, w, h: item.h, isBounded: true },
             status: 'inToCanvas',
@@ -270,7 +274,22 @@ const SourceBox = memo((props: SourceBoxProps) => {
                     onDragStart={onDragStart}
                     onResizeStop={onResizeStop}
                   >
-                    {pointData.map(value => (
+                  {pointData.map(value => 
+                   // if(pstate.pointData[0].item.config.layers[num].zIndex)
+                    // if(pstate.pointData[0].item.config.layers[num].visibility)
+                  // if(value.item.config.zIndex)
+                     ( 
+                     
+                     <div
+                        className={value.isMenu ? styles.selected : styles.dragItem}
+                        key={value.id}
+                        data-grid={value.point}
+                        style = {{visibility:"visible"}}
+                      >
+                        <DynamicEngine {...value.item} isTpl={false} />
+                      </div>
+                  ))}
+                    {/* {pointData.map(value => (
                       <div
                         className={value.isMenu ? styles.selected : styles.dragItem}
                         key={value.id}
@@ -278,7 +297,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
                       >
                         <DynamicEngine {...value.item} isTpl={false} />
                       </div>
-                    ))}
+                    ))} */}
                   </GridLayout>
                 ) : null}
               </div>

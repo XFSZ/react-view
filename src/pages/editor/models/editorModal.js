@@ -22,6 +22,7 @@ export default {
   reducers: {
     addPointData(state, { payload }) {
       let pointData = [...state.pointData, payload];
+      
       overSave('userData', pointData);
       return {
         ...state,

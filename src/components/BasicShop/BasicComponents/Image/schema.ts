@@ -27,7 +27,7 @@ export type TImageEditData = Array<
 >;
 
 export interface IImageConfig extends ICommonBaseType {
-  id: TNumberDefaultType;
+  id: TTextDefaultType;
   zIndex: TNumberDefaultType;
   translate: TPosDefaultType;
   align: TSelectDefaultType<TTextSelectKeyType>;
@@ -53,7 +53,7 @@ const Image: IImageSchema = {
     {
       key: 'id',
       name: 'id',
-      type: 'Number',
+      type: 'Text',
     },
     {
       key: 'zIndex',
@@ -174,7 +174,7 @@ const Image: IImageSchema = {
     },
   ],
   config: {
-    id:999,
+    id:"999",
     zIndex:2,
     translate: [0, 0],
     align: 'center',

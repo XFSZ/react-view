@@ -2,13 +2,15 @@ import {
     IColorConfigType,
     INumberConfigType,
     ITextConfigType,
+    ILayerDataListConfigType,
     TColorDefaultType,
     TNumberDefaultType,
     TTextDefaultType,
+    TLayerDataListDefaultType,
   } from '@/components/PanelComponents/FormEditor/types';
   
   export type TPanelEditData = Array<
-    ITextConfigType | IColorConfigType | INumberConfigType 
+    ITextConfigType | IColorConfigType | INumberConfigType | ILayerDataListConfigType
   >;
   export interface IPanelConfig {
    
@@ -16,6 +18,7 @@ import {
     color: TColorDefaultType;
     width: TNumberDefaultType;
     height: TNumberDefaultType;
+    layers:TLayerDataListDefaultType;
   }
   
   export interface IPanelSchema {
@@ -44,12 +47,26 @@ import {
         name: '高',
         type: 'Number',
       },
+      {
+        key: 'layerList',
+        name: '层级',
+        type: 'LayerList',
+        cropRate:2,
+      },
     ],
     config: {
       text: '页面1',
       color: 'rgba(60,60,60,1)',
       width: 1366,
       height: 768,
+      layers:[
+        {
+        id:'0',
+        zIndex:2,
+        visibility:1,
+        desc:'默认层级',
+      }
+      ]
     },
   };
   export default Panel;

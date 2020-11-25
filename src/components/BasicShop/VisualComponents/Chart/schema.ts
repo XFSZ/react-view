@@ -13,7 +13,7 @@ export type TChartEditData = Array<
   ITextConfigType | INumberConfigType | IColorConfigType | ITableConfigType
 >;
 export interface IChartConfig {
-  id: TNumberDefaultType;
+  id: TTextDefaultType;
   zIndex: TNumberDefaultType;
   title: TTextDefaultType;
   size: TNumberDefaultType;
@@ -33,7 +33,7 @@ const Chart: IChartSchema = {
     {
       key: 'id',
       name: 'id',
-      type: 'Number',
+      type: 'Text',
     },
     {
       key: 'zIndex',
@@ -67,7 +67,7 @@ const Chart: IChartSchema = {
     },
   ],
   config: {
-    id:999,
+    id:"999",
     zIndex:2,
     title: '柱状图',
     size: 14,

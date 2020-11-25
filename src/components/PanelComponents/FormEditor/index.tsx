@@ -7,6 +7,7 @@ import Color from '../Color';
 import CardPicker from '../CardPicker';
 import Table from '../Table';
 import Pos from '../Pos';
+import LayerList from '../LayerList';
 import { Store } from 'antd/lib/form/interface';
 import FormItems from '../FormItems';
 // import styles from './index.less';
@@ -89,6 +90,11 @@ const FormEditor = (props: FormEditorProps) => {
             {item.type === 'DataList' && (
               <Form.Item label={item.name} name={item.key}>
                 <DataList cropRate={item.cropRate} />
+              </Form.Item>
+            )}
+            {item.type === 'LayerList' && (
+              <Form.Item label={item.name} name={item.key}>
+                <LayerList  />
               </Form.Item>
             )}
             {item.type === 'Color' && (
