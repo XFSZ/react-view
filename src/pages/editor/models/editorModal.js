@@ -78,11 +78,18 @@ export default {
     },
     delPointData(state, { payload }) {
       const { id } = payload;
-      const pointData = state.pointData.filter(item => item.id !== id);
-      overSave('userData', pointData);
+      if(id!=='0'){
+        const pointData = state.pointData.filter(item => item.id !== id);
+        overSave('userData', pointData);
+        return {
+          ...state,
+          pointData,
+          curPoint: state.pointData[0],
+        };
+      }
       return {
         ...state,
-        pointData,
+        pointData: state.pointData,
         curPoint: state.pointData[0],
       };
     },

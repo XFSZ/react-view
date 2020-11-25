@@ -14,6 +14,8 @@ export type TTextEditData = Array<
   ITextConfigType | IColorConfigType | INumberConfigType | ISelectConfigType<TTextSelectKeyType>
 >;
 export interface ITextConfig {
+  id: TNumberDefaultType;
+  zIndex: TNumberDefaultType;
   text: TTextDefaultType;
   color: TColorDefaultType;
   fontSize: TNumberDefaultType;
@@ -27,6 +29,17 @@ export interface ITextSchema {
 }
 const Text: ITextSchema = {
   editData: [
+
+    {
+      key: 'id',
+      name: 'id',
+      type: 'Number',
+    },
+    {
+      key: 'zIndex',
+      name: '层级',
+      type: 'Number',
+    },
     {
       key: 'text',
       name: '文字',
@@ -68,6 +81,8 @@ const Text: ITextSchema = {
     },
   ],
   config: {
+    id:999,
+    zIndex:2,
     text: '我是文本',
     color: 'rgba(60,60,60,1)',
     fontSize: 18,

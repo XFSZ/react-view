@@ -27,6 +27,8 @@ export type TImageEditData = Array<
 >;
 
 export interface IImageConfig extends ICommonBaseType {
+  id: TNumberDefaultType;
+  zIndex: TNumberDefaultType;
   translate: TPosDefaultType;
   align: TSelectDefaultType<TTextSelectKeyType>;
   titText: TTextDefaultType;
@@ -48,6 +50,16 @@ export interface IImageSchema {
 
 const Image: IImageSchema = {
   editData: [
+    {
+      key: 'id',
+      name: 'id',
+      type: 'Number',
+    },
+    {
+      key: 'zIndex',
+      name: '层级',
+      type: 'Number',
+    },
     ...baseConfig,
     {
       key: 'translate',
@@ -162,6 +174,8 @@ const Image: IImageSchema = {
     },
   ],
   config: {
+    id:999,
+    zIndex:2,
     translate: [0, 0],
     align: 'center',
     titText: '',
@@ -177,7 +191,7 @@ const Image: IImageSchema = {
         uid: '001',
         name: 'image.png',
         status: 'done',
-        url: 'http://io.nainor.com/uploads/bg_174e470dc22.png',
+        url: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1509338037,86396524&fm=26&gp=0.jpg',
       },
     ],
     round: 0,

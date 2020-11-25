@@ -11,6 +11,7 @@ import {
     ITextConfigType | IColorConfigType | INumberConfigType 
   >;
   export interface IPanelConfig {
+   
     text: TTextDefaultType;
     color: TColorDefaultType;
     width: TNumberDefaultType;
