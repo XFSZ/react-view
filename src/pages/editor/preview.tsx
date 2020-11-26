@@ -52,11 +52,11 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     const { tid, gf } = props.location.query!;
     if (!gf && parent.window.location.pathname === '/preview') {
       req
-        .get<any, any>('/xxx/xxx/你的自定义接口地址', { params: { tid } })
+        .get<any, any>('/', { params: { tid } })
         .then(res => {
           const { pageConfig, tpl } = res || { pageConfig: {}, tpl: [] };
           // 设置标题
-          document.title = pageConfig.title || 'H5-Dooring | 强大的H5编辑神器';
+          document.title = pageConfig.title || '';
           // 设置数据源
           setPointData(
             tpl.map(item => ({
@@ -116,25 +116,29 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     <>
       <div
         ref={ref}
-        style={
-          vw > 800
-            ? pcStyle
-            : { height: '100vh', overflow: 'auto', backgroundColor: pageData.bgColor }
-        }
+        style={{ width: pointData[0].item.config.width, height: pointData[0].item.config.height }}
+        // style={
+        //   vw > 800
+        //     ? pcStyle
+        //     : { height: '100vh', overflow: 'auto', backgroundColor: pageData.bgColor }
+        // }
       >
         <div ref={refImgDom}>
           <GridLayout
             className={styles.layout}
             cols={24}
+            // style = {{width:pointData[0].item.config.width,height:pointData[0].item.config.height}}
+            width={pointData[0].item.config.width}
+            //   height={pointData[0].item.config.height}
             rowHeight={2}
-            width={vw > 800 ? 375 : vw}
+            // width={vw > 800 ? 375 : vw}
             margin={[0, 0]}
-            style={{
-              backgroundColor: pageData.bgColor,
-              backgroundImage: pageData.bgImage ? `url(${pageData.bgImage[0].url})` : 'initial',
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-            }}
+            // style={{
+            //   backgroundColor: pageData.bgColor,
+            //   backgroundImage: pageData.bgImage ? `url(${pageData.bgImage[0].url})` : 'initial',
+            //   backgroundSize: 'contain',
+            //   backgroundRepeat: 'no-repeat',
+            // }}
           >
             {pointData.map((value: PointDataItem) => (
               <div className={styles.dragItem} key={value.id} data-grid={value.point}>
@@ -145,7 +149,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         </div>
       </div>
 
-      {vw > 800 ? (
+      {/* {vw > 800 ? (
         <div
           style={{
             backgroundImage: "url('/iphone.png') ",
@@ -162,7 +166,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
             pointerEvents: 'none',
           }}
         ></div>
-      ) : null}
+      ) : null} */}
     </>
   );
 });

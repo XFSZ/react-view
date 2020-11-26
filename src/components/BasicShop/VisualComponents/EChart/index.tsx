@@ -37,15 +37,11 @@ const EChart = (props: XEChartProps) => {
   });
   useEffect(() => {
     if (!isTpl) {
-      // const chart = new Chart({
-      //   el: chartRef.current || undefined,
-      //   pixelRatio: window.devicePixelRatio, // 指定分辨率
-      // });
-
       const chart = echarts.init((container.current as unknown) as HTMLDivElement, {
         devicePixelRatio: window.devicePixelRatio,
       });
       chart.setOption(option);
+      //chart.onClick
     }
   }, [data, isTpl, option]);
   return (
@@ -56,7 +52,7 @@ const EChart = (props: XEChartProps) => {
       {isTpl ? (
         <img src={EChartImg} alt="dooring chart" />
       ) : (
-        <div ref={container} style={{ height: 400 }}></div>
+        <div ref={container} style={{ height: 200 }}></div>
       )}
     </div>
   );
