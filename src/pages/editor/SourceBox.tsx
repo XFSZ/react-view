@@ -12,7 +12,10 @@ import { Menu, Item, MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { dooringContext } from '@/layouts';
 interface SourceBoxProps {
-  pstate: { pointData: { id: string; item: any; point: any; isMenu?: any; visibility:string }[]; curPoint: any };
+  pstate: {
+    pointData: { id: string; item: any; point: any; isMenu?: any; visibility: string }[];
+    curPoint: any;
+  };
   cstate: { pointData: { id: string; item: any; point: any }[]; curPoint: any };
   scaleNum: number;
   panelData: { id: string; item: any; point: any; isMenu?: any };
@@ -244,36 +247,21 @@ const SourceBox = memo((props: SourceBoxProps) => {
     }
   }, [panelWidth, panelHeight, panelData]);
 
-  //{const val = pstate.pointData[0].item.config.layers.map(va => {if(va.zIndex ===value.item.config.zIndex){return va}});
-
-  // const render = useMemo(() => {
-
-  // })
-  function renderval(value: { id: string; item: any; point: any; isMenu?: any; visibility: string; }) {
-    if(pstate.pointData[0].item.config.layerList &&value.id!=='0'){
-      console.log("hehe : ",pstate.pointData[0].item.config.layerList);
-      for (let i = 0;i<pstate.pointData[0].item.config.layerList.length;i++){
+  function renderval(value: {
+    id: string;
+    item: any;
+    point: any;
+    isMenu?: any;
+    visibility: string;
+  }) {
+    if (pstate.pointData[0].item.config.layerList && value.id !== '0') {
+      for (let i = 0; i < pstate.pointData[0].item.config.layerList.length; i++) {
         const va = pstate.pointData[0].item.config.layerList[i];
-        console.log("va : ",va);
         if (va.zIndex === value.item.config.zIndex) {
-          console.log("va : ",va);
           return va.visibility;
         }
       }
-
-
-  //  const val =  pstate.pointData[0].item.config.layerList.filter((va: { zIndex: any; visibility: number; }) => {
-  //     if (va.zIndex === value.item.config.zIndex) {
-  //       console.log("va : ",va);
-  //       return va.visibility;
-  //     }
-  //     else{
-  //       return 0;
-  //     }
-  //   });
-   
-  }
-  console.log("hah ");
+    }
     return 0;
   }
 
@@ -286,7 +274,6 @@ const SourceBox = memo((props: SourceBoxProps) => {
           setDragState({ x: data.x, y: data.y });
         }}
       >
-       
         <div
           className={styles.canvasBox}
           style={{ width: panelWidth, height: panelHeight, backgroundColor: 'red' }}
@@ -323,18 +310,14 @@ const SourceBox = memo((props: SourceBoxProps) => {
                     onResizeStop={onResizeStop}
                   >
                     {pointData.map(value => (
-                      // if(pstate.pointData[0].item.config.layers[num].zIndex)
-                      // if(pstate.pointData[0].item.config.layers[num].visibility)
-                      // if(value.item.config.zIndex)
-                        <div
-                          className={value.isMenu ? styles.selected : styles.dragItem}
-                          key={value.id}
-                          data-grid={value.point}
-                         style={{ visibility: renderval(value)===1 ? "visible":"hidden"}}
-                        >
-                          <DynamicEngine {...value.item} isTpl={false} />
-                        </div>
-                     
+                      <div
+                        className={value.isMenu ? styles.selected : styles.dragItem}
+                        key={value.id}
+                        data-grid={value.point}
+                        style={{ visibility: renderval(value) === 1 ? 'visible' : 'hidden' }}
+                      >
+                        <DynamicEngine {...value.item} isTpl={false} />
+                      </div>
                     ))}
                     {/* {pointData.map(value => (
                       <div

@@ -55,6 +55,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
     "@antv/f2": "^3.7.7",
+    "@types/echarts": "^4.9.2",
     "@umijs/plugin-esbuild": "^1.0.1",
     "@umijs/plugin-sass": "^1.1.1",
     "@umijs/preset-react": "1.x",
@@ -65,6 +66,7 @@
     "chatbot-antd": "^0.6.0",
     "codemirror": "^5.57.0",
     "dom-to-image": "^2.6.0",
+    "echarts": "^4.9.0",
     "file-saver": "^2.0.2",
     "http-server": "^0.12.3",
     "qrcode.react": "^1.0.0",
