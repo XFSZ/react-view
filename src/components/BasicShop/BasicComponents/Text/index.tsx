@@ -5,7 +5,7 @@ import { ITextConfig } from './schema';
 import logo from '@/assets/12-文本.png';
 import { StateWithHistory } from 'redux-undo';
 import { connect } from 'dva';
-import onClick from '@/components/PanelComponents/FormEditor/onclickfunc';
+import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
 
 const Text = memo((props: ITextConfig & { isTpl: boolean; dispatch: Dispatch }) => {
   const { align, text, fontSize, color, lineHeight, isTpl, clickParams, dispatch } = props;

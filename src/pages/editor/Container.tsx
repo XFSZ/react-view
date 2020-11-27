@@ -252,7 +252,6 @@ const Container = (props: {
           {/* {console.log("curPoint : ",curPoint)} */}
           {pointData.length && curPoint ? (
             <>
-              {console.log('panel : ', curPoint)}
               <div className={styles.tit}>属性设置</div>
               <FormEditor
                 config={curPoint.item.editableEl}

@@ -22,6 +22,8 @@ export interface IEChartConfig {
   color: TColorDefaultType;
   paddingTop: TNumberDefaultType;
   data: TTableDefaultType;
+  api: TTextDefaultType;
+  timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
 }
 
@@ -72,6 +74,16 @@ const Chart: IEChartSchema = {
       name: '动作',
       type: 'TextArea',
     },
+    {
+      key: 'api',
+      name: 'api接口',
+      type: 'Text',
+    },
+    {
+      key: 'timer',
+      name: '定时器(单位s)',
+      type: 'Number',
+    },
   ],
   config: {
     id: '999',
@@ -99,6 +111,8 @@ const Chart: IEChartSchema = {
       },
     ],
     clickParams: '[{}]',
+    api: '',
+    timer: 0,
   },
 };
 
