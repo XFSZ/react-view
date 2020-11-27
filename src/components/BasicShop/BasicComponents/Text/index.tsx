@@ -1,12 +1,15 @@
 import React, { memo } from 'react';
 import styles from './index.less';
+import { Dispatch } from 'umi';
 import { ITextConfig } from './schema';
 import logo from '@/assets/12-文本.png';
-const Text = memo((props: ITextConfig & { isTpl: boolean }) => {
-  const { align, text, fontSize, color, lineHeight, isTpl } = props;
-  function onClick() {
-    console.log('clicked');
-  }
+import { StateWithHistory } from 'redux-undo';
+import { connect } from 'dva';
+import onClick from '@/components/PanelComponents/FormEditor/onclickfunc';
+
+const Text = memo((props: ITextConfig & { isTpl: boolean; dispatch: Dispatch }) => {
+  const { align, text, fontSize, color, lineHeight, isTpl, clickParams, dispatch } = props;
+
   return (
     <>
       {isTpl ? (
@@ -16,7 +19,7 @@ const Text = memo((props: ITextConfig & { isTpl: boolean }) => {
       ) : (
         <div
           className={styles.textWrap}
-          onClick={onClick}
+          onClick={() => onClick(clickParams, dispatch)}
           style={{ color, textAlign: align, fontSize, lineHeight }}
         >
           {text}
@@ -25,4 +28,9 @@ const Text = memo((props: ITextConfig & { isTpl: boolean }) => {
     </>
   );
 });
-export default Text;
+
+export default connect((state: StateWithHistory<any>) => ({
+  pstate: state.present.editorModal,
+  cstate: state.present.editorPcModal,
+}))(Text);
+//export default Text;

@@ -41,8 +41,8 @@ const Container = (props: {
   const [rightColla, setRightColla] = useState(true);
   const { pstate, cstate, dispatch } = props;
   const pointData = pstate ? pstate.pointData : [];
- // const pointData = pstate ? pstate.pointData :[{"id":"0","item":{"type":"Panel","config":{"text":"页面1","color":"rgba(60,60,60,1)","width":1366,"height":768},"h":"0px","editableEl":[{"key":"text","name":"文字","type":"Text"},{"key":"color","name":"背景颜色","type":"Color"},{"key":"width","name":"宽","type":"Number"},{"key":"height","name":"高","type":"Number"}],"category":"basePanel","x":0,"w":"0px"},"point":{"i":"x-0","x":0,"y":0,"w":1,"h":1,"isBounded":true},"status":"initCanvas"}]
-   
+  // const pointData = pstate ? pstate.pointData :[{"id":"0","item":{"type":"Panel","config":{"text":"页面1","color":"rgba(60,60,60,1)","width":1366,"height":768},"h":"0px","editableEl":[{"key":"text","name":"文字","type":"Text"},{"key":"color","name":"背景颜色","type":"Color"},{"key":"width","name":"宽","type":"Number"},{"key":"height","name":"高","type":"Number"}],"category":"basePanel","x":0,"w":"0px"},"point":{"i":"x-0","x":0,"y":0,"w":1,"h":1,"isBounded":true},"status":"initCanvas"}]
+
   const cpointData = cstate ? cstate.pointData : [];
   //  useEffect(()=>{
   //   props.pstate =[{"id":"0","item":{"type":"Panel","config":{"text":"页面1","color":"rgba(60,60,60,1)","width":1366,"height":768},"h":"0px","editableEl":[{"key":"text","name":"文字","type":"Text"},{"key":"color","name":"背景颜色","type":"Color"},{"key":"width","name":"宽","type":"Number"},{"key":"height","name":"高","type":"Number"}],"category":"basePanel","x":0,"w":"0px"},"point":{"i":"x-0","x":0,"y":0,"w":1,"h":1,"isBounded":true},"status":"initCanvas"}]
@@ -65,7 +65,7 @@ const Container = (props: {
     if (context.theme === 'h5') {
       return template1;
     } else {
-     // return template2;
+      // return template2;
     }
   }, [context.theme]);
 
@@ -74,7 +74,7 @@ const Container = (props: {
     if (context.theme === 'h5') {
       return mediaTpl1;
     } else {
-    //  return mediaTpl2;
+      //  return mediaTpl2;
     }
   }, [context.theme]);
 
@@ -83,7 +83,7 @@ const Container = (props: {
     if (context.theme === 'h5') {
       return graphTpl1;
     } else {
-    //  return graphTpl2;
+      //  return graphTpl2;
     }
   }, [context.theme]);
 
@@ -91,32 +91,28 @@ const Container = (props: {
   let canvasId = 'js_canvas';
 
   const [panelItem, setPanleItem] = useState({
-    type: "Panel",
-    config: schemaH5["Panel" as keyof typeof schemaH5].config,
+    type: 'Panel',
+    config: schemaH5['Panel' as keyof typeof schemaH5].config,
     h: '0px',
-    editableEl: schemaH5["Panel" as keyof typeof schemaH5].editData,
-    category: "basePanel",
-    x:  0,
-    w:'0px'
+    editableEl: schemaH5['Panel' as keyof typeof schemaH5].editData,
+    category: 'basePanel',
+    x: 0,
+    w: '0px',
   });
 
   useEffect(() => {
-     
-    if(pstate.pointData.length===0){
-
-    // pstate.pointData = []
+    if (pstate.pointData.length === 0) {
+      // pstate.pointData = []
       dispatch({
         type: 'editorModal/addPointData',
         payload: {
           id: '0',
-          item:panelItem,
-          point: { i: `x-${0}`, x: 0, y: 0, w:1, h: 1, isBounded: true },
+          item: panelItem,
+          point: { i: `x-${0}`, x: 0, y: 0, w: 1, h: 1, isBounded: true },
           status: 'initCanvas',
         },
       });
-      
     }
-   
   });
   const backSize = () => {
     setScale(1);
@@ -212,9 +208,6 @@ const Container = (props: {
     });
   };
 
-
-
-
   useEffect(() => {
     if (window.innerWidth < 1024) {
       props.history.push('/mobileTip');
@@ -246,7 +239,6 @@ const Container = (props: {
 
   const ref = useRef<HTMLDivElement>(null);
   const renderRight = useMemo(() => {
-
     if (context.theme === 'h5') {
       return (
         <div
@@ -258,11 +250,9 @@ const Container = (props: {
           }}
         >
           {/* {console.log("curPoint : ",curPoint)} */}
-          {
-        
-          pointData.length && curPoint ? (
-            
+          {pointData.length && curPoint ? (
             <>
+              {console.log('panel : ', curPoint)}
               <div className={styles.tit}>属性设置</div>
               <FormEditor
                 config={curPoint.item.editableEl}
@@ -275,8 +265,8 @@ const Container = (props: {
             </>
           ) : (
             <>
-            <div className={styles.tit}>属性设置</div>
-            {/* 
+              <div className={styles.tit}>属性设置</div>
+              {/* 
                <>
               
             <FormEditor
@@ -288,14 +278,14 @@ const Container = (props: {
               rightPannelRef={ref}
             />
           </> */}
-             <div style={{ paddingTop: '100px' }}>
-             <Result
-                 status="404"
-                 title="还没有数据哦"
-                 subTitle="赶快拖拽组件来生成你的H5页面吧～"
-               />
-             </div>
-             </>
+              <div style={{ paddingTop: '100px' }}>
+                <Result
+                  status="404"
+                  title="还没有数据哦"
+                  subTitle="赶快拖拽组件来生成你的H5页面吧～"
+                />
+              </div>
+            </>
           )}
         </div>
       );
@@ -407,7 +397,6 @@ const Container = (props: {
   });
 
   const mousedownfn = useMemo(() => {
-   
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === containerRef.current) {
         setDiffMove({
@@ -422,7 +411,6 @@ const Container = (props: {
   }, []);
 
   const mousemovefn = useMemo(() => {
-   
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (diffmove.move) {
         let diffx: number;
@@ -449,7 +437,6 @@ const Container = (props: {
   }, [diffmove.move, diffmove.start.x, diffmove.start.y]);
 
   const mouseupfn = useMemo(() => {
-    
     return () => {
       setDiffMove({
         start: { x: 0, y: 0 },

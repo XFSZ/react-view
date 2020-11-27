@@ -3,14 +3,16 @@ import {
   INumberConfigType,
   ITableConfigType,
   ITextConfigType,
+  ITextAreaConfigType,
   TColorDefaultType,
   TNumberDefaultType,
   TTableDefaultType,
   TTextDefaultType,
+  TTextAreaDefaultType,
 } from '@/components/PanelComponents/FormEditor/types';
 
 export type TEChartEditData = Array<
-  ITextConfigType | INumberConfigType | IColorConfigType | ITableConfigType
+  ITextConfigType | INumberConfigType | IColorConfigType | ITableConfigType | ITextAreaConfigType
 >;
 export interface IEChartConfig {
   id: TTextDefaultType;
@@ -20,6 +22,7 @@ export interface IEChartConfig {
   color: TColorDefaultType;
   paddingTop: TNumberDefaultType;
   data: TTableDefaultType;
+  clickParams: TTextAreaDefaultType;
 }
 
 export interface IEChartSchema {
@@ -64,6 +67,11 @@ const Chart: IEChartSchema = {
       name: '数据源',
       type: 'Table',
     },
+    {
+      key: 'clickParams',
+      name: '动作',
+      type: 'TextArea',
+    },
   ],
   config: {
     id: '999',
@@ -90,6 +98,7 @@ const Chart: IEChartSchema = {
         value: 80,
       },
     ],
+    clickParams: '[{}]',
   },
 };
 

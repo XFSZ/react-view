@@ -106,6 +106,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   const dragStop: ItemCallback = useMemo(() => {
     return (layout, oldItem, newItem, placeholder, e, element) => {
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
+      console.log('curPointData : ', curPointData);
       dispatch({
         type: 'editorModal/modPointData',
         payload: { ...curPointData, point: newItem, status: 'inToCanvas' },

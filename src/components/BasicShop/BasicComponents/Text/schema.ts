@@ -3,15 +3,21 @@ import {
   INumberConfigType,
   ISelectConfigType,
   ITextConfigType,
+  ITextAreaConfigType,
   TColorDefaultType,
   TNumberDefaultType,
   TSelectDefaultType,
   TTextDefaultType,
+  TTextAreaDefaultType,
 } from '@/components/PanelComponents/FormEditor/types';
 
 export type TTextSelectKeyType = 'left' | 'right' | 'center';
 export type TTextEditData = Array<
-  ITextConfigType | IColorConfigType | INumberConfigType | ISelectConfigType<TTextSelectKeyType>
+  | ITextConfigType
+  | IColorConfigType
+  | INumberConfigType
+  | ISelectConfigType<TTextSelectKeyType>
+  | ITextAreaConfigType
 >;
 export interface ITextConfig {
   id: TTextDefaultType;
@@ -21,6 +27,7 @@ export interface ITextConfig {
   fontSize: TNumberDefaultType;
   align: TSelectDefaultType<TTextSelectKeyType>;
   lineHeight: TNumberDefaultType;
+  clickParams: TTextAreaDefaultType;
 }
 
 export interface ITextSchema {
@@ -29,7 +36,6 @@ export interface ITextSchema {
 }
 const Text: ITextSchema = {
   editData: [
-
     {
       key: 'id',
       name: 'id',
@@ -79,15 +85,21 @@ const Text: ITextSchema = {
       name: '行高',
       type: 'Number',
     },
+    {
+      key: 'clickParams',
+      name: '动作',
+      type: 'TextArea',
+    },
   ],
   config: {
-    id:"999",
-    zIndex:2,
+    id: '999',
+    zIndex: 2,
     text: '我是文本',
     color: 'rgba(60,60,60,1)',
     fontSize: 18,
     align: 'center',
     lineHeight: 2,
+    clickParams: '[{}]',
   },
 };
 export default Text;

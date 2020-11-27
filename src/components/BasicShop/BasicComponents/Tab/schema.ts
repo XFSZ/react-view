@@ -3,16 +3,20 @@ import {
   IDataListConfigType,
   IMutiTextConfigType,
   INumberConfigType,
+  ITextConfigType,
   TColorDefaultType,
   TDataListDefaultType,
   TMutiTextDefaultType,
   TNumberDefaultType,
+  TTextDefaultType,
 } from '@/components/PanelComponents/FormEditor/types';
 
 export type TTabEditData = Array<
-  IMutiTextConfigType | IColorConfigType | INumberConfigType | IDataListConfigType
+  IMutiTextConfigType | IColorConfigType | INumberConfigType | IDataListConfigType | ITextConfigType
 >;
 export interface ITabConfig {
+  id: TTextDefaultType;
+  zIndex: TNumberDefaultType;
   tabs: TMutiTextDefaultType;
   color: TColorDefaultType;
   activeColor: TColorDefaultType;
@@ -28,6 +32,16 @@ export interface ITabSchema {
 
 const Tab: ITabSchema = {
   editData: [
+    {
+      key: 'id',
+      name: 'id',
+      type: 'Text',
+    },
+    {
+      key: 'zIndex',
+      name: '层级',
+      type: 'Number',
+    },
     {
       key: 'tabs',
       name: '项目类别',
@@ -57,9 +71,12 @@ const Tab: ITabSchema = {
       key: 'sourceData',
       name: '数据源',
       type: 'DataList',
+      cropRate: 0,
     },
   ],
   config: {
+    id: '999',
+    zIndex: 2,
     tabs: ['类别一', '类别二'],
     color: 'rgba(153,153,153,1)',
     activeColor: 'rgba(0,102,204,1)',
@@ -77,7 +94,8 @@ const Tab: ITabSchema = {
             uid: '001',
             name: 'image.png',
             status: 'done',
-            url: 'https://pic4.zhimg.com/80/v2-8a98e1d0ef8e75fd882a7c92a021c142_720w.jpg?source=1940ef5c',
+            url:
+              'https://pic4.zhimg.com/80/v2-8a98e1d0ef8e75fd882a7c92a021c142_720w.jpg?source=1940ef5c',
           },
         ],
       },
@@ -92,7 +110,8 @@ const Tab: ITabSchema = {
             uid: '001',
             name: 'image.png',
             status: 'done',
-            url: 'https://pic4.zhimg.com/80/v2-8a98e1d0ef8e75fd882a7c92a021c142_720w.jpg?source=1940ef5c',
+            url:
+              'https://pic4.zhimg.com/80/v2-8a98e1d0ef8e75fd882a7c92a021c142_720w.jpg?source=1940ef5c',
           },
         ],
       },
@@ -107,7 +126,8 @@ const Tab: ITabSchema = {
             uid: '001',
             name: 'image.png',
             status: 'done',
-            url: 'https://pic4.zhimg.com/80/v2-8a98e1d0ef8e75fd882a7c92a021c142_720w.jpg?source=1940ef5c',
+            url:
+              'https://pic4.zhimg.com/80/v2-8a98e1d0ef8e75fd882a7c92a021c142_720w.jpg?source=1940ef5c',
           },
         ],
       },
