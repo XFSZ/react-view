@@ -58,6 +58,7 @@ const EChart = (props: XEChartProps) => {
   };
 
   const container = useRef(null);
+
   const [option, setOption] = useState({
     tooltip: {
       trigger: 'axis',
@@ -177,20 +178,40 @@ const EChart = (props: XEChartProps) => {
         // if (params.componentType === 'xAxis') {
         //   console.log('单击了' + params.value + 'x轴标签');
         // } else {
-        //   console.log('单击了' + params.name + '柱状图');
+        setOption({
+          ...option,
+          yAxis: {
+            ...option.yAxis,
+            data: ['啊哈', '公平', '公平', '公平', '好的', '周六', '周日'],
+          },
+          series: [
+            { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
+            { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
+          ],
+        });
+        console.log('单击了' + params.name + '柱状图');
         // }
       });
-      if (timer === 0) {
-        return;
-      }
-      setInterval(() => {
-        console.log('这是一个定时器');
-        axios.get(`${api}`).then(function(response) {
-          console.log('response : ', response);
-        });
-        chart.setOption(option);
-        chart.resize();
-      }, timer);
+      //
+
+      // if (timer === 0) {
+      //   console.log("timer : ",timer)
+      //   setOption({...option, yAxis : { ...option.yAxis,data:['啊哈', '公平', '公平', '公平', '好的', '周六', '周日']}})
+      //   return;
+      // }else{
+      //   if(api!==''){
+      //     axios.get(`${api}`).then(function(response) {
+      //       console.log('response : ', response);
+      //     });
+      //   }
+
+      //   chart.setOption(option);
+      //   chart.resize();
+      //   // setInterval(() => {
+      //   //   console.log('这是一个定时器');
+
+      //   // }, 10000);
+      // }
     }
   }, [data, isTpl, option]);
   return (
