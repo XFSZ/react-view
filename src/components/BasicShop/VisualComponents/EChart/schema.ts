@@ -25,6 +25,9 @@ export interface IEChartConfig {
   api: TTextDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
+  yAxis: TTextDefaultType;
+  seriesA: TTextDefaultType;
+  seriesB: TTextDefaultType;
 }
 
 export interface IEChartSchema {
@@ -80,6 +83,21 @@ const Chart: IEChartSchema = {
       type: 'Text',
     },
     {
+      key: 'yAxis',
+      name: 'yAxis',
+      type: 'Text',
+    },
+    {
+      key: 'seriesA',
+      name: 'seriesA',
+      type: 'Text',
+    },
+    {
+      key: 'seriesB',
+      name: 'seriesB',
+      type: 'Text',
+    },
+    {
       key: 'timer',
       name: '定时器(单位s)',
       type: 'Number',
@@ -112,6 +130,9 @@ const Chart: IEChartSchema = {
     ],
     clickParams: '[{}]',
     api: '',
+    yAxis: '',
+    seriesA: '',
+    seriesB: '',
     timer: 0,
   },
 };

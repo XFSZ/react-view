@@ -7,48 +7,63 @@ import styles from './index.less';
 import { IEChartConfig } from './schema';
 import { Dispatch } from 'umi';
 import { connect } from 'dva';
-// import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
+import { StateWithHistory } from 'redux-undo';
+import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
 interface XEChartProps extends IEChartConfig {
   isTpl: boolean;
 }
 
-const onClick = (clickParams: string, dispatch: Dispatch) => {
-  try {
-    let clickParamsStrData = '[{}]';
-    if (clickParams !== '') {
-      clickParamsStrData = clickParams;
-    }
-    const clickParamsData = JSON.parse(clickParamsStrData);
-    const userData = localStorage.getItem('userData') || '[]';
-    const userDataJson = JSON.parse(userData);
-    for (let i = 0; i < clickParamsData.length; i++) {
-      for (let j = 0; j < userDataJson.length; j++) {
-        if (userDataJson[j].id === clickParamsData[i].id) {
-          const modifyData = userDataJson[j];
-          if (!clickParamsData[i].config) {
-            continue;
-          }
-          const keys = Object.keys(clickParamsData[i].config); //获取所有修改的值
-          keys.map(val => (modifyData.item.config[val] = clickParamsData[i].config[val]));
-          dispatch({
-            type: 'editorModal/modPointData',
-            payload: {
-              id: modifyData.id,
-              item: modifyData.item,
-              point: modifyData.point,
-              status: 'inToCanvas',
-            },
-          });
-        }
-      }
-    }
-  } catch (err) {
-    console.error(err);
-  }
-};
+// const onClick = (clickParams: string, dispatch: Dispatch) => {
+//   try {
+//     let clickParamsStrData = '[{}]';
+//     if (clickParams !== '') {
+//       clickParamsStrData = clickParams;
+//     }
+//     const clickParamsData = JSON.parse(clickParamsStrData);
+//     const userData = localStorage.getItem('userData') || '[]';
+//     const userDataJson = JSON.parse(userData);
+//     for (let i = 0; i < clickParamsData.length; i++) {
+//       for (let j = 0; j < userDataJson.length; j++) {
+//         if (userDataJson[j].id === clickParamsData[i].id) {
+//           const modifyData = userDataJson[j];
+//           if (!clickParamsData[i].config) {
+//             continue;
+//           }
+//           const keys = Object.keys(clickParamsData[i].config); //获取所有修改的值
+//           keys.map(val => (modifyData.item.config[val] = clickParamsData[i].config[val]));
+//           dispatch({
+//             type: 'editorModal/modPointData',
+//             payload: {
+//               id: modifyData.id,
+//               item: modifyData.item,
+//               point: modifyData.point,
+//               status: 'inToCanvas',
+//             },
+//           });
+//         }
+//       }
+//     }
+//   } catch (err) {
+//     console.error(err);
+//   }
+// };
 
-const EChart = (props: XEChartProps) => {
-  const { isTpl, data, color, size, paddingTop, title, api, timer, clickParams } = props;
+const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
+  const {
+    isTpl,
+    data,
+    color,
+    size,
+    paddingTop,
+    title,
+    api,
+    timer,
+    clickParams,
+    dispatch,
+    yAxis,
+    seriesA,
+    seriesB,
+  } = props;
   //const chartRef = useRef(null);
   //const container = useRef<HTMLDivElement>(null)
   let barData1 = {
@@ -160,60 +175,66 @@ const EChart = (props: XEChartProps) => {
   });
   useEffect(() => {
     if (!isTpl) {
-      // axios.get('https://devapi.qweather.com/v7/weather/now?location=101010100&key=79baaa3328844819a86aa99a9e65a1de').then(function(response){
-      //   console.log("response : ",response);
-      // })
       const chart = echarts.init((container.current as unknown) as HTMLDivElement, {
         devicePixelRatio: window.devicePixelRatio,
       });
       chart.setOption(option);
-
-      // setInterval(() => {
-      //   console.log("这是一个定时器")
-      //   chart.setOption(option);
-      //   chart.resize()
-      // }, 100);
       chart.on('click', function(params) {
         //onClick
         // if (params.componentType === 'xAxis') {
         //   console.log('单击了' + params.value + 'x轴标签');
         // } else {
-        setOption({
-          ...option,
-          yAxis: {
-            ...option.yAxis,
-            data: ['啊哈', '公平', '公平', '公平', '好的', '周六', '周日'],
-          },
-          series: [
-            { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
-            { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
-          ],
-        });
-        console.log('单击了' + params.name + '柱状图');
         // }
+        onClick(clickParams, dispatch);
+        // setOption({
+        //   ...option,
+        //   yAxis: {
+        //     ...option.yAxis,
+        //     data: ['啊哈', '公平', '公平', '公平', '好的', '周六', '周日'],
+        //   },
+        //   series: [
+        //     { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
+        //     { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
+        //   ],
+        // });
+        console.log('单击了' + params.name + '柱状图');
       });
-      //
 
-      // if (timer === 0) {
-      //   console.log("timer : ",timer)
-      //   setOption({...option, yAxis : { ...option.yAxis,data:['啊哈', '公平', '公平', '公平', '好的', '周六', '周日']}})
-      //   return;
-      // }else{
-      //   if(api!==''){
-      //     axios.get(`${api}`).then(function(response) {
-      //       console.log('response : ', response);
-      //     });
-      //   }
+      if (timer >= 1) {
+        console.log('timer : ', timer);
+        if (api !== '') {
+          console.log('api : ', api);
+          const timerInterval = setInterval(() => {
+            axios.get(`${api}`).then(function(response) {
+              console.log('response : ', response);
+              // response.data[yAxis]
+              //  response.data[seriesA]
+              //  response.data[seriesB]
 
-      //   chart.setOption(option);
-      //   chart.resize();
-      //   // setInterval(() => {
-      //   //   console.log('这是一个定时器');
+              setOption({
+                ...option,
+                yAxis: {
+                  ...option.yAxis,
+                  data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+                },
+                series: [
+                  { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
+                  { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
+                ],
+              });
+            });
+          }, timer * 1000);
+          return () => clearInterval(timerInterval);
+        }
+      } else {
+        console.log('timer : ', timer);
 
-      //   // }, 10000);
-      // }
+        return;
+        //  chart.setOption(option);
+        //  chart.resize();
+      }
     }
-  }, [data, isTpl, option]);
+  }, [data, isTpl, option, api, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
@@ -228,6 +249,9 @@ const EChart = (props: XEChartProps) => {
   );
 };
 
-export default memo(EChart);
+export default connect((state: StateWithHistory<any>) => ({
+  pstate: state.present.editorModal,
+  cstate: state.present.editorPcModal,
+}))(memo(EChart));
 
-// // @ts-ignore
+// export default memo(EChart);
