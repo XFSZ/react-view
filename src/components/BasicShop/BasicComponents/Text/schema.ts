@@ -28,6 +28,10 @@ export interface ITextConfig {
   align: TSelectDefaultType<TTextSelectKeyType>;
   lineHeight: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
+  api: TTextDefaultType;
+  apiParams: TTextAreaDefaultType;
+  timer: TNumberDefaultType;
+  dataVal: TTextDefaultType;
 }
 
 export interface ITextSchema {
@@ -90,6 +94,26 @@ const Text: ITextSchema = {
       name: '动作',
       type: 'TextArea',
     },
+    {
+      key: 'api',
+      name: 'api接口',
+      type: 'Text',
+    },
+    {
+      key: 'apiParams',
+      name: 'api参数',
+      type: 'TextArea',
+    },
+    {
+      key: 'dataVal',
+      name: 'api取值',
+      type: 'Text',
+    },
+    {
+      key: 'timer',
+      name: '定时器(单位s)',
+      type: 'Number',
+    },
   ],
   config: {
     id: '999',
@@ -100,6 +124,10 @@ const Text: ITextSchema = {
     align: 'center',
     lineHeight: 2,
     clickParams: '[{}]',
+    api: '',
+    apiParams: '',
+    dataVal: '',
+    timer: 0,
   },
 };
 export default Text;

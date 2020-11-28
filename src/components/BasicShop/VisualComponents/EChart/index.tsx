@@ -63,6 +63,7 @@ const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
     yAxis,
     seriesA,
     seriesB,
+    apiParams,
   } = props;
   //const chartRef = useRef(null);
   //const container = useRef<HTMLDivElement>(null)
@@ -186,17 +187,17 @@ const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
         // } else {
         // }
         onClick(clickParams, dispatch);
-        // setOption({
-        //   ...option,
-        //   yAxis: {
-        //     ...option.yAxis,
-        //     data: ['啊哈', '公平', '公平', '公平', '好的', '周六', '周日'],
-        //   },
-        //   series: [
-        //     { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
-        //     { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
-        //   ],
-        // });
+        setOption({
+          ...option,
+          yAxis: {
+            ...option.yAxis,
+            data: ['啊哈', '公平', '公平', '公平', '好的', '周六', '周日'],
+          },
+          series: [
+            { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
+            { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
+          ],
+        });
         console.log('单击了' + params.name + '柱状图');
       });
 
@@ -204,13 +205,17 @@ const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
         console.log('timer : ', timer);
         if (api !== '') {
           console.log('api : ', api);
+          let params = {};
+          if (apiParams !== '') {
+            params = JSON.parse(apiParams);
+          }
           const timerInterval = setInterval(() => {
-            axios.get(`${api}`).then(function(response) {
+            axios.get(api, { params }).then(function(response) {
               console.log('response : ', response);
-              // response.data[yAxis]
-              //  response.data[seriesA]
-              //  response.data[seriesB]
-
+              //const yAxis =   response.data[yAxis]
+              // const seriesA = response.data[seriesA]
+              // const seriesB =  response.data[seriesB]
+              console.log('test : ', response.data[yAxis]);
               setOption({
                 ...option,
                 yAxis: {
@@ -234,7 +239,7 @@ const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
         //  chart.resize();
       }
     }
-  }, [data, isTpl, option, api, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
+  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>

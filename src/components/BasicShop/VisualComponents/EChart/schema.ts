@@ -23,6 +23,7 @@ export interface IEChartConfig {
   paddingTop: TNumberDefaultType;
   data: TTableDefaultType;
   api: TTextDefaultType;
+  apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
   yAxis: TTextDefaultType;
@@ -83,6 +84,11 @@ const Chart: IEChartSchema = {
       type: 'Text',
     },
     {
+      key: 'apiParams',
+      name: 'api参数',
+      type: 'TextArea',
+    },
+    {
       key: 'yAxis',
       name: 'yAxis',
       type: 'Text',
@@ -130,6 +136,7 @@ const Chart: IEChartSchema = {
     ],
     clickParams: '[{}]',
     api: '',
+    apiParams: '',
     yAxis: '',
     seriesA: '',
     seriesB: '',
