@@ -65,6 +65,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
 
       // 转换成网格规则的坐标和大小
       let gridY = Math.ceil(y / cellHeight);
+      //  let gridY = pointEnd!.y;
       if (context.theme === 'h5') {
         const uid = uuid(6, 10);
         item.config.id = uid;
@@ -248,6 +249,8 @@ const SourceBox = memo((props: SourceBoxProps) => {
     }
   }, [panelWidth, panelHeight, panelData]);
 
+  // const renderval  = useCallback(()=>{})
+
   function renderval(value: {
     id: string;
     item: any;
@@ -343,7 +346,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
     dragState,
     dragStop,
     drop,
-    isShowTip,
+    //  isShowTip,
     onDragStart,
     onResizeStop,
     opacity,
@@ -352,6 +355,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
     setDragState,
     panelWidth,
     panelHeight,
+    // renderval,
   ]);
 
   return (

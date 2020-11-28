@@ -2,6 +2,9 @@ import path from 'path';
 import { defineConfig } from 'umi';
 
 export default defineConfig({
+  // targets: {
+  //   firefox: 51,
+  // },
   dynamicImport: {
     loading: '@/components/LoadingCp',
   },
@@ -20,7 +23,7 @@ export default defineConfig({
     {
       exact: false,
       path: '/',
-     // component: '@/layouts/index',
+      // component: '@/layouts/index',
       routes: [
         {
           path: '/',

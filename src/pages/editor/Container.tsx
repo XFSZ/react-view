@@ -469,7 +469,7 @@ const Container = (props: {
       });
       containerRef.current!.style.cursor = 'default';
     }
-  }, [diffmove.move]);
+  }, [diffmove.move, dispatch]);
 
   return (
     <div className={styles.editorWrap}>
