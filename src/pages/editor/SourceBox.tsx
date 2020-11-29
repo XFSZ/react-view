@@ -11,6 +11,7 @@ import { StateWithHistory } from 'redux-undo';
 import { Menu, Item, MenuProvider } from 'react-contexify';
 import 'react-contexify/dist/ReactContexify.min.css';
 import { dooringContext } from '@/layouts';
+
 interface SourceBoxProps {
   pstate: {
     pointData: { id: string; item: any; point: any; isMenu?: any; visibility: string }[];
@@ -107,7 +108,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   const dragStop: ItemCallback = useMemo(() => {
     return (layout, oldItem, newItem, placeholder, e, element) => {
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
-      console.log('curPointData : ', curPointData);
+      // console.log('curPointData : ', curPointData);
       dispatch({
         type: 'editorModal/modPointData',
         payload: { ...curPointData, point: newItem, status: 'inToCanvas' },
@@ -258,6 +259,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
     isMenu?: any;
     visibility: string;
   }) {
+    // console.log("renderval : ",value)
     if (pstate.pointData[0].item.config.layerList && value.id !== '0') {
       for (let i = 0; i < pstate.pointData[0].item.config.layerList.length; i++) {
         const va = pstate.pointData[0].item.config.layerList[i];
@@ -302,38 +304,49 @@ const SourceBox = memo((props: SourceBoxProps) => {
                 }}
                 ref={drop}
               >
-                {pointData.length > 0 ? (
-                  <GridLayout
-                    className={styles.layout}
-                    cols={24}
-                    rowHeight={2}
-                    width={canvasRect[0] || 0}
-                    margin={[0, 0]}
-                    onDragStop={dragStop}
-                    onDragStart={onDragStart}
-                    onResizeStop={onResizeStop}
-                  >
-                    {pointData.map(value => (
-                      <div
-                        className={value.isMenu ? styles.selected : styles.dragItem}
-                        key={value.id}
-                        data-grid={value.point}
-                        style={{ visibility: renderval(value) === 1 ? 'visible' : 'hidden' }}
-                      >
-                        <DynamicEngine {...value.item} isTpl={false} />
-                      </div>
-                    ))}
-                    {/* {pointData.map(value => (
-                      <div
-                        className={value.isMenu ? styles.selected : styles.dragItem}
-                        key={value.id}
-                        data-grid={value.point}
-                      >
-                        <DynamicEngine {...value.item} isTpl={false} />
-                      </div>
-                    ))} */}
-                  </GridLayout>
-                ) : null}
+                {pointData.length > 0
+                  ? pstate.pointData[0].item.config.layerList.map(
+                      (layoutval: { id: string; zIndex: number }) => (
+                        <div
+                          key={layoutval.id}
+                          style={{ position: 'absolute', zIndex: layoutval.zIndex }}
+                        >
+                          <GridLayout
+                            key={`dd${layoutval.id}`}
+                            className={styles.layout}
+                            cols={24}
+                            rowHeight={2}
+                            compactType={null}
+                            width={canvasRect[0] || 0}
+                            // isBounded={true}
+                            //useCSSTransforms = {false}
+                            //synchronizeLayout={true}
+                            margin={[0, 0]}
+                            onDragStop={dragStop}
+                            onDragStart={onDragStart}
+                            onResizeStop={onResizeStop}
+                          >
+                            {pointData.map(value =>
+                              value.id !== '0' && value.item.config.zIndex === layoutval.zIndex ? (
+                                <div
+                                  className={value.isMenu ? styles.selected : styles.dragItem}
+                                  key={value.id}
+                                  data-grid={value.point}
+                                  style={{
+                                    visibility: renderval(value) === 1 ? 'visible' : 'hidden',
+                                  }}
+                                >
+                                  <DynamicEngine {...value.item} isTpl={false} />
+                                </div>
+                              ) : (
+                                <div key={`dc${value.id}`}></div>
+                              ),
+                            )}
+                          </GridLayout>
+                        </div>
+                      ),
+                    )
+                  : null}
               </div>
             </div>
           </MenuProvider>

@@ -116,7 +116,12 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     <>
       <div
         ref={ref}
-        style={{ width: pointData[0].item.config.width, height: pointData[0].item.config.height }}
+        style={{
+          display: 'flex',
+          margin: 'auto',
+          width: pointData[0].item.config.width,
+          height: pointData[0].item.config.height,
+        }}
         // style={
         //   vw > 800
         //     ? pcStyle
@@ -133,6 +138,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
             rowHeight={2}
             // width={vw > 800 ? 375 : vw}
             margin={[0, 0]}
+            compactType={null}
             // style={{
             //   backgroundColor: pageData.bgColor,
             //   backgroundImage: pageData.bgImage ? `url(${pageData.bgImage[0].url})` : 'initial',
