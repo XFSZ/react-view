@@ -63,7 +63,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
         col = 24, // 网格列数
         cellHeight = 2,
         w = item.type === 'Icon' ? 3 : col;
-
+      w = 6;
       // 转换成网格规则的坐标和大小
       let gridY = Math.ceil(y / cellHeight);
       //  let gridY = pointEnd!.y;
