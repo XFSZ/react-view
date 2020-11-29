@@ -305,7 +305,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
                 ref={drop}
               >
                 {pointData.length > 0
-                  ? pstate.pointData[0].item.config.layerList.map(
+                  ? pointData[0].item.config.layerList.map(
                       (layoutval: { id: string; zIndex: number }) => (
                         <div
                           key={layoutval.id}
