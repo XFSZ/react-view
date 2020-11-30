@@ -17,6 +17,7 @@ import {
 import { history } from 'umi';
 import QRCode from 'qrcode.react';
 import { saveAs } from 'file-saver';
+import axios from 'axios';
 import req from '@/utils/req';
 import Code from '@/assets/code.png';
 import styles from './index.less';
@@ -75,10 +76,10 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
       title: '确定要保存吗？',
       content: (
         <div className={styles.saveForm}>
-          <div className={styles.formIpt}>
+          {/* <div className={styles.formIpt}>
             <span>模版名称：</span>
             <Input ref={iptRef} />
-          </div>
+          </div> */}
           {/* <div className={styles.formIpt}>
             <span>封面设置：</span>
             <Button
@@ -102,8 +103,8 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
       okText: '保存',
       cancelText: '取消',
       onOk() {
-        let name = iptRef.current!.state.value;
-        req.post('/visible/tpl/save', { name, tpl: pointData }).then(res => {
+        // let name = iptRef.current!.state.value;
+        axios.post('http://192.168.1.5:3000/updatedata', { data: pointData }).then(res => {
           console.log(res);
         });
       },
@@ -239,7 +240,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
           onClick={handleSaveTpl}
           disabled={!pointData.length}
         >
-          保存模版
+          保存模板
         </Button>
         <Upload {...uploadprops}>
           <Button type="link" style={{ marginRight: '8px' }}>
