@@ -36,7 +36,7 @@ const Text = memo((props: ITextConfig & { isTpl: boolean; dispatch: Dispatch }) 
           }
           const timerInterval = setInterval(() => {
             axios.get(api, { params }).then(function(response) {
-              console.log('response : ', response);
+              console.log('response : ', response.data);
               // setValText(response.data[dataVal])
             });
           }, timer * 1000);

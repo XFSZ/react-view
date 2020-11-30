@@ -105,7 +105,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
       onOk() {
         // let name = iptRef.current!.state.value;
         axios.post('http://192.168.1.5:3000/updatedata', { data: pointData }).then(res => {
-          console.log(res);
+          console.log(res.data);
         });
       },
       onCancel() {
