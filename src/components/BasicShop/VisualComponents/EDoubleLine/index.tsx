@@ -1,6 +1,4 @@
 import * as echarts from 'echarts';
-//import ReactEcharts from "echarts-for-react";
-import 'echarts-gl';
 import React, { memo, useEffect, useRef, useState } from 'react';
 // import { uuid } from 'utils/tool';
 import EChartImg from '@/assets/xiao.png';
@@ -50,7 +48,7 @@ interface XEChartProps extends IEChartConfig {
 //   }
 // };
 
-const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
+const EDoubleLine = (props: XEChartProps & { dispatch: Dispatch }) => {
   const {
     isTpl,
     data,
@@ -78,103 +76,176 @@ const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
   const container = useRef(null);
 
   const [option, setOption] = useState({
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        // 坐标轴指示器，坐标轴触发有效
-        type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
-      },
-    },
-
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true,
-    },
+    backgroundColor: '#1a212b',
     xAxis: {
-      type: 'value',
-      axisLabel: {
-        show: true,
-        textStyle: {
-          fontFamily: 'OPPOSans',
-          color: 'rgba(170,170,170,1)',
+      type: 'category',
+      boundaryGap: false,
+      data: [],
+      axisLine: {
+        onZero: false,
+        lineStyle: {
+          color: '#585c65',
+          width: 1,
         },
       },
+      axisLabel: {
+        color: '#959FAB',
+        fontSize: 12,
+        fontWeight: 400,
+        fontFamily: 'Microsoft YaHei',
+      },
       splitLine: {
-        // 网格线
-        show: false,
+        show: true,
+        lineStyle: {
+          color: ['#373b46'],
+          type: 'dashed',
+        },
+      },
+      splitArea: {
+        show: true,
+        areaStyle: {
+          color: ['rgba(55,59,70,0.3)', 'rgba(200,200,200,0)'],
+        },
       },
     },
     yAxis: {
-      type: 'category',
-      axisLabel: {
-        show: true,
-        textStyle: {
-          fontFamily: 'OPPOSans',
-          color: 'rgba(170,170,170,1)',
-          //color: '#ffffff',
-          fontSize: 17,
+      type: 'value',
+      min: 0,
+      axisLine: {
+        onZero: false,
+        lineStyle: {
+          color: '#585c65',
+          width: 1,
         },
       },
-      axisTick: {
-        // y轴刻度线
-        show: false,
+      axisLabel: {
+        color: '#959FAB',
+        fontSize: 10,
+        fontWeight: 400,
+        fontFamily: 'Microsoft YaHei',
       },
-      data: barData1.ydata,
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: ['#373b46'],
+        },
+      },
+      scale: true,
     },
     series: [
       {
-        name: '完好数',
-        type: 'bar',
-        stack: '总量',
-
-        barWidth: 8,
+        data: [],
+        type: 'line',
+        areaStyle: {},
+        name: '',
+        smooth: true,
         itemStyle: {
-          normal: { color: '#048ad3' },
+          normal: {
+            opacity: false,
+            color: '#054899',
+            borderColor: '#575dff',
+            lineStyle: {
+              color: '#054899',
+              width: 1,
+            },
+            areaStyle: {
+              opacity: 0.3,
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: '#054899',
+                  },
+                  {
+                    offset: 1,
+                    color: 'rgba(0,0,0,0)',
+                  },
+                ],
+                globalCoord: false,
+              },
+            },
+          },
         },
-
-        data: barData1.xdata1,
       },
       {
-        name: '大修数',
-        type: 'bar',
-        stack: '总量',
-        barWidth: 8,
-
+        data: [],
+        type: 'line',
+        areaStyle: {},
+        name: '',
+        smooth: true,
         itemStyle: {
-          normal: { color: '#00c6b8' },
+          normal: {
+            opacity: false,
+            color: '#F5AD47',
+            borderColor: '#575dff',
+            lineStyle: {
+              color: '#F5AD47',
+              width: 1,
+            },
+            areaStyle: {
+              opacity: 0.3,
+              color: {
+                type: 'linear',
+                x: 0,
+                y: 0,
+                x2: 0,
+                y2: 1,
+                colorStops: [
+                  {
+                    offset: 0,
+                    color: '#F5AD47',
+                  },
+                  {
+                    offset: 1,
+                    color: 'rgba(0,0,0,0)',
+                  },
+                ],
+                globalCoord: false,
+              },
+            },
+          },
         },
-
-        backgroundStyle: {
-          // // 前四个参数分别是 x0, y0, x2, y2, 范围从 0 - 1，相当于在图形包围盒中的百分比，如果 globalCoord 为 `true`，则该四个值是绝对的像素位置
-          // color: {
-          //   type: 'linear',
-          //   x: 0,
-          //   y: 0,
-          //   x2: 0,
-          //   y2: 1,
-          //   colorStops: [
-          //     {
-          //       offset: 0,
-          //       color: 'red', // 0% 处的颜色
-          //     },
-          //     {
-          //       offset: 1,
-          //       color: 'blue', // 100% 处的颜色
-          //     },
-          //   ],
-          //   globalCoord: false, // 缺省为 false
-          // },
-          color: new echarts.graphic.LinearGradient(1, 0, 0, 0, [
-            { offset: 0, color: 'rgba(172,172,172,1)' },
-            { offset: 0.2, color: 'rgba(172,172,172,0.5)' },
-            { offset: 1, color: 'rgba(0,0,0,0.5)' },
-          ]),
-        },
-        data: barData1.xdata2,
       },
     ],
+    legend: {
+      right: '5%',
+      top: 'middle',
+      orient: 'vertical',
+      icon: 'rect',
+      borderRadius: 0,
+      borderColor: '#5470fa',
+      //"data": [],
+      textStyle: {
+        fontFamily: 'Microsoft YaHei',
+        fontSize: 14,
+        color: '#dadde2',
+      },
+      show: true,
+      itemWidth: 25,
+      itemHeight: 14,
+    },
+    tooltip: {
+      trigger: 'axis',
+      transitionDuration: 0,
+      axisPointer: {
+        type: 'cross',
+        label: {
+          backgroundColor: '#6a7985',
+        },
+      },
+    },
+    grid: {
+      top: '4%',
+      left: '1%',
+      bottom: '3%',
+      right: '25%',
+      containLabel: true,
+    },
   });
   useEffect(() => {
     if (!isTpl) {
@@ -188,18 +259,18 @@ const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
         //   console.log('单击了' + params.value + 'x轴标签');
         // } else {
         // }
-        onClick(clickParams, dispatch);
-        setOption({
-          ...option,
-          yAxis: {
-            ...option.yAxis,
-            data: ['啊哈', '公平', '公平', '公平', '好的', '周六', '周日'],
-          },
-          series: [
-            { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
-            { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
-          ],
-        });
+        //  onClick(clickParams, dispatch);
+        // setOption({
+        //   ...option,
+        //   yAxis: {
+        //     ...option.yAxis,
+        //     data: ['啊哈', '公平', '公平', '公平', '好的', '周六', '周日'],
+        //   },
+        //   series: [
+        //     { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
+        //     { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
+        //   ],
+        // });
         console.log('单击了' + params.name + '柱状图');
       });
 
@@ -218,17 +289,17 @@ const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
               // const seriesA = response.data[seriesA]
               // const seriesB =  response.data[seriesB]
               console.log('test : ', response.data[yAxis]);
-              setOption({
-                ...option,
-                yAxis: {
-                  ...option.yAxis,
-                  data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-                },
-                series: [
-                  { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
-                  { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
-                ],
-              });
+              // setOption({
+              //   ...option,
+              //   yAxis: {
+              //     ...option.yAxis,
+              //     data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+              //   },
+              //   series: [
+              //     { ...option.series[0], data: [32, 30, 30, 33, 39, 33, 32] },
+              //     { ...option.series[1], data: [12, 13, 10, 13, 90, 23, 21] },
+              //   ],
+              // });
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
@@ -259,6 +330,6 @@ const EChart = (props: XEChartProps & { dispatch: Dispatch }) => {
 export default connect((state: StateWithHistory<any>) => ({
   pstate: state.present.editorModal,
   cstate: state.present.editorPcModal,
-}))(memo(EChart));
+}))(memo(EDoubleLine));
 
 // export default memo(EChart);

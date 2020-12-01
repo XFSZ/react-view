@@ -2,9 +2,11 @@ import path from 'path';
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  // targets: {
-  //   firefox: 51,
-  // },
+  targets: {
+    // chrome:56,
+    firefox: 51,
+    // opera:43,
+  },
   dynamicImport: {
     loading: '@/components/LoadingCp',
   },

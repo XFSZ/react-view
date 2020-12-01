@@ -130,6 +130,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   }, [context.theme, cpointData, dispatch, pointData]);
 
   const onDragStart: ItemCallback = useMemo(() => {
+    console.log('onDragStart');
     return (layout, oldItem, newItem, placeholder, e, element) => {
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({

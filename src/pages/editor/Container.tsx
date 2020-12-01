@@ -410,6 +410,7 @@ const Container = (props: {
   }, []);
 
   const mousemovefn = useMemo(() => {
+    console.log('mousemovefn');
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (diffmove.move) {
         let diffx: number;
