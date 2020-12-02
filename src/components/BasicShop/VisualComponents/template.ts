@@ -5,7 +5,22 @@
 // import XProgress from './XProgress/template';
 import EChart from './EChart/template';
 import EPie from './EPie/template';
-const visualTemplate = [EChart, EPie];
+import EDoubleLine from './EDoubleLine/template';
+import ESinglePie from './ESinglePie/template';
+import ERadar from './ERadar/template';
+import EMultiLine from './EMultiLine/template';
+import EDualAxes from './EDualAxes/template';
+import EColumn from './EColumn/template';
+const visualTemplate = [
+  EChart,
+  EPie,
+  EDoubleLine,
+  ESinglePie,
+  ERadar,
+  EMultiLine,
+  EDualAxes,
+  EColumn,
+];
 // const visualTemplate = [Chart, Line, Pie, Area, XProgress, EChart];
 const VisualTemplate = visualTemplate.map(v => {
   return { ...v, category: 'visual' };

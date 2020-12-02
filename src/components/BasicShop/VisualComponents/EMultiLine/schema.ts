@@ -36,7 +36,7 @@ export interface IEChartSchema {
   config: IEChartConfig;
 }
 
-const EDoubleLine: IEChartSchema = {
+const EMultiLine: IEChartSchema = {
   editData: [
     {
       key: 'id',
@@ -112,7 +112,7 @@ const EDoubleLine: IEChartSchema = {
   config: {
     id: '999',
     zIndex: 2,
-    title: '双曲线',
+    title: '雷达图',
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
@@ -144,4 +144,4 @@ const EDoubleLine: IEChartSchema = {
   },
 };
 
-export default EDoubleLine;
+export default EMultiLine;

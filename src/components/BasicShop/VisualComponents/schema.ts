@@ -5,6 +5,12 @@
 // import XProgress from './XProgress/schema';
 import EChart from './EChart/schema';
 import EPie from './EPie/schema';
+import EDoubleLine from './EDoubleLine/schema';
+import ESinglePie from './ESinglePie/schema';
+import ERadar from './ERadar/schema';
+import EMultiLine from './EMultiLine/schema';
+import EDualAxes from './EDualAxes/schema';
+import EColumn from './EColumn/schema';
 const visualSchema = {
   // Chart,
   // Line,
@@ -13,6 +19,12 @@ const visualSchema = {
   // XProgress,
   EChart,
   EPie,
+  EDoubleLine,
+  ESinglePie,
+  ERadar,
+  EMultiLine,
+  EDualAxes,
+  EColumn,
 };
 
 export default visualSchema;
