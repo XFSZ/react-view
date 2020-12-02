@@ -36,7 +36,7 @@ export interface IEChartSchema {
   config: IEChartConfig;
 }
 
-const EDualAxes: IEChartSchema = {
+const EHorizontalBar: IEChartSchema = {
   editData: [
     {
       key: 'id',
@@ -112,7 +112,7 @@ const EDualAxes: IEChartSchema = {
   config: {
     id: '999',
     zIndex: 2,
-    title: '分组柱线图',
+    title: '横向柱图',
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
@@ -144,4 +144,4 @@ const EDualAxes: IEChartSchema = {
   },
 };
 
-export default EDualAxes;
+export default EHorizontalBar;

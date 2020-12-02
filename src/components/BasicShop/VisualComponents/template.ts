@@ -11,6 +11,8 @@ import ERadar from './ERadar/template';
 import EMultiLine from './EMultiLine/template';
 import EDualAxes from './EDualAxes/template';
 import EColumn from './EColumn/template';
+import EMultiLine2 from './EMultiLine2/template';
+import EHorizontalBar from './EHorizontalBar/template';
 const visualTemplate = [
   EChart,
   EPie,
@@ -20,6 +22,8 @@ const visualTemplate = [
   EMultiLine,
   EDualAxes,
   EColumn,
+  EMultiLine2,
+  EHorizontalBar,
 ];
 // const visualTemplate = [Chart, Line, Pie, Area, XProgress, EChart];
 const VisualTemplate = visualTemplate.map(v => {

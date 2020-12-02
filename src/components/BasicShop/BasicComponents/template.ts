@@ -13,17 +13,17 @@ import Text from './Text/template';
 import WhiteTpl from './WhiteTpl/template';
 
 const basicTemplate = [
-  Carousel,
-  Footer,
-  Form,
-  Header,
-  Icon,
+  // Carousel,
+  // Footer,
+  // Form,
+  // Header,
+  // Icon,
   Image,
-  List,
+  // List,
   LongText,
-  Notice,
-  Qrcode,
-  Tab,
+  // Notice,
+  // Qrcode,
+  // Tab,
   Text,
   WhiteTpl,
 ];

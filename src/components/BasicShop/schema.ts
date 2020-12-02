@@ -5,7 +5,7 @@ import BasicPanelSchema from './BasicPanel/schema';
 
 const schema = {
   ...BasicSchema,
-  ...MediaSchema,
+  //  ...MediaSchema,
   ...VisualSchema,
   ...BasicPanelSchema,
 };

@@ -112,7 +112,7 @@ const EColumn: IEChartSchema = {
   config: {
     id: '999',
     zIndex: 2,
-    title: '雷达图',
+    title: '分组柱状图',
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,

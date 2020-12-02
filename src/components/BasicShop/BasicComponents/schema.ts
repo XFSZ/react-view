@@ -13,18 +13,18 @@ import Tab from './Tab/schema';
 import Text from './Text/schema';
 
 const basicSchema = {
-  Carousel,
-  Footer,
-  Form,
-  Header,
-  Icon,
+  // Carousel,
+  // Footer,
+  // Form,
+  // Header,
+  // Icon,
   Image,
-  List,
+  // List,
   LongText,
   WhiteTpl,
-  Notice,
-  Qrcode,
-  Tab,
+  // Notice,
+  // Qrcode,
+  // Tab,
   Text,
 };
 export default basicSchema;

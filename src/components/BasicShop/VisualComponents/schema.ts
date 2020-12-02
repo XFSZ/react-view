@@ -11,6 +11,8 @@ import ERadar from './ERadar/schema';
 import EMultiLine from './EMultiLine/schema';
 import EDualAxes from './EDualAxes/schema';
 import EColumn from './EColumn/schema';
+import EMultiLine2 from './EMultiLine2/schema';
+import EHorizontalBar from './EHorizontalBar/schema';
 const visualSchema = {
   // Chart,
   // Line,
@@ -25,6 +27,8 @@ const visualSchema = {
   EMultiLine,
   EDualAxes,
   EColumn,
+  EMultiLine2,
+  EHorizontalBar,
 };
 
 export default visualSchema;

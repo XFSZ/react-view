@@ -17,7 +17,7 @@ import DynamicEngine, { componentsType } from 'components/DynamicEngine';
 import FormEditor from 'components/PanelComponents/FormEditor';
 
 import template1 from 'components/BasicShop/BasicComponents/template';
-import mediaTpl1 from 'components/BasicShop/MediaComponents/template';
+//import mediaTpl1 from 'components/BasicShop/MediaComponents/template';
 import graphTpl1 from 'components/BasicShop/VisualComponents/template';
 
 import schemaH5 from 'components/BasicShop/schema';
@@ -69,14 +69,14 @@ const Container = (props: {
     }
   }, [context.theme]);
 
-  const mediaTpl = useMemo(() => {
-    return mediaTpl1;
-    if (context.theme === 'h5') {
-      return mediaTpl1;
-    } else {
-      //  return mediaTpl2;
-    }
-  }, [context.theme]);
+  // const mediaTpl = useMemo(() => {
+  //   return mediaTpl1;
+  //   if (context.theme === 'h5') {
+  //     return mediaTpl1;
+  //   } else {
+  //     //  return mediaTpl2;
+  //   }
+  // }, [context.theme]);
 
   const graphTpl = useMemo(() => {
     return graphTpl1;
@@ -226,14 +226,15 @@ const Container = (props: {
     template.forEach(v => {
       arr.push(v.type);
     });
-    mediaTpl.forEach(v => {
-      arr.push(v.type);
-    });
+    // mediaTpl.forEach(v => {
+    //   arr.push(v.type);
+    // });
     graphTpl.forEach(v => {
       arr.push(v.type);
     });
     return arr;
-  }, [graphTpl, mediaTpl, template]);
+  }, [graphTpl, template]);
+  // }, [graphTpl, mediaTpl, template]);
 
   const [dragstate, setDragState] = useState({ x: 0, y: 0 });
 
@@ -358,7 +359,7 @@ const Container = (props: {
               );
             })}
           </TabPane>
-          <TabPane tab={generateHeader('media', '')} key="2">
+          {/* <TabPane tab={generateHeader('media', '')} key="2">
             <div className={styles.ctitle}>媒体组件</div>
             {mediaTpl.map((value, i) => (
               <TargetBox item={value} key={i} canvasId={canvasId}>
@@ -370,7 +371,7 @@ const Container = (props: {
                 />
               </TargetBox>
             ))}
-          </TabPane>
+          </TabPane> */}
           <TabPane tab={generateHeader('visible', '')} key="3">
             <div className={styles.ctitle}>可视化组件</div>
             {graphTpl.map((value, i) => (
@@ -387,7 +388,8 @@ const Container = (props: {
         </>
       );
     }
-  }, [canvasId, collapsed, generateHeader, graphTpl, mediaTpl, schemaH5, template]);
+  }, [canvasId, collapsed, generateHeader, graphTpl, schemaH5, template]);
+  // }, [canvasId, collapsed, generateHeader, graphTpl, mediaTpl, schemaH5, template]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [diffmove, setDiffMove] = useState({
