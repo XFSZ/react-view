@@ -1,6 +1,5 @@
 import * as echarts from 'echarts';
 //import ReactEcharts from "echarts-for-react";
-import 'echarts-gl';
 import React, { memo, useEffect, useRef, useState } from 'react';
 // import { uuid } from 'utils/tool';
 import EChartImg from '@/assets/xiao.png';

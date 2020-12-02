@@ -54,8 +54,10 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.2.1",
+    "@antv/data-set": "^0.11.7",
     "@antv/f2": "^3.7.7",
     "@antv/g2": "^4.0.15",
+    "@antv/g2plot": "^2.2.13",
     "@types/echarts": "^4.9.2",
     "@umijs/plugin-esbuild": "^1.0.1",
     "@umijs/plugin-sass": "^1.1.1",

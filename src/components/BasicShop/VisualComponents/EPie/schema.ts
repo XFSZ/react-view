@@ -112,7 +112,7 @@ const EPie: IEChartSchema = {
   config: {
     id: '999',
     zIndex: 2,
-    title: '柱状图',
+    title: '饼状图',
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
