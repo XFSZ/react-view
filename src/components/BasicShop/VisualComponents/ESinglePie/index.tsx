@@ -74,9 +74,9 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
   const container = useRef(null);
 
   const [option, setOption] = useState({
-    height: 100,
-    width: 100,
-    autoFit: false,
+    // height: 100,
+    // width: 100,
+    autoFit: true,
     percent: 0.6,
     color: ['#5B8FF9', '#E8EDF3'],
     innerRadius: 0.85,
@@ -126,11 +126,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
         {title}
       </div>
-      {isTpl ? (
-        <img src={EChartImg} alt="dooring chart" />
-      ) : (
-        <div ref={container} style={{ height: 200 }}></div>
-      )}
+      {isTpl ? <img src={EChartImg} alt="dooring chart" /> : <div ref={container}></div>}
     </div>
   );
 };

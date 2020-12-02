@@ -236,11 +236,7 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
         {title}
       </div>
-      {isTpl ? (
-        <img src={EChartImg} alt="dooring chart" />
-      ) : (
-        <div ref={container} style={{ height: 200 }}></div>
-      )}
+      {isTpl ? <img src={EChartImg} alt="dooring chart" /> : <div ref={container}></div>}
     </div>
   );
 };

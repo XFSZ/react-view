@@ -8,7 +8,7 @@ import { Dispatch } from 'umi';
 import { connect } from 'dva';
 import { StateWithHistory } from 'redux-undo';
 import DataSet from '@antv/data-set';
-import { Radar } from '@antv/g2plot';
+import { Radar, RadarOptions } from '@antv/g2plot';
 //import { Chart } from '@antv/g2';
 
 //import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
@@ -93,6 +93,7 @@ const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
   const container = useRef(null);
 
   const [option, setOption] = useState({
+    autoFit: true,
     data: dv.rows,
     xField: 'item',
     yField: 'score',
@@ -128,13 +129,13 @@ const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
       },
     },
     // 开启辅助点
-    point: {
-      size: 2,
-    },
+    // point: {
+    //   size: 2,
+    // },
   });
   useEffect(() => {
     if (!isTpl) {
-      const chart = new Radar(container.current || '', option);
+      const chart = new Radar(container.current || '', option as RadarOptions);
       chart.render();
       // background:{fill:'#1a212b'},
       // width:500,
@@ -170,11 +171,7 @@ const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
         {title}
       </div>
-      {isTpl ? (
-        <img src={EChartImg} alt="dooring chart" />
-      ) : (
-        <div ref={container} style={{ height: 200 }}></div>
-      )}
+      {isTpl ? <img src={EChartImg} alt="dooring chart" /> : <div ref={container}></div>}
     </div>
   );
 };
