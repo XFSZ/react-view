@@ -242,7 +242,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
         >
           保存模板
         </Button>
-        <Upload {...uploadprops}>
+        {/* <Upload {...uploadprops}>
           <Button type="link" style={{ marginRight: '8px' }}>
             <UploadOutlined />
           </Button>
@@ -272,7 +272,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
           disabled={!pointData.length}
         >
           <FileAddOutlined />
-        </Button>
+        </Button> */}
         {/* <MyPopover content={content()} directions="BOTTOM">
           <Button
             type="link"

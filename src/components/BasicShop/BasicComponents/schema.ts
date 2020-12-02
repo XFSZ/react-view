@@ -4,7 +4,8 @@ import Form from './Form/schema';
 import Header from './Header/schema';
 import Icon from './Icon/schema';
 import WhiteTpl from './WhiteTpl/schema';
-import Image from './Image/schema';
+//import Image from './Image/schema';
+import SelfImage from './SelfImage/schema';
 import List from './List/schema';
 import LongText from './LongText/schema';
 import Notice from './Notice/schema';
@@ -18,7 +19,8 @@ const basicSchema = {
   // Form,
   // Header,
   // Icon,
-  Image,
+  //  Image,
+  SelfImage,
   // List,
   LongText,
   WhiteTpl,

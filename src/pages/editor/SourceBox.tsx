@@ -130,7 +130,6 @@ const SourceBox = memo((props: SourceBoxProps) => {
   }, [context.theme, cpointData, dispatch, pointData]);
 
   const onDragStart: ItemCallback = useMemo(() => {
-    console.log('onDragStart');
     return (layout, oldItem, newItem, placeholder, e, element) => {
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({
@@ -319,6 +318,8 @@ const SourceBox = memo((props: SourceBoxProps) => {
                             rowHeight={2}
                             compactType={null}
                             width={canvasRect[0] || 0}
+                            //autoSize={true}
+                            // rowHeight={canvasRect[1] || 2}
                             // isBounded={true}
                             //useCSSTransforms = {false}
                             //synchronizeLayout={true}

@@ -301,6 +301,7 @@ const EMultiLine2 = (props: XEChartProps & { dispatch: Dispatch }) => {
 
   const [option, setOption] = useState({
     data: dataset,
+    autoFit: true,
     xField: 'date',
     yField: 'value',
     yAxis: {
@@ -363,7 +364,11 @@ const EMultiLine2 = (props: XEChartProps & { dispatch: Dispatch }) => {
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
         {title}
       </div>
-      {isTpl ? <img src={EChartImg} alt="dooring chart" /> : <div ref={container}></div>}
+      {isTpl ? (
+        <img src={EChartImg} alt="dooring chart" />
+      ) : (
+        <div ref={container} style={{ width: '100%', height: '200px' }}></div>
+      )}
     </div>
   );
 };

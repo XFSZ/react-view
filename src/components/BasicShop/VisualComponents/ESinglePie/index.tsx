@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 // import { uuid } from 'utils/tool';
-import EChartImg from '@/assets/xiao.png';
+import EChartImg from '@/assets/chart1.png';
 import axios from 'axios';
 import styles from './index.less';
 import { IEChartConfig } from './schema';
@@ -9,6 +9,7 @@ import { connect } from 'dva';
 import { StateWithHistory } from 'redux-undo';
 import DataSet from '@antv/data-set';
 import { RingProgress, RingProgressOptions } from '@antv/g2plot';
+import { PieChartOutlined } from '@ant-design/icons';
 //import { Chart } from '@antv/g2';
 
 //import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
@@ -126,7 +127,11 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
         {title}
       </div>
-      {isTpl ? <img src={EChartImg} alt="dooring chart" /> : <div ref={container}></div>}
+      {isTpl ? (
+        <img src={EChartImg} alt="chart" />
+      ) : (
+        <div ref={container} style={{ height: '200px' }}></div>
+      )}
     </div>
   );
 };

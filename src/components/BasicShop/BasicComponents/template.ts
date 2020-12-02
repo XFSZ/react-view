@@ -3,7 +3,8 @@ import Footer from './Footer/template';
 import Form from './Form/template';
 import Header from './Header/template';
 import Icon from './Icon/template';
-import Image from './Image/template';
+// import Image from './Image/template';
+import SelfImage from './SelfImage/template';
 import List from './List/template';
 import LongText from './LongText/template';
 import Notice from './Notice/template';
@@ -18,7 +19,8 @@ const basicTemplate = [
   // Form,
   // Header,
   // Icon,
-  Image,
+  //  Image,
+  SelfImage,
   // List,
   LongText,
   // Notice,
