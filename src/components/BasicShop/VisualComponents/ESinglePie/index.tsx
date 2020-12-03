@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 // import { uuid } from 'utils/tool';
-import EChartImg from '@/assets/chart1.png';
+import EChartImg from '@/assets/EPie.png';
 import axios from 'axios';
 import styles from './index.less';
 import { IEChartConfig } from './schema';

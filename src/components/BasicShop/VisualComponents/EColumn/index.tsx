@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 // import { uuid } from 'utils/tool';
-import EChartImg from '@/assets/xiao.png';
+import EChartImg from '@/assets/EBar.png';
 import axios from 'axios';
 import styles from './index.less';
 import { IEChartConfig } from './schema';
@@ -216,7 +216,7 @@ const EColumn = (props: XEChartProps & { dispatch: Dispatch }) => {
         {title}
       </div>
       {isTpl ? (
-        <img src={EChartImg} alt="dooring chart" />
+        <img src={EChartImg} alt="chart" />
       ) : (
         <div ref={container} style={{ height: '200px' }}></div>
       )}

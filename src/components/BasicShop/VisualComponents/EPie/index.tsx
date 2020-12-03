@@ -1,7 +1,7 @@
 import DataSet from '@antv/data-set';
 import { Chart } from '@antv/g2';
 import React, { memo, useEffect, useRef, useState } from 'react';
-import EChartImg from '@/assets/xiao.png';
+import EChartImg from '@/assets/EPie.png';
 import axios from 'axios';
 import styles from './index.less';
 import { IEChartConfig } from './schema';

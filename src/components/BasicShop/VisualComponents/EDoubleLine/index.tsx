@@ -1,7 +1,7 @@
 import * as echarts from 'echarts';
 import React, { memo, useEffect, useRef, useState } from 'react';
 // import { uuid } from 'utils/tool';
-import EChartImg from '@/assets/xiao.png';
+import EChartImg from '@/assets/ELine.png';
 import axios from 'axios';
 import styles from './index.less';
 import { IEChartConfig } from './schema';
