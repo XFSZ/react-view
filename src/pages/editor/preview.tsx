@@ -138,12 +138,12 @@ const PreviewPage = memo((props: PreviewPageProps) => {
           display: 'flex',
           margin: 'auto',
           // height:'100vh',
-          height: document.body.clientHeight,
-          width: document.body.clientWidth,
-          overflow: 'auto',
+          // height: document.body.clientHeight,
+          //  width: document.body.clientWidth,
+          //   overflow: 'auto',
           // overflow: 'auto',
-          // width: pointData[0].item.config.width,
-          // height: pointData[0].item.config.height,
+          width: pointData[0].item.config.width,
+          height: pointData[0].item.config.height,
         }}
         // style={
         //   vw > 800
@@ -165,7 +165,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
                       cols={24}
                       rowHeight={2}
                       compactType={null}
-                      width={document.body.clientWidth}
+                      width={pointData[0].item.config.width}
                       margin={[0, 0]}
                     >
                       {pointData.map(value =>

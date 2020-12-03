@@ -22,7 +22,7 @@ export default {
   reducers: {
     addPointData(state, { payload }) {
       let pointData = [...state.pointData, payload];
-      
+
       overSave('userData', pointData);
       return {
         ...state,
@@ -32,8 +32,10 @@ export default {
     },
     modPointData(state, { payload }) {
       const { id } = payload;
+      console.log('enen', id);
       const pointData = state.pointData.map(item => {
         if (item.id === id) {
+          console.log('haha', payload);
           return payload;
         }
         return { ...item };
@@ -69,7 +71,7 @@ export default {
         pointData,
       };
     },
-    nullPointData(state){
+    nullPointData(state) {
       const pointData = state.pointData;
       return {
         ...state,
@@ -79,7 +81,7 @@ export default {
     },
     delPointData(state, { payload }) {
       const { id } = payload;
-      if(id!=='0'){
+      if (id !== '0') {
         const pointData = state.pointData.filter(item => item.id !== id);
         overSave('userData', pointData);
         return {
