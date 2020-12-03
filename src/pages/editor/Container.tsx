@@ -22,7 +22,7 @@ import graphTpl1 from 'components/BasicShop/VisualComponents/template';
 
 import schemaH5 from 'components/BasicShop/schema';
 import { ActionCreators, StateWithHistory } from 'redux-undo';
-import { dooringContext } from '@/layouts';
+import { dooringContext, userViewData } from '@/layouts';
 import { throttle } from '@/utils/tool';
 import { uuid } from '@/utils/tool';
 import styles from './index.less';
@@ -36,6 +36,8 @@ const Container = (props: {
   cstate?: any;
   dispatch?: any;
 }) => {
+  // const userViewDatas = useContext(userViewData)
+  // console.log("userdata",userViewDatas);
   const [scaleNum, setScale] = useState(1);
   const [collapsed, setCollapsed] = useState(false);
   const [rightColla, setRightColla] = useState(true);
@@ -90,30 +92,30 @@ const Container = (props: {
   // 指定画布的id
   let canvasId = 'js_canvas';
 
-  const [panelItem, setPanleItem] = useState({
-    type: 'Panel',
-    config: schemaH5['Panel' as keyof typeof schemaH5].config,
-    h: '0px',
-    editableEl: schemaH5['Panel' as keyof typeof schemaH5].editData,
-    category: 'basePanel',
-    x: 0,
-    w: '0px',
-  });
+  // const [panelItem, setPanleItem] = useState({
+  //   type: 'Panel',
+  //   config: schemaH5['Panel' as keyof typeof schemaH5].config,
+  //   h: '0px',
+  //   editableEl: schemaH5['Panel' as keyof typeof schemaH5].editData,
+  //   category: 'basePanel',
+  //   x: 0,
+  //   w: '0px',
+  // });
 
-  useEffect(() => {
-    if (pstate.pointData.length === 0) {
-      // pstate.pointData = []
-      dispatch({
-        type: 'editorModal/addPointData',
-        payload: {
-          id: '0',
-          item: panelItem,
-          point: { i: `x-${0}`, x: 0, y: 0, w: 1, h: 1, isBounded: true },
-          status: 'initCanvas',
-        },
-      });
-    }
-  });
+  // useEffect(() => {
+  //   if (pstate.pointData.length === 0) {
+  //     // pstate.pointData = []
+  //     dispatch({
+  //       type: 'editorModal/addPointData',
+  //       payload: {
+  //         id: '0',
+  //         item: panelItem,
+  //         point: { i: `x-${0}`, x: 0, y: 0, w: 1, h: 1, isBounded: true },
+  //         status: 'initCanvas',
+  //       },
+  //     });
+  //   }
+  // });
   const backSize = () => {
     setScale(1);
     setDragState({ x: 0, y: 0 });
