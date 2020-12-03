@@ -67,14 +67,14 @@ const SourceBox = memo((props: SourceBoxProps) => {
       // 转换成网格规则的坐标和大小
       let gridY = Math.ceil(y / cellHeight);
       //  let gridY = pointEnd!.y;
+      const uid = uuid(6, 10);
+      let itemNew = { ...item, config: { ...item.config, id: uid } };
       if (context.theme === 'h5') {
-        const uid = uuid(6, 10);
-        item.config.id = uid;
         dispatch({
           type: 'editorModal/addPointData',
           payload: {
             id: uid,
-            item,
+            item: itemNew,
             point: { i: `x-${pointData.length}`, x: 0, y: gridY, w, h: item.h, isBounded: true },
             status: 'inToCanvas',
           },

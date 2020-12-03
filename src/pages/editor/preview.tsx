@@ -111,16 +111,39 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         console.error('oops, something went wrong!', error);
       });
   };
-
+  function renderval(value: {
+    id: string;
+    item: any;
+    point: any;
+    isMenu?: any;
+    visibility: string;
+  }) {
+    // console.log("renderval : ",value)
+    if (pointData[0].item.config.layerList && value.id !== '0') {
+      for (let i = 0; i < pointData[0].item.config.layerList.length; i++) {
+        const va = pointData[0].item.config.layerList[i];
+        if (va.zIndex === value.item.config.zIndex) {
+          return va.visibility;
+        }
+      }
+    }
+    return 0;
+  }
   return (
     <>
+      {/* <body> */}
       <div
         ref={ref}
         style={{
           display: 'flex',
           margin: 'auto',
-          width: pointData[0].item.config.width,
-          height: pointData[0].item.config.height,
+          // height:'100vh',
+          height: document.body.clientHeight,
+          width: document.body.clientWidth,
+          overflow: 'auto',
+          // overflow: 'auto',
+          // width: pointData[0].item.config.width,
+          // height: pointData[0].item.config.height,
         }}
         // style={
         //   vw > 800
@@ -129,50 +152,47 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         // }
       >
         <div ref={refImgDom}>
-          <GridLayout
-            className={styles.layout}
-            cols={24}
-            // style = {{width:pointData[0].item.config.width,height:pointData[0].item.config.height}}
-            width={pointData[0].item.config.width}
-            //   height={pointData[0].item.config.height}
-            rowHeight={2}
-            // width={vw > 800 ? 375 : vw}
-            margin={[0, 0]}
-            compactType={null}
-            // style={{
-            //   backgroundColor: pageData.bgColor,
-            //   backgroundImage: pageData.bgImage ? `url(${pageData.bgImage[0].url})` : 'initial',
-            //   backgroundSize: 'contain',
-            //   backgroundRepeat: 'no-repeat',
-            // }}
-          >
-            {pointData.map((value: PointDataItem) => (
-              <div className={styles.dragItem} key={value.id} data-grid={value.point}>
-                <DynamicEngine {...(value.item as any)} />
-              </div>
-            ))}
-          </GridLayout>
+          {pointData.length > 0
+            ? pointData[0].item.config.layerList.map(
+                (layoutval: { id: string; zIndex: number }) => (
+                  <div
+                    key={layoutval.id}
+                    style={{ position: 'absolute', zIndex: layoutval.zIndex }}
+                  >
+                    <GridLayout
+                      key={`dd${layoutval.id}`}
+                      className={styles.layout}
+                      cols={24}
+                      rowHeight={2}
+                      compactType={null}
+                      width={document.body.clientWidth}
+                      margin={[0, 0]}
+                    >
+                      {pointData.map(value =>
+                        value.id !== '0' && value.item.config.zIndex === layoutval.zIndex ? (
+                          <div
+                            className={styles.dragItem}
+                            //className={value.isMenu ? styles.selected : styles.dragItem}
+                            key={value.id}
+                            data-grid={value.point}
+                            style={{
+                              visibility: renderval(value) === 1 ? 'visible' : 'hidden',
+                            }}
+                          >
+                            <DynamicEngine {...value.item} />
+                          </div>
+                        ) : (
+                          <div key={`dc${value.id}`}></div>
+                        ),
+                      )}
+                    </GridLayout>
+                  </div>
+                ),
+              )
+            : null}
         </div>
       </div>
-
-      {/* {vw > 800 ? (
-        <div
-          style={{
-            backgroundImage: "url('/iphone.png') ",
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'contain',
-            position: 'absolute',
-            top: 0,
-            height: '840px',
-            width: '419px', //375+22+22
-            left: '50%',
-            transform: 'translate(-50%,-80px) scale(0.7)',
-            boxShadow: '0 4px 30px 0 rgba(4, 59, 85, 0.1)',
-            borderRadius: '60px',
-            pointerEvents: 'none',
-          }}
-        ></div>
-      ) : null} */}
+      {/* </body> */}
     </>
   );
 });

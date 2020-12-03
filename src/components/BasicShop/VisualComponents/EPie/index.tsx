@@ -70,18 +70,18 @@ const EPie = (props: XEChartProps & { dispatch: Dispatch }) => {
 
   // const container = useRef<HTMLElement>(null);
   const dataset = [
-    { name: '狮子', type: '火象星座', value: 11 },
-    { name: '白羊', type: '火象星座', value: 10 },
-    { name: '射手', type: '火象星座', value: 10 },
-    { name: '水瓶', type: '风向星座', value: 14 },
-    { name: '双子', type: '风向星座', value: 7 },
-    { name: '天平', type: '风向星座', value: 7 },
-    { name: '摩羯', type: '土象星座', value: 14 },
-    { name: '金牛', type: '土象星座', value: 3 },
-    { name: '处女', type: '土象星座', value: 3 },
-    { name: '天蝎', type: '水象星座', value: 11 },
-    { name: '巨蟹', type: '水象星座', value: 5 },
-    { name: '双鱼', type: '水象星座', value: 5 },
+    { name: '狮子', type: '火象星座狮子', value: 11 },
+    { name: '白羊', type: '火象星座白羊', value: 10 },
+    { name: '射手', type: '火象星座射手', value: 10 },
+    { name: '水瓶', type: '风向星座水瓶', value: 14 },
+    { name: '双子', type: '风向星座双子', value: 7 },
+    { name: '天平', type: '风向星座天平', value: 7 },
+    { name: '摩羯', type: '土象星座摩羯', value: 14 },
+    { name: '金牛', type: '土象星座金牛', value: 3 },
+    { name: '处女', type: '土象星座处女', value: 3 },
+    { name: '天蝎', type: '水象星座天蝎', value: 11 },
+    { name: '巨蟹', type: '水象星座巨蟹', value: 5 },
+    { name: '双鱼', type: '水象星座双鱼', value: 5 },
   ];
   const ds = new DataSet();
   const dv = ds.createView();
@@ -94,10 +94,19 @@ const EPie = (props: XEChartProps & { dispatch: Dispatch }) => {
 
   const colorMap = {
     //火象星座: '#1890ff',
-    火象星座: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
-    风向星座: '#13c2c2',
-    土象星座: '#ffc53d',
-    水象星座: '#73d13d',
+    火象星座狮子: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    //  火象星座狮子: '#1890ff',
+    火象星座白羊: '#1890ff',
+    火象星座射手: '#1890ff',
+    风向星座水瓶: '#13c2c2',
+    风向星座双子: '#13c2c2',
+    风向星座天平: '#13c2c2',
+    土象星座摩羯: '#ffc53d',
+    土象星座金牛: '#ffc53d',
+    土象星座处女: '#ffc53d',
+    水象星座天蝎: '#73d13d',
+    水象星座巨蟹: '#73d13d',
+    水象星座双鱼: '#73d13d',
   };
   useEffect(() => {
     if (!isTpl) {
