@@ -32,10 +32,9 @@ export default {
     },
     modPointData(state, { payload }) {
       const { id } = payload;
-      console.log('enen', id);
+
       const pointData = state.pointData.map(item => {
         if (item.id === id) {
-          console.log('haha', payload);
           return payload;
         }
         return { ...item };

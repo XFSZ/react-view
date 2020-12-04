@@ -131,16 +131,14 @@ const PreviewPage = memo((props: PreviewPageProps) => {
   }
   return (
     <>
-      {/* <body> */}
       <div
         ref={ref}
         style={{
           display: 'flex',
-          margin: 'auto',
+          margin: 0,
           // height:'100vh',
           // height: document.body.clientHeight,
           //  width: document.body.clientWidth,
-          //   overflow: 'auto',
           // overflow: 'auto',
           width: pointData[0].item.config.width,
           height: pointData[0].item.config.height,
@@ -162,7 +160,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
                     <GridLayout
                       key={`dd${layoutval.id}`}
                       className={styles.layout}
-                      cols={24}
+                      cols={9999}
                       rowHeight={2}
                       compactType={null}
                       width={pointData[0].item.config.width}
@@ -172,7 +170,6 @@ const PreviewPage = memo((props: PreviewPageProps) => {
                         value.id !== '0' && value.item.config.zIndex === layoutval.zIndex ? (
                           <div
                             className={styles.dragItem}
-                            //className={value.isMenu ? styles.selected : styles.dragItem}
                             key={value.id}
                             data-grid={value.point}
                             style={{
@@ -192,7 +189,6 @@ const PreviewPage = memo((props: PreviewPageProps) => {
             : null}
         </div>
       </div>
-      {/* </body> */}
     </>
   );
 });
