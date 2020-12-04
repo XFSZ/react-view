@@ -7,71 +7,70 @@
  * @LastEditTime: 2020-10-08 16:12:26
  */
 import { uuid } from '@/utils/tool';
-const pointData = localStorage.getItem('userData') || '[]';
+const pointData = localStorage.getItem('userPreviewData') || '[]';
 
-function overSave(name, data) {
+function overSave(name: string, data: any) {
   localStorage.setItem(name, JSON.stringify(data));
-  localStorage.setItem('userPreviewData', JSON.stringify(data));
 }
 
 export default {
-  namespace: 'editorModal',
+  namespace: 'previewModal',
   state: {
     pointData: JSON.parse(pointData),
     curPoint: null,
   },
   reducers: {
-    addPointData(state, { payload }) {
+    addPointData(state: any, { payload }: any) {
       let pointData = [...state.pointData, payload];
 
-      overSave('userData', pointData);
+      overSave('userPreviewData', pointData);
       return {
         ...state,
         pointData,
         curPoint: payload,
       };
     },
-    modPointData(state, { payload }) {
+    modPointData(state: any, { payload }: any) {
       const { id } = payload;
-
-      const pointData = state.pointData.map(item => {
+      console.log(' preview click ');
+      const pointData = state.pointData.map((item: any) => {
         if (item.id === id) {
           return payload;
         }
         return { ...item };
       });
-      overSave('userData', pointData);
+      overSave('userPreviewData', pointData);
       return {
         ...state,
         pointData,
         curPoint: payload,
       };
     },
-    importTplData(state, { payload }) {
-      overSave('userData', payload);
+    importTplData(state: any, { payload }: any) {
+      overSave('userPreviewData', payload);
       return {
         ...state,
         pointData: payload,
         curPoint: null,
       };
     },
-    copyPointData(state, { payload }) {
+    copyPointData(state: any, { payload }: any) {
       const { id } = payload;
-      const pointData = [];
-      state.pointData.forEach(item => {
+      const pointData: any[] = [];
+      state.pointData.forEach((item: any) => {
         pointData.push({ ...item });
         if (item.id === id) {
           pointData.push({ ...item, id: uuid(6, 10) });
         }
       });
-      overSave('userData', pointData);
+      overSave('userPreviewData', pointData);
 
       return {
         ...state,
         pointData,
       };
     },
-    nullPointData(state) {
+    nullPointData(state: any) {
       const pointData = state.pointData;
       return {
         ...state,
@@ -79,11 +78,11 @@ export default {
         curPoint: state.pointData[0],
       };
     },
-    delPointData(state, { payload }) {
+    delPointData(state: any, { payload }: any) {
       const { id } = payload;
       if (id !== '0') {
-        const pointData = state.pointData.filter(item => item.id !== id);
-        overSave('userData', pointData);
+        const pointData = state.pointData.filter((item: any) => item.id !== id);
+        overSave('userPreviewData', pointData);
         return {
           ...state,
           pointData,
@@ -96,8 +95,8 @@ export default {
         curPoint: state.pointData[0],
       };
     },
-    clearAll(state) {
-      overSave('userData', []);
+    clearAll(state: any) {
+      overSave('userPreviewData', []);
       return {
         ...state,
         pointData: [],

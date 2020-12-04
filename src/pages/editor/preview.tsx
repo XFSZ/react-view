@@ -6,11 +6,15 @@ import req from '@/utils/req';
 import styles from './index.less';
 import { useGetScrollBarWidth } from '@/utils/tool';
 import { LocationDescriptorObject } from 'history-with-query';
-
+import { connect } from 'dva';
+import { StateWithHistory } from 'redux-undo';
 const isMac = navigator.platform.indexOf('Mac') === 0;
 
 interface PreviewPageProps {
   location: LocationDescriptorObject;
+  pstate: {
+    pointData: { id: string; item: any; point: any; isMenu?: any; visibility: string }[];
+  };
 }
 interface PointDataItem {
   id: string;
@@ -19,21 +23,31 @@ interface PointDataItem {
 }
 
 const PreviewPage = memo((props: PreviewPageProps) => {
-  const [pointData, setPointData] = useState(() => {
-    let pointDataStr = localStorage.getItem('pointData');
-    let points;
+  const { pstate } = props;
+  console.log(pstate);
+  let pointData: any = pstate.pointData || [];
+  pointData.map((item: PointDataItem) => ({
+    ...item,
+    point: { ...item.point, isDraggable: false, isResizable: false },
+  }));
 
-    try {
-      points = JSON.parse(pointDataStr!) || [];
-    } catch (err) {
-      points = [];
-    }
-    return points.map((item: PointDataItem) => ({
-      ...item,
-      point: { ...item.point, isDraggable: false, isResizable: false },
-    }));
-  });
+  // const [pointData, setPointData] = useState(() => {
 
+  // //  let pointDataStr = localStorage.getItem('pointData');
+  //   let points:any;
+
+  //   try {
+  //    // points = JSON.parse(pointDataStr!) || [];
+  //    points = pstate.pointData ||[]
+  //   } catch (err) {
+  //     points = [];
+  //   }
+  //   return points.map((item: PointDataItem) => ({
+  //     ...item,
+  //     point: { ...item.point, isDraggable: false, isResizable: false },
+  //   }));
+  // });
+  // setPointData(points);
   const [pageData, setPageData] = useState(() => {
     let pageConfigStr = localStorage.getItem('pageConfig');
     let pageConfig;
@@ -46,7 +60,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     return pageConfig;
   });
 
-  const vw = window.innerWidth;
+  // const vw = window.innerWidth;
 
   useEffect(() => {
     const { tid, gf } = props.location.query!;
@@ -82,18 +96,18 @@ const PreviewPage = memo((props: PreviewPageProps) => {
 
   const ref = useRef<HTMLDivElement>(null);
   const refImgDom = useRef<HTMLDivElement>(null);
-  const width = useGetScrollBarWidth(ref);
-  const pcStyle: CSSProperties = useMemo(() => {
-    return {
-      width: isMac ? 382 : 375 + width + 1, //小数会有偏差
-      margin: '55px auto',
-      height: '684px',
-      overflow: 'auto',
-      position: 'relative',
-      transform: 'scale(0.7) translateY(-80px)',
-      backgroundColor: pageData.bgColor,
-    };
-  }, [width]);
+  //  const width = useGetScrollBarWidth(ref);
+  // const pcStyle: CSSProperties = useMemo(() => {
+  //   return {
+  //     width: isMac ? 382 : 375 + width + 1, //小数会有偏差
+  //     margin: '55px auto',
+  //     height: '684px',
+  //     overflow: 'auto',
+  //     position: 'relative',
+  //     transform: 'scale(0.7) translateY(-80px)',
+  //     backgroundColor: pageData.bgColor,
+  //   };
+  // }, [width]);
 
   const generateImg = (cb: any) => {
     domtoimage
@@ -131,6 +145,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
   }
   return (
     <>
+      {console.log('on', pointData)}
       <div
         ref={ref}
         style={{
@@ -193,4 +208,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
   );
 });
 
-export default PreviewPage;
+//export default PreviewPage;
+export default connect((state: StateWithHistory<any>) => ({
+  pstate: state.present.previewModal,
+}))(PreviewPage);
