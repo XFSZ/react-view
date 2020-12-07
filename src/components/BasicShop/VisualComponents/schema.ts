@@ -5,6 +5,7 @@
 // import XProgress from './XProgress/schema';
 import EChart from './EChart/schema';
 import EPie from './EPie/schema';
+import EPie2 from './EPie2/schema';
 import EDoubleLine from './EDoubleLine/schema';
 import ESinglePie from './ESinglePie/schema';
 import ERadar from './ERadar/schema';
@@ -19,8 +20,10 @@ const visualSchema = {
   // Pie,
   // Area,
   // XProgress,
+
   EChart,
   EPie,
+  EPie2,
   EDoubleLine,
   ESinglePie,
   ERadar,

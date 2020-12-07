@@ -1,5 +1,5 @@
 import DataSet from '@antv/data-set';
-import { Chart } from '@antv/g2';
+import { Chart, registerInteraction } from '@antv/g2';
 import React, { memo, useEffect, useRef, useState } from 'react';
 import EChartImg from '@/assets/EPie.png';
 import axios from 'axios';
@@ -94,8 +94,8 @@ const EPie = (props: XEChartProps & { dispatch: Dispatch }) => {
 
   const colorMap = {
     //火象星座: '#1890ff',
-    火象星座狮子: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
-    //  火象星座狮子: '#1890ff',
+    //火象星座狮子: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    火象星座狮子: '#1890ff',
     火象星座白羊: '#1890ff',
     火象星座射手: '#1890ff',
     风向星座水瓶: '#13c2c2',
@@ -108,12 +108,29 @@ const EPie = (props: XEChartProps & { dispatch: Dispatch }) => {
     水象星座巨蟹: '#73d13d',
     水象星座双鱼: '#73d13d',
   };
+  const colorMapB = {
+    //火象星座: '#1890ff',
+    火象星座狮子: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    //  火象星座狮子: '#1890ff',
+    火象星座白羊: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    火象星座射手: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    风向星座水瓶: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    风向星座双子: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    风向星座天平: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    土象星座摩羯: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    土象星座金牛: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    土象星座处女: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    水象星座天蝎: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    水象星座巨蟹: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+    水象星座双鱼: 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+  };
   useEffect(() => {
     if (!isTpl) {
       const chart = new Chart(
         {
           container: container.current || '',
           autoFit: true,
+
           height: 200,
           // width:500,
         },
@@ -139,19 +156,19 @@ const EPie = (props: XEChartProps & { dispatch: Dispatch }) => {
         .interval()
         .adjust('stack')
         .position('percent')
-        .color('type', val => colorMap[val])
+        .color('type', val => colorMapB[val])
         .style({
           stroke: 'white',
           lineWidth: 1,
-        })
-        .label('type', {
-          offset: -5,
-          style: {
-            fill: 'white',
-            shadowBlur: 2,
-            shadowColor: 'rgba(0, 0, 0, .45)',
-          },
         });
+      // .label('type', {
+      //   offset: -5,
+      //   style: {
+      //     fill: 'white',
+      //     shadowBlur: 2,
+      //     shadowColor: 'rgba(0, 0, 0, .45)',
+      //   },
+      // });
 
       const ds2 = new DataSet();
       const dv2 = ds2.createView();
@@ -175,19 +192,49 @@ const EPie = (props: XEChartProps & { dispatch: Dispatch }) => {
         .style({
           stroke: 'white',
           lineWidth: 1,
-        })
-        .label('name', {
-          offset: -10,
-          style: {
-            fill: 'white',
-            shadowBlur: 2,
-            shadowColor: 'rgba(0, 0, 0, .45)',
-          },
         });
+      // .label('name', {
+      //   offset: -10,
+      //   style: {
+      //     fill: 'white',
+      //     shadowBlur: 2,
+      //     shadowColor: 'rgba(0, 0, 0, .45)',
+      //   },
+      // });
 
       chart.interaction('element-active');
-
+      registerInteraction('element-highlight-by-x', {
+        start: [{ trigger: 'element:mouseenter', action: 'element-highlight-by-x:highlight' }],
+        end: [{ trigger: 'element:mouseleave', action: 'element-highlight-by-x:reset' }],
+      });
+      registerInteraction('axis-label-highlight', {
+        start: [
+          {
+            trigger: 'axis-label:mouseenter',
+            action: ['list-highlight:highlight', 'element-highlight:highlight'],
+          },
+        ],
+        end: [
+          {
+            trigger: 'axis-label:mouseleave',
+            action: ['list-highlight:reset', 'element-highlight:reset'],
+          },
+        ],
+      });
+      registerInteraction('element-active', {
+        start: [{ trigger: 'element:mouseenter', action: 'element-active:active' }],
+        end: [{ trigger: 'element:mouseleave', action: 'element-active:reset' }],
+      });
       chart.render();
+      //  chart.interaction('element-highlight-by-x')
+      //  chart.interaction('axis-label-highlight')
+      //  chart.interaction('element-active')
+      chart.interaction('element-highlight');
+
+      registerInteraction('element-highlight', {
+        start: [{ trigger: 'element:mouseenter', action: 'element-highlight:highlight' }],
+        end: [{ trigger: 'element:mouseleave', action: 'element-highlight:reset' }],
+      });
     }
   }, [data, isTpl]);
   return (

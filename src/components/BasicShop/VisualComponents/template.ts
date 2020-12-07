@@ -5,6 +5,7 @@
 // import XProgress from './XProgress/template';
 import EChart from './EChart/template';
 import EPie from './EPie/template';
+import EPie2 from './EPie2/template';
 import EDoubleLine from './EDoubleLine/template';
 import ESinglePie from './ESinglePie/template';
 import ERadar from './ERadar/template';
@@ -16,6 +17,7 @@ import EHorizontalBar from './EHorizontalBar/template';
 const visualTemplate = [
   EChart,
   EPie,
+  EPie2,
   EDoubleLine,
   ESinglePie,
   ERadar,
