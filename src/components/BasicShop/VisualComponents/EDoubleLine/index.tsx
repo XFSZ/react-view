@@ -181,9 +181,9 @@ const EDoubleLine = (props: XEChartProps & { dispatch: Dispatch }) => {
       // width:500,
 
       if (timer >= 1) {
-        console.log('timer : ', timer);
+        //    console.log('timer : ', timer);
         if (api !== '') {
-          console.log('api : ', api);
+          //      console.log('api : ', api);
           let params = {};
           if (apiParams !== '') {
             params = JSON.parse(apiParams);
@@ -200,7 +200,7 @@ const EDoubleLine = (props: XEChartProps & { dispatch: Dispatch }) => {
           return () => clearInterval(timerInterval);
         }
       } else {
-        console.log('timer : ', timer);
+        //    console.log('timer : ', timer);
 
         return;
       }
