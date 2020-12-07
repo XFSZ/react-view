@@ -282,7 +282,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
       >
         <div
           className={styles.canvasBox}
-          style={{ width: panelWidth, height: panelHeight, backgroundColor: 'red' }}
+          style={{ width: '0px', height: '0px', backgroundColor: 'gray' }}
         >
           <MenuProvider id="menu_id">
             <div

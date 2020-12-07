@@ -15,26 +15,7 @@ import { Radar, RadarOptions } from '@antv/g2plot';
 interface XEChartProps extends IEChartConfig {
   isTpl: boolean;
 }
-const { DataView } = DataSet;
-const dataset = [
-  { item: 'Design', a: 70, b: 30 },
-  { item: 'Development', a: 60, b: 70 },
-  { item: 'Marketing', a: 50, b: 60 },
-  { item: 'Users', a: 40, b: 50 },
-  { item: 'Test', a: 60, b: 70 },
-  { item: 'Language', a: 70, b: 50 },
-  { item: 'Technology', a: 50, b: 40 },
-  { item: 'Support', a: 30, b: 40 },
-  { item: 'Sales', a: 60, b: 40 },
-  { item: 'UX', a: 50, b: 60 },
-];
-const dv = new DataView().source(dataset);
-dv.transform({
-  type: 'fold',
-  fields: ['a', 'b'], // 展开字段集
-  key: 'user', // key字段
-  value: 'score', // value字段
-});
+
 // const onClick = (clickParams: string, dispatch: Dispatch) => {
 //   try {
 //     let clickParamsStrData = '[{}]';
@@ -69,7 +50,26 @@ dv.transform({
 //     console.error(err);
 //   }
 // };
-
+const { DataView } = DataSet;
+const dataset = [
+  { item: 'Design', a: 70, b: 30 },
+  { item: 'Development', a: 60, b: 70 },
+  { item: 'Marketing', a: 50, b: 60 },
+  { item: 'Users', a: 40, b: 50 },
+  { item: 'Test', a: 60, b: 70 },
+  { item: 'Language', a: 70, b: 50 },
+  { item: 'Technology', a: 50, b: 40 },
+  { item: 'Support', a: 30, b: 40 },
+  { item: 'Sales', a: 60, b: 40 },
+  { item: 'UX', a: 50, b: 60 },
+];
+const dv = new DataView().source(dataset);
+dv.transform({
+  type: 'fold',
+  fields: ['a', 'b'], // 展开字段集
+  key: 'user', // key字段
+  value: 'score', // value字段
+});
 const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
   const {
     isTpl,

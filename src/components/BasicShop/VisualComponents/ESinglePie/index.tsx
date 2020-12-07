@@ -64,9 +64,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
     timer,
     clickParams,
     dispatch,
-    yAxis,
-    seriesA,
-    seriesB,
+    ringProgressName,
     apiParams,
   } = props;
   //const chartRef = useRef(null);
@@ -85,7 +83,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
     statistic: {
       title: {
         style: { color: '#363636', fontSize: '12px', lineHeight: '14px' },
-        formatter: () => '进度',
+        formatter: () => `${ringProgressName}`,
       },
     },
   });
@@ -110,7 +108,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
               //const yAxis =   response.data[yAxis]
               // const seriesA = response.data[seriesA]
               // const seriesB =  response.data[seriesB]
-              console.log('test : ', response.data[yAxis]);
+              console.log('test : ', response.data[ringProgressName]);
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
@@ -121,7 +119,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
         return;
       }
     }
-  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
+  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, ringProgressName]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>

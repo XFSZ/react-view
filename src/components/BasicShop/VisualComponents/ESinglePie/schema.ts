@@ -26,9 +26,7 @@ export interface IEChartConfig {
   apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
-  yAxis: TTextDefaultType;
-  seriesA: TTextDefaultType;
-  seriesB: TTextDefaultType;
+  ringProgressName: TTextDefaultType;
 }
 
 export interface IEChartSchema {
@@ -89,18 +87,8 @@ const ESinglePie: IEChartSchema = {
       type: 'TextArea',
     },
     {
-      key: 'yAxis',
-      name: 'yAxis',
-      type: 'Text',
-    },
-    {
-      key: 'seriesA',
-      name: 'seriesA',
-      type: 'Text',
-    },
-    {
-      key: 'seriesB',
-      name: 'seriesB',
+      key: 'ringProgressName',
+      name: 'ringProgressName',
       type: 'Text',
     },
     {
@@ -137,9 +125,7 @@ const ESinglePie: IEChartSchema = {
     clickParams: '[{}]',
     api: '',
     apiParams: '',
-    yAxis: '',
-    seriesA: '',
-    seriesB: '',
+    ringProgressName: '完好率',
     timer: 0,
   },
 };

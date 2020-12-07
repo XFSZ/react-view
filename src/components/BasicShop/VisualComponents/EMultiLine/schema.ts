@@ -26,9 +26,9 @@ export interface IEChartConfig {
   apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
-  yAxis: TTextDefaultType;
-  seriesA: TTextDefaultType;
-  seriesB: TTextDefaultType;
+  yField: TTextDefaultType;
+  xField: TTextDefaultType;
+  seriesField: TTextDefaultType;
 }
 
 export interface IEChartSchema {
@@ -89,18 +89,18 @@ const EMultiLine: IEChartSchema = {
       type: 'TextArea',
     },
     {
-      key: 'yAxis',
-      name: 'yAxis',
+      key: 'yField',
+      name: 'yField',
       type: 'Text',
     },
     {
-      key: 'seriesA',
-      name: 'seriesA',
+      key: 'xField',
+      name: 'xField',
       type: 'Text',
     },
     {
-      key: 'seriesB',
-      name: 'seriesB',
+      key: 'seriesField',
+      name: 'seriesField',
       type: 'Text',
     },
     {
@@ -137,9 +137,9 @@ const EMultiLine: IEChartSchema = {
     clickParams: '[{}]',
     api: '',
     apiParams: '',
-    yAxis: '',
-    seriesA: '',
-    seriesB: '',
+    yField: 'value',
+    xField: 'year',
+    seriesField: 'category',
     timer: 0,
   },
 };

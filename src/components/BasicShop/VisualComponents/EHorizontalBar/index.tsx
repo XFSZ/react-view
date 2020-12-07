@@ -169,9 +169,9 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
     timer,
     clickParams,
     dispatch,
-    yAxis,
-    seriesA,
-    seriesB,
+    yField,
+    xField,
+    seriesField,
     apiParams,
   } = props;
   //const chartRef = useRef(null);
@@ -181,11 +181,12 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
 
   const [option, setOption] = useState({
     data: dataset,
-    xField: 'value',
-    yField: 'year',
-    seriesField: 'country',
+    xField: `${xField}`,
+    yField: `${yField}`,
+    seriesField: `${seriesField}`,
     isPercent: true,
     isStack: true,
+    legend: false,
     /** 自定义颜色 */
     // color: ['#2582a1', '#f88c24', '#c52125', '#87f4d0'],
     label: {
@@ -202,13 +203,8 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
     if (!isTpl) {
       const chart = new Bar(container.current || '', option as BarOptions);
       chart.render();
-      // background:{fill:'#1a212b'},
-      // width:500,
-
       if (timer >= 1) {
-        //      console.log('timer : ', timer);
         if (api !== '') {
-          //        console.log('api : ', api);
           let params = {};
           if (apiParams !== '') {
             params = JSON.parse(apiParams);
@@ -219,18 +215,29 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
               //const yAxis =   response.data[yAxis]
               // const seriesA = response.data[seriesA]
               // const seriesB =  response.data[seriesB]
-              console.log('test : ', response.data[yAxis]);
+              // console.log('test : ', response.data[yField]);
+              //setOption({...option,data:response.data})
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
         }
       } else {
-        //     console.log('timer : ', timer);
-
         return;
       }
     }
-  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
+  }, [
+    data,
+    isTpl,
+    option,
+    api,
+    apiParams,
+    timer,
+    clickParams,
+    dispatch,
+    yField,
+    xField,
+    seriesField,
+  ]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
@@ -249,5 +256,3 @@ export default connect((state: StateWithHistory<any>) => ({
   pstate: state.present.editorModal,
   cstate: state.present.editorPcModal,
 }))(memo(EHorizontalBar));
-
-// export default memo(EChart);

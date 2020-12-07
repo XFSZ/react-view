@@ -164,9 +164,9 @@ const EMultiLine = (props: XEChartProps & { dispatch: Dispatch }) => {
     timer,
     clickParams,
     dispatch,
-    yAxis,
-    seriesA,
-    seriesB,
+    yField,
+    xField,
+    seriesField,
     apiParams,
   } = props;
   //const chartRef = useRef(null);
@@ -176,9 +176,9 @@ const EMultiLine = (props: XEChartProps & { dispatch: Dispatch }) => {
 
   const [option, setOption] = useState({
     data: dataset,
-    xField: 'year',
-    yField: 'value',
-    seriesField: 'category',
+    xField: `${xField}`,
+    yField: `${yField}`,
+    seriesField: `${seriesField}`,
     yAxis: {
       label: {
         // 数值格式化为千分位
@@ -208,7 +208,7 @@ const EMultiLine = (props: XEChartProps & { dispatch: Dispatch }) => {
               //const yAxis =   response.data[yAxis]
               // const seriesA = response.data[seriesA]
               // const seriesB =  response.data[seriesB]
-              console.log('test : ', response.data[yAxis]);
+              console.log('test : ', response.data[yField]);
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
@@ -219,7 +219,19 @@ const EMultiLine = (props: XEChartProps & { dispatch: Dispatch }) => {
         return;
       }
     }
-  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
+  }, [
+    data,
+    isTpl,
+    option,
+    api,
+    apiParams,
+    timer,
+    clickParams,
+    dispatch,
+    yField,
+    xField,
+    seriesField,
+  ]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>

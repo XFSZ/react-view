@@ -160,6 +160,7 @@ const EPie2 = (props: XEChartProps & { dispatch: Dispatch }) => {
               // const seriesA = response.data[seriesA]
               // const seriesB =  response.data[seriesB]
               console.log('test : ', response.data[yAxis]);
+              //setOption({...option,data:response.data})
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
