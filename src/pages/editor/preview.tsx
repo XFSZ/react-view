@@ -16,38 +16,14 @@ interface PreviewPageProps {
     pointData: { id: string; item: any; point: any; isMenu?: any; visibility: string }[];
   };
 }
-interface PointDataItem {
-  id: string;
-  item: Record<string, any>;
-  point: Record<string, any>;
-}
 
 const PreviewPage = memo((props: PreviewPageProps) => {
   const { pstate } = props;
-  console.log(pstate);
+
   let pointData: any = pstate.pointData || [];
-  pointData.map((item: PointDataItem) => ({
-    ...item,
-    point: { ...item.point, isDraggable: false, isResizable: false },
-  }));
 
-  // const [pointData, setPointData] = useState(() => {
+  console.log(pointData);
 
-  // //  let pointDataStr = localStorage.getItem('pointData');
-  //   let points:any;
-
-  //   try {
-  //    // points = JSON.parse(pointDataStr!) || [];
-  //    points = pstate.pointData ||[]
-  //   } catch (err) {
-  //     points = [];
-  //   }
-  //   return points.map((item: PointDataItem) => ({
-  //     ...item,
-  //     point: { ...item.point, isDraggable: false, isResizable: false },
-  //   }));
-  // });
-  // setPointData(points);
   const [pageData, setPageData] = useState(() => {
     let pageConfigStr = localStorage.getItem('pageConfig');
     let pageConfig;
@@ -60,71 +36,57 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     return pageConfig;
   });
 
-  // const vw = window.innerWidth;
+  // useEffect(() => {
+  //   const { tid, gf } = props.location.query!;
+  //   if (!gf && parent.window.location.pathname === '/preview') {
+  //     req
+  //       .get<any, any>('/', { params: { tid } })
+  //       .then(res => {
+  //         const { pageConfig, tpl } = res || { pageConfig: {}, tpl: [] };
+  //         // 设置标题
+  //         document.title = pageConfig.title || '';
+  //         // 设置数据源
+  //         // setPointData(
+  //         //   tpl.map(item => ({
+  //         //     ...item,
+  //         //     point: { ...item.point, isDraggable: false, isResizable: false },
+  //         //   })),
+  //         // );
 
-  useEffect(() => {
-    const { tid, gf } = props.location.query!;
-    if (!gf && parent.window.location.pathname === '/preview') {
-      req
-        .get<any, any>('/', { params: { tid } })
-        .then(res => {
-          const { pageConfig, tpl } = res || { pageConfig: {}, tpl: [] };
-          // 设置标题
-          document.title = pageConfig.title || '';
-          // 设置数据源
-          setPointData(
-            tpl.map(item => ({
-              ...item,
-              point: { ...item.point, isDraggable: false, isResizable: false },
-            })),
-          );
+  //         setPageData(pageConfig);
+  //       })
+  //       .catch(err => {
+  //         console.error(err);
+  //       });
+  //     return;
+  //   }
 
-          setPageData(pageConfig);
-        })
-        .catch(err => {
-          console.error(err);
-        });
-      return;
-    }
-
-    setTimeout(() => {
-      generateImg((url: string) => {
-        parent.window.getFaceUrl(url);
-      });
-    }, 3000);
-  }, [props.location.query]);
+  //   setTimeout(() => {
+  //     generateImg((url: string) => {
+  //       parent.window.getFaceUrl(url);
+  //     });
+  //   }, 3000);
+  // }, [props.location.query]);
 
   const ref = useRef<HTMLDivElement>(null);
   const refImgDom = useRef<HTMLDivElement>(null);
-  //  const width = useGetScrollBarWidth(ref);
-  // const pcStyle: CSSProperties = useMemo(() => {
-  //   return {
-  //     width: isMac ? 382 : 375 + width + 1, //小数会有偏差
-  //     margin: '55px auto',
-  //     height: '684px',
-  //     overflow: 'auto',
-  //     position: 'relative',
-  //     transform: 'scale(0.7) translateY(-80px)',
-  //     backgroundColor: pageData.bgColor,
-  //   };
-  // }, [width]);
 
-  const generateImg = (cb: any) => {
-    domtoimage
-      .toBlob(refImgDom.current, {
-        bgcolor: '#fff',
-      })
-      .then(function(blob: Blob) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          cb && cb(e?.target?.result);
-        };
-        reader.readAsDataURL(blob);
-      })
-      .catch(function(error: any) {
-        console.error('oops, something went wrong!', error);
-      });
-  };
+  // const generateImg = (cb: any) => {
+  //   domtoimage
+  //     .toBlob(refImgDom.current, {
+  //       bgcolor: '#fff',
+  //     })
+  //     .then(function(blob: Blob) {
+  //       const reader = new FileReader();
+  //       reader.onload = function(e) {
+  //         cb && cb(e?.target?.result);
+  //       };
+  //       reader.readAsDataURL(blob);
+  //     })
+  //     .catch(function(error: any) {
+  //       console.error('oops, something went wrong!', error);
+  //     });
+  // };
   function renderval(value: {
     id: string;
     item: any;
@@ -132,7 +94,6 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     isMenu?: any;
     visibility: string;
   }) {
-    // console.log("renderval : ",value)
     if (pointData[0].item.config.layerList && value.id !== '0') {
       for (let i = 0; i < pointData[0].item.config.layerList.length; i++) {
         const va = pointData[0].item.config.layerList[i];
@@ -158,11 +119,6 @@ const PreviewPage = memo((props: PreviewPageProps) => {
           width: pointData[0].item.config.width,
           height: pointData[0].item.config.height,
         }}
-        // style={
-        //   vw > 800
-        //     ? pcStyle
-        //     : { height: '100vh', overflow: 'auto', backgroundColor: pageData.bgColor }
-        // }
       >
         <div ref={refImgDom}>
           {pointData.length > 0
@@ -181,7 +137,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
                       width={pointData[0].item.config.width}
                       margin={[0, 0]}
                     >
-                      {pointData.map(value =>
+                      {pointData.map((value: any) =>
                         value.id !== '0' && value.item.config.zIndex === layoutval.zIndex ? (
                           <div
                             className={styles.dragItem}
@@ -208,7 +164,6 @@ const PreviewPage = memo((props: PreviewPageProps) => {
   );
 });
 
-//export default PreviewPage;
 export default connect((state: StateWithHistory<any>) => ({
   pstate: state.present.previewModal,
 }))(PreviewPage);

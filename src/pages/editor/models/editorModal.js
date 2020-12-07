@@ -8,10 +8,19 @@
  */
 import { uuid } from '@/utils/tool';
 const pointData = localStorage.getItem('userData') || '[]';
+// interface PointDataItem {
+//   id: string;
+//   item: Record<string, any>;
+//   point: Record<string, any>;
+// }
 
 function overSave(name, data) {
   localStorage.setItem(name, JSON.stringify(data));
-  localStorage.setItem('userPreviewData', JSON.stringify(data));
+  const previewdata = data.map(item => ({
+    ...item,
+    point: { ...item.point, isDraggable: false, static: true, isResizable: false },
+  }));
+  localStorage.setItem('userPreviewData', JSON.stringify(previewdata));
 }
 
 export default {
