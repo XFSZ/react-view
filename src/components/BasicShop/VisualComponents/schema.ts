@@ -21,7 +21,7 @@ const visualSchema = {
   // Area,
   // XProgress,
 
-  EChart,
+  // EChart,
   EPie,
   EPie2,
   EDoubleLine,

@@ -15,7 +15,7 @@ import EColumn from './EColumn/template';
 import EMultiLine2 from './EMultiLine2/template';
 import EHorizontalBar from './EHorizontalBar/template';
 const visualTemplate = [
-  EChart,
+  // EChart,
   EPie,
   EPie2,
   EDoubleLine,
