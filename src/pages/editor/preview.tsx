@@ -112,6 +112,8 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         style={{
           display: 'flex',
           margin: 0,
+          position: 'relative',
+          overflow: 'hidden',
           //overflow: 'auto',
           //  overflow: 'hidden',
           // height:'100vh',
