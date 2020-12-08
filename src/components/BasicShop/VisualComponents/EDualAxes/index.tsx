@@ -82,6 +82,7 @@ const EDualAxes = (props: XEChartProps & { dispatch: Dispatch }) => {
     data: [barDataArr, lineDataArr],
     xField: `${xField}`,
     yField: [`${yFieldBar}`, `${yFieldLine}`],
+    legend: { position: 'right' },
     geometryOptions: [
       {
         geometry: 'column',

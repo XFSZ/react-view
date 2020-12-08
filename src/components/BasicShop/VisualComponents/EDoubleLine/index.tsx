@@ -148,16 +148,17 @@ const EDoubleLine = (props: XEChartProps & { dispatch: Dispatch }) => {
     height: 200,
     tooltip: { shared: true },
     smooth: true,
-    meta: {
-      visits: {
-        min: 30,
-        max: 180,
-        tickItnerval: 30,
-      },
-      sessions: {
-        range: [0.05, 0.95],
-      },
-    },
+    legend: { position: 'right' },
+    // meta: {
+    //   visits: {
+    //     min: 30,
+    //     max: 180,
+    //     tickItnerval: 30,
+    //   },
+    //   sessions: {
+    //     range: [0.05, 0.95],
+    //   },
+    // },
     yAxis: {
       grid: { line: { style: { lineDash: [4, 2], stroke: '#ddd' } } },
       tickLine: { style: { stroke: '#ddd' } },
@@ -172,7 +173,7 @@ const EDoubleLine = (props: XEChartProps & { dispatch: Dispatch }) => {
       };
     },
     color: ['#5B8FF9', '#61DDAA'],
-    legend: { position: 'top' },
+    //legend: { position: 'top' },
   });
   useEffect(() => {
     if (!isTpl) {

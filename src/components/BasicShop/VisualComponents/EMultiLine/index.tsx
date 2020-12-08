@@ -180,6 +180,7 @@ const EMultiLine = (props: XEChartProps & { dispatch: Dispatch }) => {
     xField: `${xField}`,
     yField: `${yField}`,
     seriesField: `${seriesField}`,
+    legend: { position: 'right' },
     yAxis: {
       label: {
         // 数值格式化为千分位

@@ -99,11 +99,12 @@ const EPie2 = (props: XEChartProps & { dispatch: Dispatch }) => {
     colorField: 'type',
     radius: 1,
     innerRadius: 0.64,
-    meta: {
-      value: {
-        formatter: v => `¥ ${v}`,
-      },
-    },
+    // meta: {
+    //   value: {
+    //     formatter: v => `¥ ${v}`,
+    //   },
+    // },
+    legend: { position: 'right' },
     label: {
       type: 'inner',
       offset: '-50%',

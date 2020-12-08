@@ -102,7 +102,7 @@ const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
     xField: `${xField}`,
     yField: 'score',
     seriesField: 'user',
-    legend: false,
+    legend: { position: 'right' },
     // meta: {
     //   score: {
     //     alias: '分数',
