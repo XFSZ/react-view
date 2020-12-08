@@ -50,30 +50,24 @@ interface XEChartProps extends IEChartConfig {
 //     console.error(err);
 //   }
 // };
-const { DataView } = DataSet;
-const dataset = [
-  { item: 'Design', a: 70, b: 30 },
-  { item: 'Development', a: 60, b: 70 },
-  { item: 'Marketing', a: 50, b: 60 },
-  { item: 'Users', a: 40, b: 50 },
-  { item: 'Test', a: 60, b: 70 },
-  { item: 'Language', a: 70, b: 50 },
-  { item: 'Technology', a: 50, b: 40 },
-  { item: 'Support', a: 30, b: 40 },
-  { item: 'Sales', a: 60, b: 40 },
-  { item: 'UX', a: 50, b: 60 },
-];
-const dv = new DataView().source(dataset);
-dv.transform({
-  type: 'fold',
-  fields: ['a', 'b'], // 展开字段集
-  key: 'user', // key字段
-  value: 'score', // value字段
-});
+
+// const dataset = [
+//   { item: 'Design', a: 70, b: 30 },
+//   { item: 'Development', a: 60, b: 70 },
+//   { item: 'Marketing', a: 50, b: 60 },
+//   { item: 'Users', a: 40, b: 50 },
+//   { item: 'Test', a: 60, b: 70 },
+//   { item: 'Language', a: 70, b: 50 },
+//   { item: 'Technology', a: 50, b: 40 },
+//   { item: 'Support', a: 30, b: 40 },
+//   { item: 'Sales', a: 60, b: 40 },
+//   { item: 'UX', a: 50, b: 60 },
+// ];
+
 const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
   const {
     isTpl,
-    data,
+    //  data,
     color,
     size,
     paddingTop,
@@ -82,29 +76,40 @@ const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
     timer,
     clickParams,
     dispatch,
-    yAxis,
-    seriesA,
-    seriesB,
+    dataSet,
+    xField,
+    seriesFieldA,
+    seriesFieldB,
     apiParams,
   } = props;
   //const chartRef = useRef(null);
   //const container = useRef<HTMLDivElement>(null)
 
   const container = useRef(null);
-
+  const { DataView } = DataSet;
+  const dataset = eval(`(${dataSet})`);
+  console.log(dataset);
+  const dv = new DataView().source(dataset);
+  dv.transform({
+    type: 'fold',
+    fields: [`${seriesFieldA}`, `${seriesFieldB}`], // 展开字段集
+    key: 'user', // key字段
+    value: 'score', // value字段
+  });
   const [option, setOption] = useState({
     autoFit: true,
     data: dv.rows,
-    xField: 'item',
+    xField: `${xField}`,
     yField: 'score',
     seriesField: 'user',
-    meta: {
-      score: {
-        alias: '分数',
-        min: 0,
-        max: 80,
-      },
-    },
+    legend: false,
+    // meta: {
+    //   score: {
+    //     alias: '分数',
+    //     min: 0,
+    //     max: 80,
+    //   },
+    // },
     xAxis: {
       line: null,
       tickLine: null,
@@ -154,7 +159,7 @@ const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
               //const yAxis =   response.data[yAxis]
               // const seriesA = response.data[seriesA]
               // const seriesB =  response.data[seriesB]
-              console.log('test : ', response.data[yAxis]);
+              console.log('test : ', response.data[xField]);
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
@@ -165,7 +170,19 @@ const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
         return;
       }
     }
-  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
+  }, [
+    dataSet,
+    isTpl,
+    option,
+    api,
+    apiParams,
+    timer,
+    clickParams,
+    dispatch,
+    xField,
+    seriesFieldA,
+    seriesFieldB,
+  ]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>

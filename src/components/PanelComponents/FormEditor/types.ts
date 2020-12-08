@@ -68,7 +68,7 @@ export interface ILayerDataListConfigType {
 export type TLayerDataListDefaultTypeItem = {
   id: string;
   zIndex: number;
-  visibility:number
+  visibility: number;
   desc: string;
   type?: number;
 };
@@ -145,6 +145,11 @@ export type TTableDefaultType = Array<{
   value: number;
 }>;
 
+export interface IArrayDataConfigType {}
+export type TArrayDataConfigType = Array<{
+  name: string;
+  value: number;
+}>;
 // position input control
 export interface IPosConfigType {
   key: string;

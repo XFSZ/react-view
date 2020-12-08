@@ -21,14 +21,15 @@ export interface IEChartConfig {
   size: TNumberDefaultType;
   color: TColorDefaultType;
   paddingTop: TNumberDefaultType;
-  data: TTableDefaultType;
+  // data: TTableDefaultType;
   api: TTextDefaultType;
   apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
-  yAxis: TTextDefaultType;
-  seriesA: TTextDefaultType;
-  seriesB: TTextDefaultType;
+  dataSet: TTextAreaDefaultType;
+  xField: TTextDefaultType;
+  yField: TTextDefaultType;
+  seriesField: TTextDefaultType;
 }
 
 export interface IEChartSchema {
@@ -69,11 +70,6 @@ const EColumn: IEChartSchema = {
       type: 'Number',
     },
     {
-      key: 'data',
-      name: '数据源',
-      type: 'Table',
-    },
-    {
       key: 'clickParams',
       name: '动作',
       type: 'TextArea',
@@ -89,24 +85,30 @@ const EColumn: IEChartSchema = {
       type: 'TextArea',
     },
     {
-      key: 'yAxis',
-      name: 'yAxis',
-      type: 'Text',
-    },
-    {
-      key: 'seriesA',
-      name: 'seriesA',
-      type: 'Text',
-    },
-    {
-      key: 'seriesB',
-      name: 'seriesB',
-      type: 'Text',
-    },
-    {
       key: 'timer',
       name: '定时器(单位s)',
       type: 'Number',
+    },
+
+    {
+      key: 'xField',
+      name: 'xField',
+      type: 'Text',
+    },
+    {
+      key: 'yField',
+      name: 'yField',
+      type: 'Text',
+    },
+    {
+      key: 'seriesField',
+      name: 'seriesField',
+      type: 'Text',
+    },
+    {
+      key: 'dataSet',
+      name: 'dataSet',
+      type: 'TextArea',
     },
   ],
   config: {
@@ -116,31 +118,95 @@ const EColumn: IEChartSchema = {
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
-    data: [
-      {
-        name: 'A',
-        value: 20,
-      },
-      {
-        name: 'B',
-        value: 60,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-      {
-        name: 'D',
-        value: 80,
-      },
-    ],
     clickParams: '[{}]',
     api: '',
     apiParams: '',
-    yAxis: '',
-    seriesA: '',
-    seriesB: '',
+    xField: 'months',
+    yField: 'averageFainfall',
+    seriesField: 'name',
     timer: 0,
+    dataSet: `[
+      {
+        name: 'London',
+        months: 'Jan.',
+        averageFainfall: 18.9,
+      },
+      {
+        name: 'London',
+        months: 'Feb.',
+        averageFainfall: 28.8,
+      },
+      {
+        name: 'London',
+        months: 'Mar.',
+        averageFainfall: 39.3,
+      },
+      {
+        name: 'London',
+        months: 'Apr.',
+        averageFainfall: 81.4,
+      },
+      {
+        name: 'London',
+        months: 'May',
+        averageFainfall: 47,
+      },
+      {
+        name: 'London',
+        months: 'Jun.',
+        averageFainfall: 20.3,
+      },
+      {
+        name: 'London',
+        months: 'Jul.',
+        averageFainfall: 24,
+      },
+      {
+        name: 'London',
+        months: 'Aug.',
+        averageFainfall: 35.6,
+      },
+      {
+        name: 'Berlin',
+        months: 'Jan.',
+        averageFainfall: 12.4,
+      },
+      {
+        name: 'Berlin',
+        months: 'Feb.',
+        averageFainfall: 23.2,
+      },
+      {
+        name: 'Berlin',
+        months: 'Mar.',
+        averageFainfall: 34.5,
+      },
+      {
+        name: 'Berlin',
+        months: 'Apr.',
+        averageFainfall: 99.7,
+      },
+      {
+        name: 'Berlin',
+        months: 'May',
+        averageFainfall: 52.6,
+      },
+      {
+        name: 'Berlin',
+        months: 'Jun.',
+        averageFainfall: 35.5,
+      },
+      {
+        name: 'Berlin',
+        months: 'Jul.',
+        averageFainfall: 37.4,
+      },
+      {
+        name: 'Berlin',
+        months: 'Aug.',
+        averageFainfall: 42.4,
+      },
+    ]`,
   },
 };
 

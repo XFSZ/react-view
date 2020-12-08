@@ -21,14 +21,15 @@ export interface IEChartConfig {
   size: TNumberDefaultType;
   color: TColorDefaultType;
   paddingTop: TNumberDefaultType;
-  data: TTableDefaultType;
+  // data: TTableDefaultType;
   api: TTextDefaultType;
   apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
-  yAxis: TTextDefaultType;
-  seriesA: TTextDefaultType;
-  seriesB: TTextDefaultType;
+  xField: TTextDefaultType;
+  seriesFieldA: TTextDefaultType;
+  seriesFieldB: TTextDefaultType;
+  dataSet: TTextAreaDefaultType;
 }
 
 export interface IEChartSchema {
@@ -68,11 +69,7 @@ const ERadar: IEChartSchema = {
       name: '上边距',
       type: 'Number',
     },
-    {
-      key: 'data',
-      name: '数据源',
-      type: 'Table',
-    },
+
     {
       key: 'clickParams',
       name: '动作',
@@ -108,6 +105,11 @@ const ERadar: IEChartSchema = {
       name: '定时器(单位s)',
       type: 'Number',
     },
+    {
+      key: 'dataSet',
+      name: 'dataSet',
+      type: 'TextArea',
+    },
   ],
   config: {
     id: '999',
@@ -116,31 +118,26 @@ const ERadar: IEChartSchema = {
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
-    data: [
-      {
-        name: 'A',
-        value: 20,
-      },
-      {
-        name: 'B',
-        value: 60,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-      {
-        name: 'D',
-        value: 80,
-      },
-    ],
+
     clickParams: '[{}]',
     api: '',
     apiParams: '',
-    yAxis: '',
-    seriesA: '',
-    seriesB: '',
+    xField: 'item',
+    seriesFieldA: 'a',
+    seriesFieldB: 'b',
     timer: 0,
+    dataSet: `[
+      { item: 'Design', a: 70, b: 30 },
+      { item: 'Development', a: 60, b: 70 },
+      { item: 'Marketing', a: 50, b: 60 },
+      { item: 'Users', a: 40, b: 50 },
+      { item: 'Test', a: 60, b: 70 },
+      { item: 'Language', a: 70, b: 50 },
+      { item: 'Technology', a: 50, b: 40 },
+      { item: 'Support', a: 30, b: 40 },
+      { item: 'Sales', a: 60, b: 40 },
+      { item: 'UX', a: 50, b: 60 },
+    ]`,
   },
 };
 

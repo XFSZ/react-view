@@ -14,88 +14,7 @@ import { Column, ColumnOptions } from '@antv/g2plot';
 interface XEChartProps extends IEChartConfig {
   isTpl: boolean;
 }
-const dataset = [
-  {
-    name: 'London',
-    月份: 'Jan.',
-    月均降雨量: 18.9,
-  },
-  {
-    name: 'London',
-    月份: 'Feb.',
-    月均降雨量: 28.8,
-  },
-  {
-    name: 'London',
-    月份: 'Mar.',
-    月均降雨量: 39.3,
-  },
-  {
-    name: 'London',
-    月份: 'Apr.',
-    月均降雨量: 81.4,
-  },
-  {
-    name: 'London',
-    月份: 'May',
-    月均降雨量: 47,
-  },
-  {
-    name: 'London',
-    月份: 'Jun.',
-    月均降雨量: 20.3,
-  },
-  {
-    name: 'London',
-    月份: 'Jul.',
-    月均降雨量: 24,
-  },
-  {
-    name: 'London',
-    月份: 'Aug.',
-    月均降雨量: 35.6,
-  },
-  {
-    name: 'Berlin',
-    月份: 'Jan.',
-    月均降雨量: 12.4,
-  },
-  {
-    name: 'Berlin',
-    月份: 'Feb.',
-    月均降雨量: 23.2,
-  },
-  {
-    name: 'Berlin',
-    月份: 'Mar.',
-    月均降雨量: 34.5,
-  },
-  {
-    name: 'Berlin',
-    月份: 'Apr.',
-    月均降雨量: 99.7,
-  },
-  {
-    name: 'Berlin',
-    月份: 'May',
-    月均降雨量: 52.6,
-  },
-  {
-    name: 'Berlin',
-    月份: 'Jun.',
-    月均降雨量: 35.5,
-  },
-  {
-    name: 'Berlin',
-    月份: 'Jul.',
-    月均降雨量: 37.4,
-  },
-  {
-    name: 'Berlin',
-    月份: 'Aug.',
-    月均降雨量: 42.4,
-  },
-];
+
 // const onClick = (clickParams: string, dispatch: Dispatch) => {
 //   try {
 //     let clickParamsStrData = '[{}]';
@@ -134,35 +53,37 @@ const dataset = [
 const EColumn = (props: XEChartProps & { dispatch: Dispatch }) => {
   const {
     isTpl,
-    data,
+    //   data,
     color,
     size,
     paddingTop,
     title,
     api,
+    apiParams,
     timer,
     clickParams,
     dispatch,
-    yAxis,
-    seriesA,
-    seriesB,
-    apiParams,
+    dataSet,
+    xField,
+    yField,
+    seriesField,
   } = props;
   //const chartRef = useRef(null);
   //const container = useRef<HTMLDivElement>(null)
 
   const container = useRef(null);
-
+  const dataset = eval(`(${dataSet})`);
   const [option, setOption] = useState({
     data: dataset,
     isGroup: true,
-    xField: '月份',
-    yField: '月均降雨量',
-    seriesField: 'name',
+    xField: `${xField}`,
+    yField: `${yField}`,
+    seriesField: `${seriesField}`,
     /** 设置颜色 */
     //color: ['#1ca9e6', '#f88c24'],
     /** 设置间距 */
     // marginRatio: 0.1,
+    legend: false,
     label: {
       // 可手动配置 label 数据标签位置
       position: 'middle', // 'top', 'middle', 'bottom'
@@ -198,7 +119,7 @@ const EColumn = (props: XEChartProps & { dispatch: Dispatch }) => {
               //const yAxis =   response.data[yAxis]
               // const seriesA = response.data[seriesA]
               // const seriesB =  response.data[seriesB]
-              console.log('test : ', response.data[yAxis]);
+              console.log('test : ', response.data[yField]);
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
@@ -209,7 +130,19 @@ const EColumn = (props: XEChartProps & { dispatch: Dispatch }) => {
         return;
       }
     }
-  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
+  }, [
+    isTpl,
+    option,
+    api,
+    apiParams,
+    timer,
+    clickParams,
+    dispatch,
+    dataSet,
+    xField,
+    yField,
+    seriesField,
+  ]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>

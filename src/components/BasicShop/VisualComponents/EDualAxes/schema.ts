@@ -21,14 +21,18 @@ export interface IEChartConfig {
   size: TNumberDefaultType;
   color: TColorDefaultType;
   paddingTop: TNumberDefaultType;
-  data: TTableDefaultType;
+  // data: TTableDefaultType;
   api: TTextDefaultType;
   apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
-  yAxis: TTextDefaultType;
-  seriesA: TTextDefaultType;
-  seriesB: TTextDefaultType;
+  barData: TTextAreaDefaultType;
+  lineData: TTextAreaDefaultType;
+  xField: TTextDefaultType;
+  yFieldBar: TTextDefaultType;
+  yFieldLine: TTextDefaultType;
+  seriesFieldBar: TTextDefaultType;
+  seriesFieldLine: TTextDefaultType;
 }
 
 export interface IEChartSchema {
@@ -69,11 +73,6 @@ const EDualAxes: IEChartSchema = {
       type: 'Number',
     },
     {
-      key: 'data',
-      name: '数据源',
-      type: 'Table',
-    },
-    {
       key: 'clickParams',
       name: '动作',
       type: 'TextArea',
@@ -89,24 +88,45 @@ const EDualAxes: IEChartSchema = {
       type: 'TextArea',
     },
     {
-      key: 'yAxis',
-      name: 'yAxis',
-      type: 'Text',
-    },
-    {
-      key: 'seriesA',
-      name: 'seriesA',
-      type: 'Text',
-    },
-    {
-      key: 'seriesB',
-      name: 'seriesB',
-      type: 'Text',
-    },
-    {
       key: 'timer',
       name: '定时器(单位s)',
       type: 'Number',
+    },
+
+    {
+      key: 'xField',
+      name: 'xField',
+      type: 'Text',
+    },
+    {
+      key: 'yFieldBar',
+      name: 'yFieldBar',
+      type: 'Text',
+    },
+    {
+      key: 'yFieldLine',
+      name: 'yFieldLine',
+      type: 'Text',
+    },
+    {
+      key: 'seriesFieldBar',
+      name: 'seriesFieldBar',
+      type: 'Text',
+    },
+    {
+      key: 'seriesFieldLine',
+      name: 'seriesFieldLine',
+      type: 'Text',
+    },
+    {
+      key: 'barData',
+      name: 'barData',
+      type: 'TextArea',
+    },
+    {
+      key: 'lineData',
+      name: 'lineData',
+      type: 'TextArea',
     },
   ],
   config: {
@@ -116,30 +136,43 @@ const EDualAxes: IEChartSchema = {
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
-    data: [
-      {
-        name: 'A',
-        value: 20,
-      },
-      {
-        name: 'B',
-        value: 60,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-      {
-        name: 'D',
-        value: 80,
-      },
-    ],
     clickParams: '[{}]',
     api: '',
     apiParams: '',
-    yAxis: '',
-    seriesA: '',
-    seriesB: '',
+    barData: `[
+      { time: '2019-03', value: 350, type: 'uv' },
+      { time: '2019-04', value: 900, type: 'uv' },
+      { time: '2019-05', value: 300, type: 'uv' },
+      { time: '2019-06', value: 450, type: 'uv' },
+      { time: '2019-07', value: 470, type: 'uv' },
+      { time: '2019-03', value: 220, type: 'bill' },
+      { time: '2019-04', value: 300, type: 'bill' },
+      { time: '2019-05', value: 250, type: 'bill' },
+      { time: '2019-06', value: 220, type: 'bill' },
+      { time: '2019-07', value: 362, type: 'bill' },
+    ]`,
+    lineData: `[
+      { time: '2019-03', count: 800, name: 'a' },
+      { time: '2019-04', count: 600, name: 'a' },
+      { time: '2019-05', count: 400, name: 'a' },
+      { time: '2019-06', count: 380, name: 'a' },
+      { time: '2019-07', count: 220, name: 'a' },
+      { time: '2019-03', count: 750, name: 'b' },
+      { time: '2019-04', count: 650, name: 'b' },
+      { time: '2019-05', count: 450, name: 'b' },
+      { time: '2019-06', count: 400, name: 'b' },
+      { time: '2019-07', count: 320, name: 'b' },
+      { time: '2019-03', count: 900, name: 'c' },
+      { time: '2019-04', count: 600, name: 'c' },
+      { time: '2019-05', count: 450, name: 'c' },
+      { time: '2019-06', count: 300, name: 'c' },
+      { time: '2019-07', count: 200, name: 'c' },
+    ]`,
+    xField: 'time',
+    yFieldBar: 'value',
+    yFieldLine: 'count',
+    seriesFieldBar: 'type',
+    seriesFieldLine: 'name',
     timer: 0,
   },
 };

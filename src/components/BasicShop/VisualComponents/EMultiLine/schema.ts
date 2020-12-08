@@ -21,11 +21,12 @@ export interface IEChartConfig {
   size: TNumberDefaultType;
   color: TColorDefaultType;
   paddingTop: TNumberDefaultType;
-  data: TTableDefaultType;
+  // data: TTableDefaultType;
   api: TTextDefaultType;
   apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
+  dataSet: TTextAreaDefaultType;
   yField: TTextDefaultType;
   xField: TTextDefaultType;
   seriesField: TTextDefaultType;
@@ -108,6 +109,11 @@ const EMultiLine: IEChartSchema = {
       name: '定时器(单位s)',
       type: 'Number',
     },
+    {
+      key: 'dataSet',
+      name: 'dataSet',
+      type: 'TextArea',
+    },
   ],
   config: {
     id: '999',
@@ -116,24 +122,7 @@ const EMultiLine: IEChartSchema = {
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
-    data: [
-      {
-        name: 'A',
-        value: 20,
-      },
-      {
-        name: 'B',
-        value: 60,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-      {
-        name: 'D',
-        value: 80,
-      },
-    ],
+
     clickParams: '[{}]',
     api: '',
     apiParams: '',
@@ -141,6 +130,108 @@ const EMultiLine: IEChartSchema = {
     xField: 'year',
     seriesField: 'category',
     timer: 0,
+    dataSet: `[
+      {
+        year: '2011',
+        value: 3134,
+        category: 'Liquid fuel',
+      },
+      {
+        year: '2011',
+        value: 4055,
+        category: 'Solid fuel',
+      },
+      {
+        year: '2011',
+        value: 1756,
+        category: 'Gas fuel',
+      },
+      {
+        year: '2011',
+        value: 494,
+        category: 'Cement production',
+      },
+      {
+        year: '2011',
+        value: 64,
+        category: 'Gas flarinl',
+      },
+      {
+        year: '2012',
+        value: 3200,
+        category: 'Liquid fuel',
+      },
+      {
+        year: '2012',
+        value: 4106,
+        category: 'Solid fuel',
+      },
+      {
+        year: '2012',
+        value: 1783,
+        category: 'Gas fuel',
+      },
+      {
+        year: '2012',
+        value: 519,
+        category: 'Cement production',
+      },
+      {
+        year: '2012',
+        value: 65,
+        category: 'Gas flarinl',
+      },
+      {
+        year: '2013',
+        value: 3220,
+        category: 'Liquid fuel',
+      },
+      {
+        year: '2013',
+        value: 4126,
+        category: 'Solid fuel',
+      },
+      {
+        year: '2013',
+        value: 1806,
+        category: 'Gas fuel',
+      },
+      {
+        year: '2013',
+        value: 554,
+        category: 'Cement production',
+      },
+      {
+        year: '2013',
+        value: 68,
+        category: 'Gas flarinl',
+      },
+      {
+        year: '2014',
+        value: 3280,
+        category: 'Liquid fuel',
+      },
+      {
+        year: '2014',
+        value: 4117,
+        category: 'Solid fuel',
+      },
+      {
+        year: '2014',
+        value: 1823,
+        category: 'Gas fuel',
+      },
+      {
+        year: '2014',
+        value: 568,
+        category: 'Cement production',
+      },
+      {
+        year: '2014',
+        value: 68,
+        category: 'Gas flarinl',
+      },
+    ]`,
   },
 };
 

@@ -49,40 +49,11 @@ interface XEChartProps extends IEChartConfig {
 //     console.error(err);
 //   }
 // };
-const uvBillData = [
-  { time: '2019-03', value: 350, type: 'uv' },
-  { time: '2019-04', value: 900, type: 'uv' },
-  { time: '2019-05', value: 300, type: 'uv' },
-  { time: '2019-06', value: 450, type: 'uv' },
-  { time: '2019-07', value: 470, type: 'uv' },
-  { time: '2019-03', value: 220, type: 'bill' },
-  { time: '2019-04', value: 300, type: 'bill' },
-  { time: '2019-05', value: 250, type: 'bill' },
-  { time: '2019-06', value: 220, type: 'bill' },
-  { time: '2019-07', value: 362, type: 'bill' },
-];
 
-const transformData = [
-  { time: '2019-03', count: 800, name: 'a' },
-  { time: '2019-04', count: 600, name: 'a' },
-  { time: '2019-05', count: 400, name: 'a' },
-  { time: '2019-06', count: 380, name: 'a' },
-  { time: '2019-07', count: 220, name: 'a' },
-  { time: '2019-03', count: 750, name: 'b' },
-  { time: '2019-04', count: 650, name: 'b' },
-  { time: '2019-05', count: 450, name: 'b' },
-  { time: '2019-06', count: 400, name: 'b' },
-  { time: '2019-07', count: 320, name: 'b' },
-  { time: '2019-03', count: 900, name: 'c' },
-  { time: '2019-04', count: 600, name: 'c' },
-  { time: '2019-05', count: 450, name: 'c' },
-  { time: '2019-06', count: 300, name: 'c' },
-  { time: '2019-07', count: 200, name: 'c' },
-];
 const EDualAxes = (props: XEChartProps & { dispatch: Dispatch }) => {
   const {
     isTpl,
-    data,
+    // data,
     color,
     size,
     paddingTop,
@@ -91,41 +62,47 @@ const EDualAxes = (props: XEChartProps & { dispatch: Dispatch }) => {
     timer,
     clickParams,
     dispatch,
-    yAxis,
-    seriesA,
-    seriesB,
+    barData,
+    lineData,
+    xField,
+    yFieldBar,
+    yFieldLine,
+    seriesFieldBar,
+    seriesFieldLine,
     apiParams,
   } = props;
   //const chartRef = useRef(null);
   //const container = useRef<HTMLDivElement>(null)
 
   const container = useRef(null);
-
+  //`(${})`
+  const barDataArr = eval('(' + barData + ')');
+  const lineDataArr = eval('(' + lineData + ')');
   const [option, setOption] = useState({
-    data: [uvBillData, transformData],
-    xField: 'time',
-    yField: ['value', 'count'],
+    data: [barDataArr, lineDataArr],
+    xField: `${xField}`,
+    yField: [`${yFieldBar}`, `${yFieldLine}`],
     geometryOptions: [
       {
         geometry: 'column',
         isGroup: true,
-        seriesField: 'type',
+        seriesField: `${seriesFieldBar}`,
         columnWidthRatio: 0.4,
       },
       {
         geometry: 'line',
-        seriesField: 'name',
-        lineStyle: ({ name }) => {
-          if (name === 'a') {
-            return {
-              lineDash: [1, 4],
-              opacity: 1,
-            };
-          }
-          return {
-            opacity: 0.5,
-          };
-        },
+        seriesField: `${seriesFieldLine}`,
+        // lineStyle: ({ name }) => {
+        //   if (name === 'a') {
+        //     return {
+        //       lineDash: [1, 4],
+        //       opacity: 1,
+        //     };
+        //   }
+        //   return {
+        //     opacity: 0.5,
+        //   };
+        // },
       },
     ],
   });
@@ -150,7 +127,7 @@ const EDualAxes = (props: XEChartProps & { dispatch: Dispatch }) => {
               //const yAxis =   response.data[yAxis]
               // const seriesA = response.data[seriesA]
               // const seriesB =  response.data[seriesB]
-              console.log('test : ', response.data[yAxis]);
+              console.log('test : ', response.data[yFieldBar]);
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
@@ -161,7 +138,23 @@ const EDualAxes = (props: XEChartProps & { dispatch: Dispatch }) => {
         return;
       }
     }
-  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
+  }, [
+    isTpl,
+    option,
+    api,
+    apiParams,
+    timer,
+    clickParams,
+    dispatch,
+    barData,
+    lineData,
+    xField,
+    yFieldBar,
+    yFieldLine,
+    seriesFieldBar,
+    seriesFieldLine,
+  ]);
+  //}, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, yAxis, seriesA, seriesB]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
@@ -180,5 +173,3 @@ export default connect((state: StateWithHistory<any>) => ({
   pstate: state.present.editorModal,
   cstate: state.present.editorPcModal,
 }))(memo(EDualAxes));
-
-// export default memo(EChart);

@@ -21,11 +21,12 @@ export interface IEChartConfig {
   size: TNumberDefaultType;
   color: TColorDefaultType;
   paddingTop: TNumberDefaultType;
-  data: TTableDefaultType;
+  // data: TTableDefaultType;
   api: TTextDefaultType;
   apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
+  dataSet: TTextAreaDefaultType;
   yField: TTextDefaultType;
   xField: TTextDefaultType;
   seriesField: TTextDefaultType;
@@ -68,11 +69,7 @@ const EHorizontalBar: IEChartSchema = {
       name: '上边距',
       type: 'Number',
     },
-    {
-      key: 'data',
-      name: '数据源',
-      type: 'Table',
-    },
+
     {
       key: 'clickParams',
       name: '动作',
@@ -88,6 +85,7 @@ const EHorizontalBar: IEChartSchema = {
       name: 'api参数',
       type: 'TextArea',
     },
+
     {
       key: 'yField',
       name: 'yField',
@@ -108,6 +106,11 @@ const EHorizontalBar: IEChartSchema = {
       name: '定时器(单位s)',
       type: 'Number',
     },
+    {
+      key: 'dataSet',
+      name: 'dataSet',
+      type: 'TextArea',
+    },
   ],
   config: {
     id: '999',
@@ -116,31 +119,120 @@ const EHorizontalBar: IEChartSchema = {
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
-    data: [
-      {
-        name: 'A',
-        value: 20,
-      },
-      {
-        name: 'B',
-        value: 60,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-      {
-        name: 'D',
-        value: 80,
-      },
-    ],
     clickParams: '[{}]',
     api: '',
     apiParams: '',
+    timer: 0,
     yField: 'year',
     xField: 'value',
     seriesField: 'country',
-    timer: 0,
+    dataSet: `[
+      {
+        country: 'Asia',
+        year: '1750',
+        value: 502,
+      },
+      {
+        country: 'Asia',
+        year: '1800',
+        value: 635,
+      },
+      {
+        country: 'Asia',
+        year: '1850',
+        value: 809,
+      },
+      {
+        country: 'Asia',
+        year: '1900',
+        value: 947,
+      },
+      {
+        country: 'Asia',
+        year: '1950',
+        value: 1402,
+      },
+      {
+        country: 'Asia',
+        year: '1999',
+        value: 3634,
+      },
+      {
+        country: 'Asia',
+        year: '2050',
+        value: 5268,
+      },
+      {
+        country: 'Africa',
+        year: '1750',
+        value: 106,
+      },
+      {
+        country: 'Africa',
+        year: '1800',
+        value: 107,
+      },
+      {
+        country: 'Africa',
+        year: '1850',
+        value: 111,
+      },
+      {
+        country: 'Africa',
+        year: '1900',
+        value: 133,
+      },
+      {
+        country: 'Africa',
+        year: '1950',
+        value: 221,
+      },
+      {
+        country: 'Africa',
+        year: '1999',
+        value: 767,
+      },
+      {
+        country: 'Africa',
+        year: '2050',
+        value: 1766,
+      },
+      {
+        country: 'Europe',
+        year: '1750',
+        value: 163,
+      },
+      {
+        country: 'Europe',
+        year: '1800',
+        value: 203,
+      },
+      {
+        country: 'Europe',
+        year: '1850',
+        value: 276,
+      },
+      {
+        country: 'Europe',
+        year: '1900',
+        value: 408,
+      },
+      {
+        country: 'Europe',
+        year: '1950',
+        value: 547,
+      },
+      {
+        country: 'Europe',
+        year: '1999',
+        value: 729,
+      },
+      {
+        country: 'Europe',
+        year: '2050',
+        value: 628,
+      },
+    ]`,
   },
 };
 

@@ -21,12 +21,13 @@ export interface IEChartConfig {
   size: TNumberDefaultType;
   color: TColorDefaultType;
   paddingTop: TNumberDefaultType;
-  data: TTableDefaultType;
+  // data: TTableDefaultType;
   api: TTextDefaultType;
   apiParams: TTextAreaDefaultType;
   timer: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
   ringProgressName: TTextDefaultType;
+  percent: TNumberDefaultType;
 }
 
 export interface IEChartSchema {
@@ -67,11 +68,6 @@ const ESinglePie: IEChartSchema = {
       type: 'Number',
     },
     {
-      key: 'data',
-      name: '数据源',
-      type: 'Table',
-    },
-    {
       key: 'clickParams',
       name: '动作',
       type: 'TextArea',
@@ -96,6 +92,11 @@ const ESinglePie: IEChartSchema = {
       name: '定时器(单位s)',
       type: 'Number',
     },
+    {
+      key: 'percent',
+      name: 'percent',
+      type: 'Number',
+    },
   ],
   config: {
     id: '999',
@@ -104,24 +105,7 @@ const ESinglePie: IEChartSchema = {
     size: 14,
     color: 'rgba(0,0,0,1)',
     paddingTop: 10,
-    data: [
-      {
-        name: 'A',
-        value: 20,
-      },
-      {
-        name: 'B',
-        value: 60,
-      },
-      {
-        name: 'C',
-        value: 20,
-      },
-      {
-        name: 'D',
-        value: 80,
-      },
-    ],
+    percent: 0.6,
     clickParams: '[{}]',
     api: '',
     apiParams: '',

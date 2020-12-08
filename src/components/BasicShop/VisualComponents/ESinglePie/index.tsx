@@ -55,7 +55,7 @@ interface XEChartProps extends IEChartConfig {
 const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
   const {
     isTpl,
-    data,
+    //    data,
     color,
     size,
     paddingTop,
@@ -65,6 +65,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
     clickParams,
     dispatch,
     ringProgressName,
+    percent,
     apiParams,
   } = props;
   //const chartRef = useRef(null);
@@ -76,7 +77,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
     // height: 100,
     // width: 100,
     autoFit: true,
-    percent: 0.6,
+    percent: percent,
     color: ['#5B8FF9', '#E8EDF3'],
     innerRadius: 0.85,
     radius: 0.98,
@@ -119,7 +120,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
         return;
       }
     }
-  }, [data, isTpl, option, api, apiParams, timer, clickParams, dispatch, ringProgressName]);
+  }, [percent, isTpl, option, api, apiParams, timer, clickParams, dispatch, ringProgressName]);
   return (
     <div className={styles.chartWrap}>
       <div className={styles.chartTitle} style={{ color, fontSize: size, paddingTop }}>
