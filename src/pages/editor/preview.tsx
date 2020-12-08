@@ -112,6 +112,8 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         style={{
           display: 'flex',
           margin: 0,
+          //overflow: 'auto',
+          //  overflow: 'hidden',
           // height:'100vh',
           // height: document.body.clientHeight,
           //  width: document.body.clientWidth,
@@ -126,7 +128,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
                 (layoutval: { id: string; zIndex: number }) => (
                   <div
                     key={layoutval.id}
-                    style={{ position: 'absolute', zIndex: layoutval.zIndex }}
+                    style={{ position: 'absolute', zIndex: layoutval.zIndex, marginTop: '-2px' }}
                   >
                     <GridLayout
                       key={`dd${layoutval.id}`}

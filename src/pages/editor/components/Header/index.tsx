@@ -283,7 +283,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
             <MobileOutlined />
           </Button>
         </MyPopover> */}
-        <Button
+        {/* <Button
           type="link"
           style={{ marginRight: '9px' }}
           title="清空"
@@ -291,7 +291,7 @@ const HeaderComponent = memo((props: HeaderComponentProps) => {
           disabled={!pointData.length}
         >
           <DeleteOutlined />
-        </Button>
+        </Button> */}
         <Button
           type="link"
           style={{ marginRight: '9px' }}
