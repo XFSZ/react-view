@@ -323,6 +323,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
                             // isBounded={true}
                             //useCSSTransforms = {false}
                             //synchronizeLayout={true}
+                            preventCollision={true}
                             margin={[0, 0]}
                             onDragStop={dragStop}
                             onDragStart={onDragStart}

@@ -210,12 +210,12 @@ const Container = (props: {
     });
   };
 
-  useEffect(() => {
-    if (window.innerWidth < 1024) {
-      props.history.push('/mobileTip');
-    } //待修改
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   if (window.innerWidth < 1024) {
+  //     props.history.push('/mobileTip');
+  //   } //待修改
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   useEffect(() => {
     if (pstate.curPoint && pstate.curPoint.status === 'inToCanvas') {

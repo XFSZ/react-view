@@ -88,10 +88,11 @@ const EDualAxes = (props: XEChartProps & { dispatch: Dispatch }) => {
         geometry: 'column',
         isGroup: true,
         seriesField: `${seriesFieldBar}`,
-        columnWidthRatio: 0.4,
+        columnWidthRatio: 0.2,
       },
       {
         geometry: 'line',
+        smooth: true,
         seriesField: `${seriesFieldLine}`,
         // lineStyle: ({ name }) => {
         //   if (name === 'a') {

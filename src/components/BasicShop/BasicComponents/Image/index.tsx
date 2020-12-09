@@ -71,7 +71,11 @@ const Image = memo((props: IImageConfig) => {
                 {subTitText}
               </div>
             </div>
-            <img src={imgUrl && imgUrl[0].url} alt="" style={{ width: '100%' }} />
+            <img
+              src={imgUrl && imgUrl[0].url}
+              alt=""
+              style={{ padding: 0, border: 0, marginTop: 0, width: '100%' }}
+            />
           </div>
         </div>
       )}

@@ -151,7 +151,7 @@ const EColumn = (props: XEChartProps & { dispatch: Dispatch }) => {
       {isTpl ? (
         <img src={EChartImg} alt="chart" />
       ) : (
-        <div ref={container} style={{ height: '200px' }}></div>
+        <div ref={container} style={{ height: '150px' }}></div>
       )}
     </div>
   );

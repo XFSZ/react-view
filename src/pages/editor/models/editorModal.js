@@ -66,19 +66,21 @@ export default {
     },
     copyPointData(state, { payload }) {
       const { id } = payload;
-      const pointData = [];
-      state.pointData.forEach(item => {
-        pointData.push({ ...item });
-        if (item.id === id) {
-          pointData.push({ ...item, id: uuid(6, 10) });
-        }
-      });
-      overSave('userData', pointData);
+      if (id !== '0') {
+        const pointData = [];
+        state.pointData.forEach(item => {
+          pointData.push({ ...item });
+          if (item.id === id) {
+            pointData.push({ ...item, id: uuid(6, 10) });
+          }
+        });
+        overSave('userData', pointData);
 
-      return {
-        ...state,
-        pointData,
-      };
+        return {
+          ...state,
+          pointData,
+        };
+      }
     },
     nullPointData(state) {
       const pointData = state.pointData;

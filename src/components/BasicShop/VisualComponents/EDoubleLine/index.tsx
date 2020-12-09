@@ -142,11 +142,11 @@ const EDoubleLine = (props: XEChartProps & { dispatch: Dispatch }) => {
     xField: `${xField}`,
     yField: `${yField}`,
     seriesField: `${seriesField}`,
-    padding: 'auto',
+    //  padding: 'auto',
     isStack: false,
-    appendPadding: [0, 0, 30, 0],
-    height: 200,
-    tooltip: { shared: true },
+    //  appendPadding: [0, 0, 30, 0],
+    // height: 200,
+    // tooltip: { shared: true },
     smooth: true,
     legend: { position: 'right' },
     // meta: {
@@ -163,16 +163,19 @@ const EDoubleLine = (props: XEChartProps & { dispatch: Dispatch }) => {
       grid: { line: { style: { lineDash: [4, 2], stroke: '#ddd' } } },
       tickLine: { style: { stroke: '#ddd' } },
     },
-    xAxis: false,
-    areaStyle: ({ type }) => {
-      return {
-        fill:
-          type === 'Current Month'
-            ? 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)'
-            : 'l(90) 0:#61DDAA 0.75:rgba(97,221,170,0.25) 1:rgba(255,255,255,0.2)',
-      };
-    },
-    color: ['#5B8FF9', '#61DDAA'],
+    //xAxis: false,
+    // areaStyle: ({ type }) => {
+    //   return {
+    //     fill:
+    //       type === 'Current Month'
+    //         ? 'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)'
+    //         : 'l(90) 0:#61DDAA 0.75:rgba(97,221,170,0.25) 1:rgba(255,255,255,0.2)',
+    //   };
+    // },
+    color: [
+      'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+      'l(90) 0:#61DDAA 0.75:rgba(97,221,170,0.25) 1:rgba(255,255,255,0.2)',
+    ],
     //legend: { position: 'top' },
   });
   useEffect(() => {

@@ -129,7 +129,7 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
       {isTpl ? (
         <img src={EChartImg} alt="chart" />
       ) : (
-        <div ref={container} style={{ height: '200px' }}></div>
+        <div ref={container} style={{ height: '100px' }}></div>
       )}
     </div>
   );

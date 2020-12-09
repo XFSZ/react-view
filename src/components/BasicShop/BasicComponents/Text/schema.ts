@@ -128,7 +128,7 @@ const Text: ITextSchema = {
     id: '999',
     zIndex: 2,
     text: '我是文本',
-    color: 'rgba(60,60,60,1)',
+    color: 'rgba(70,70,70,1)',
     fontSize: 18,
     align: 'center',
     lineHeight: 2,

@@ -188,34 +188,60 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
     isPercent: true,
     isStack: true,
     legend: false,
-    barWidthRatio: 0.6,
-    //marginRatio:0.1,
-    // columnStyle:{
-    //   style: {
-    //     fill: 'red',
-    //     fillOpacity: 0.5,
-    //     stroke: 'black',
-    //     lineWidth: 1,
-    //     lineDash: [4, 5],
-    //     strokeOpacity: 0.7,
-    //     shadowColor: 'black',
-    //     shadowBlur: 10,
-    //     shadowOffsetX: 5,
-    //     shadowOffsetY: 5,
-    //     cursor: 'pointer'
-    //   }
-    // },
+    barWidthRatio: 0.2,
+
     /** 自定义颜色 */
     // color: ['#2582a1', '#f88c24', '#c52125', '#87f4d0'],
-    label: {
-      position: 'middle',
-      content: item => {
-        return item.value.toFixed(2);
+    xAxis: {
+      // 格式化 x 轴标签加单位，自定义 labal 样式
+      line: {
+        lineWidth: 1,
+        stroke: 'gray',
+        opacity: 1,
       },
-      style: {
-        fill: '#fff',
+      // tickLine:null,
+      tickLine: {
+        stroke: 'gray',
+        lineWidth: 1,
+        opacity: 1,
+      },
+      grid: {
+        line: {
+          style: {
+            lineWidth: 0,
+          },
+        },
+      },
+      label: {
+        formatter: v => {
+          return v * 100 + '%';
+        },
       },
     },
+    yAxis: {
+      tickLine: null,
+      // grid: {
+      //   line: {
+      //     style: {
+      //       lineWidth: 0.5,
+      //     },
+      //   },
+      // },
+      // line: {
+      //   style: {
+      //     lineWidth: 0.5,
+      //   },
+      // },
+    },
+    // label: {
+    //   position: 'middle',
+    //   content: item => {
+    //     return (item.value * 100).toFixed(2)  ;
+    //   },
+    //   style: {
+    //     fill: '#fff',
+    //   },
+    // },
   });
   useEffect(() => {
     if (!isTpl) {
