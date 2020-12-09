@@ -27,6 +27,7 @@ export interface ILongTextConfig {
   fontSize: TNumberDefaultType;
   indent: TNumberDefaultType;
   lineHeight: TNumberDefaultType;
+  fontWeight: TNumberDefaultType;
   textAlign: TSelectDefaultType<TLongTextSelectKeyType>;
 }
 
@@ -63,6 +64,13 @@ const LongText: ILongTextSchema = {
       type: 'Number',
     },
     {
+      key: 'fontWeight',
+      name: '字体粗细',
+      type: 'Number',
+      range: [100, 900],
+      step: 100,
+    },
+    {
       key: 'indent',
       name: '首行缩进',
       type: 'Number',
@@ -95,6 +103,7 @@ const LongText: ILongTextSchema = {
     },
   ],
   config: {
+    fontWeight: 400,
     id: '999',
     zIndex: 2,
     text:
