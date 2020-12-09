@@ -88,7 +88,7 @@ const ERadar = (props: XEChartProps & { dispatch: Dispatch }) => {
   const container = useRef(null);
   const { DataView } = DataSet;
   const dataset = eval(`(${dataSet})`);
-  console.log(dataset);
+  // console.log(dataset);
   const dv = new DataView().source(dataset);
   dv.transform({
     type: 'fold',

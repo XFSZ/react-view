@@ -27,6 +27,7 @@ export interface ITextConfig {
   fontSize: TNumberDefaultType;
   align: TSelectDefaultType<TTextSelectKeyType>;
   lineHeight: TNumberDefaultType;
+  fontWeight: TNumberDefaultType;
   clickParams: TTextAreaDefaultType;
   api: TTextDefaultType;
   apiParams: TTextAreaDefaultType;
@@ -64,6 +65,13 @@ const Text: ITextSchema = {
       key: 'fontSize',
       name: '字体大小',
       type: 'Number',
+    },
+    {
+      key: 'fontWeight',
+      name: '字体粗细',
+      type: 'Number',
+      range: [100, 900],
+      step: 100,
     },
     {
       key: 'align',
@@ -116,6 +124,7 @@ const Text: ITextSchema = {
     },
   ],
   config: {
+    fontWeight: 400,
     id: '999',
     zIndex: 2,
     text: '我是文本',

@@ -188,6 +188,23 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
     isPercent: true,
     isStack: true,
     legend: false,
+    barWidthRatio: 0.6,
+    //marginRatio:0.1,
+    // columnStyle:{
+    //   style: {
+    //     fill: 'red',
+    //     fillOpacity: 0.5,
+    //     stroke: 'black',
+    //     lineWidth: 1,
+    //     lineDash: [4, 5],
+    //     strokeOpacity: 0.7,
+    //     shadowColor: 'black',
+    //     shadowBlur: 10,
+    //     shadowOffsetX: 5,
+    //     shadowOffsetY: 5,
+    //     cursor: 'pointer'
+    //   }
+    // },
     /** 自定义颜色 */
     // color: ['#2582a1', '#f88c24', '#c52125', '#87f4d0'],
     label: {

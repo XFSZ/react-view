@@ -16,6 +16,7 @@ const Text = memo((props: ITextConfig & { isTpl: boolean; dispatch: Dispatch }) 
     color,
     lineHeight,
     isTpl,
+    fontWeight,
     clickParams,
     dispatch,
     api,
@@ -58,7 +59,7 @@ const Text = memo((props: ITextConfig & { isTpl: boolean; dispatch: Dispatch }) 
         <div
           className={styles.textWrap}
           onClick={() => onClick(clickParams, dispatch)}
-          style={{ color, textAlign: align, fontSize, lineHeight }}
+          style={{ color, textAlign: align, fontSize, lineHeight, fontWeight }}
         >
           {valText}
         </div>

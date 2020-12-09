@@ -8,7 +8,8 @@ import { Dispatch } from 'umi';
 import { connect } from 'dva';
 import { StateWithHistory } from 'redux-undo';
 import DataSet from '@antv/data-set';
-import { Line } from '@antv/g2plot';
+import { Line, LineOptions } from '@antv/g2plot';
+// import { LineOption } from '@antv/g2/lib/interface';
 
 //import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
 interface XEChartProps extends IEChartConfig {
@@ -181,21 +182,36 @@ const EMultiLine = (props: XEChartProps & { dispatch: Dispatch }) => {
     yField: `${yField}`,
     seriesField: `${seriesField}`,
     legend: { position: 'right' },
-    yAxis: {
-      label: {
-        // 数值格式化为千分位
-        formatter: v => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, s => `${s},`),
-      },
-    },
-    color: ['#1979C9', '#D62A0D', '#FAA219'],
+    // yAxis: {
+    //   label: {
+    //     // 数值格式化为千分位
+    //     formatter: v => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, s => `${s},`),
+    //   },
+    // },
+    //color: ['#1979C9', '#D62A0D', '#FAA219'],
   });
   useEffect(() => {
     if (!isTpl) {
-      const chart = new Line(container.current || '', option);
+      const chart = new Line(container.current || '', option as LineOptions);
       chart.render();
       // background:{fill:'#1a212b'},
       // width:500,
+      /*
+// element 添加点击事件
+chart.on('element:click', (e) => {
+  console.log(e);
+});
 
+// annotation 添加点击事件
+chart.on('annotation:click', (e) => {
+  console.log(e);
+});
+
+// axis-label 添加点击事件
+chart.on('axis-label:click', (e) => {
+  console.log(e);
+});
+*/
       if (timer >= 1) {
         console.log('timer : ', timer);
         if (api !== '') {
