@@ -42,10 +42,15 @@ function BasicLayout(props) {
   const [loading, setLoading] = React.useState(true);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get('http://192.168.1.5:3000/getdata');
+      const result = await axios('http://192.168.1.5:3000/getdata');
       // console.log('response : ', result.data);
       // setUserProps(result.data);
       localStorage.setItem('userData', JSON.stringify(result.data));
+      const previewdata = result.data.map(item => ({
+        ...item,
+        point: { ...item.point, isDraggable: false, static: true, isResizable: false },
+      }));
+      localStorage.setItem('userPreviewData', JSON.stringify(previewdata));
       setLoading(false);
     };
     fetchData();

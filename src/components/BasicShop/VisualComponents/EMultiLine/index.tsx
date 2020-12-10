@@ -182,6 +182,24 @@ const EMultiLine = (props: XEChartProps & { dispatch: Dispatch }) => {
     yField: `${yField}`,
     seriesField: `${seriesField}`,
     legend: { position: 'right' },
+    yAxis: {
+      tickLine: null,
+      line: {
+        lineWidth: 1,
+        style: { opacity: 0.5, stroke: '#ddd' },
+        // opacity: 1,
+      },
+      grid: { line: { style: { opacity: 0.5, stroke: '#ddd' } } },
+      // tickLine: { style: { stroke: '#ddd' } },
+    },
+    xAxis: {
+      tickLine: null,
+      line: {
+        lineWidth: 1,
+        style: { opacity: 0.5, stroke: '#ddd' },
+        // opacity: 1,
+      },
+    },
     // yAxis: {
     //   label: {
     //     // 数值格式化为千分位
@@ -258,7 +276,7 @@ chart.on('axis-label:click', (e) => {
       {isTpl ? (
         <img src={EChartImg} alt="dooring chart" />
       ) : (
-        <div ref={container} style={{ height: '200px' }}></div>
+        <div ref={container} style={{ height: '240px' }}></div>
       )}
     </div>
   );

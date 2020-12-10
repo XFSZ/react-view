@@ -32,7 +32,6 @@ export default {
     },
     modPointData(state: any, { payload }: any) {
       const { id } = payload;
-      console.log(' preview click ');
       const pointData = state.pointData.map((item: any) => {
         if (item.id === id) {
           return payload;

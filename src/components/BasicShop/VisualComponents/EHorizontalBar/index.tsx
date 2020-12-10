@@ -247,6 +247,7 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
     if (!isTpl) {
       const chart = new Bar(container.current || '', option as BarOptions);
       chart.render();
+
       if (timer >= 1) {
         if (api !== '') {
           let params = {};
@@ -256,9 +257,6 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
           const timerInterval = setInterval(() => {
             axios.get(api, { params }).then(function(response) {
               console.log('response : ', response);
-              //const yAxis =   response.data[yAxis]
-              // const seriesA = response.data[seriesA]
-              // const seriesB =  response.data[seriesB]
               // console.log('test : ', response.data[yField]);
               //setOption({...option,data:response.data})
             });
