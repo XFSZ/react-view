@@ -334,9 +334,7 @@ const EMultiLine2 = (props: XEChartProps & { dispatch: Dispatch }) => {
       // width:500,
 
       if (timer >= 1) {
-        //    console.log('timer : ', timer);
         if (api !== '') {
-          //      console.log('api : ', api);
           let params = {};
           if (apiParams !== '') {
             params = JSON.parse(apiParams);
@@ -345,16 +343,12 @@ const EMultiLine2 = (props: XEChartProps & { dispatch: Dispatch }) => {
             axios.get(api, { params }).then(function(response) {
               console.log('response : ', response);
               //const yAxis =   response.data[yAxis]
-              // const seriesA = response.data[seriesA]
-              // const seriesB =  response.data[seriesB]
               console.log('test : ', response.data[yAxis]);
             });
           }, timer * 1000);
           return () => clearInterval(timerInterval);
         }
       } else {
-        //    console.log('timer : ', timer);
-
         return;
       }
     }

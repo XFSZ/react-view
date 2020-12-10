@@ -28,9 +28,7 @@ const Text = memo((props: ITextConfig & { isTpl: boolean; dispatch: Dispatch }) 
   useEffect(() => {
     if (!isTpl) {
       if (timer >= 1) {
-        console.log('timer : ', timer);
         if (api !== '') {
-          console.log('api : ', api);
           let params = {};
           if (apiParams !== '') {
             params = JSON.parse(apiParams);
@@ -44,7 +42,6 @@ const Text = memo((props: ITextConfig & { isTpl: boolean; dispatch: Dispatch }) 
           return () => clearInterval(timerInterval);
         }
       } else {
-        console.log('timer : ', timer);
         return;
       }
     }
