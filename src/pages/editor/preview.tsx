@@ -28,7 +28,7 @@ interface PreviewPageProps {
 
 const PreviewPage = memo((props: PreviewPageProps) => {
   const { pstate } = props;
-  console.log('perview : ', pstate);
+  // console.log('perview : ', pstate);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (pstate.pointData.length < 1) {
@@ -47,7 +47,12 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     setLoading(false);
   }, []);
   let pointData: any = pstate.pointData || [];
-  console.log('perview : ', pointData);
+
+  let fireFoxHeight: any = document.body.clientHeight;
+  try {
+    fireFoxHeight = pointData[0].item.config.height - 1;
+  } catch (e) {}
+
   const ref = useRef<HTMLDivElement>(null);
   const refImgDom = useRef<HTMLDivElement>(null);
 
@@ -74,8 +79,9 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     <div
       ref={ref}
       style={{
-        display: 'flex',
+        // display: 'flex',
         margin: 0,
+        padding: 0,
         position: 'relative',
         overflow: 'hidden',
         // height:'100vh',
@@ -83,7 +89,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         //  width: document.body.clientWidth,
         // overflow: 'auto',
         width: pointData[0].item.config.width,
-        height: pointData[0].item.config.height,
+        height: fireFoxHeight,
       }}
     >
       <div ref={refImgDom}>

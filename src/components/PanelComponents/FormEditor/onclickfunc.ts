@@ -19,24 +19,29 @@ const onClick = (clickParams: string, dispatch: Dispatch) => {
           }
           const keys = Object.keys(clickParamsData[i].config); //获取所有修改的值
           keys.map(val => (modifyData.item.config[val] = clickParamsData[i].config[val]));
-          dispatch({
-            type: 'editorModal/modPointData',
-            payload: {
-              id: modifyData.id,
-              item: modifyData.item,
-              point: modifyData.point,
-              status: 'inToCanvas',
-            },
-          });
-          dispatch({
-            type: 'previewModal/modPointData',
-            payload: {
-              id: modifyData.id,
-              item: modifyData.item,
-              point: modifyData.point,
-              status: 'inToCanvas',
-            },
-          });
+
+          try {
+            dispatch({
+              type: 'editorModal/modPointData',
+              payload: {
+                id: modifyData.id,
+                item: modifyData.item,
+                point: modifyData.point,
+                status: 'inToCanvas',
+              },
+            });
+          } catch (e) {}
+          try {
+            dispatch({
+              type: 'previewModal/modPointData',
+              payload: {
+                id: modifyData.id,
+                item: modifyData.item,
+                point: modifyData.point,
+                status: 'inToCanvas',
+              },
+            });
+          } catch (e) {}
         }
       }
     }
