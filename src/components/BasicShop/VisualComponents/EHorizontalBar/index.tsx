@@ -10,7 +10,7 @@ import { StateWithHistory } from 'redux-undo';
 import DataSet from '@antv/data-set';
 import { Bar, BarOptions } from '@antv/g2plot';
 
-//import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
+import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
 interface XEChartProps extends IEChartConfig {
   isTpl: boolean;
 }
@@ -141,7 +141,8 @@ const EHorizontalBar = (props: XEChartProps & { dispatch: Dispatch }) => {
       const chart = new Bar(container.current || '', option as BarOptions);
       chart.render();
       chart.on('element:click', (e: any) => {
-        console.log(e);
+        onClick(clickParams, dispatch);
+        // console.log(e);
       });
       if (timer >= 1) {
         if (api !== '') {

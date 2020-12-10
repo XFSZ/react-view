@@ -71,7 +71,12 @@ export default {
         state.pointData.forEach(item => {
           pointData.push({ ...item });
           if (item.id === id) {
-            pointData.push({ ...item, id: uuid(6, 10) });
+            let uid = uuid(6, 10);
+            pointData.push({
+              ...item,
+              id: uid,
+              item: { ...item.item, config: { ...item.item.config, id: uid } },
+            });
           }
         });
         overSave('userData', pointData);

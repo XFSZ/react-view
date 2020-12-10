@@ -173,8 +173,8 @@ const EDoubleLine = (props: XEChartProps & { dispatch: Dispatch }) => {
     //   };
     // },
     color: [
-      'l(90) 0:#5B8FF9 0.75:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
-      'l(90) 0:#61DDAA 0.75:rgba(97,221,170,0.25) 1:rgba(255,255,255,0.2)',
+      'l(90) 0:#5B8FF9 0.4:rgba(91,143,249,0.25) 1:rgba(255,255,255,0.2)',
+      'l(90) 0:#61DDAA 0.4:rgba(97,221,170,0.25) 1:rgba(255,255,255,0.2)',
     ],
     //legend: { position: 'top' },
   });
