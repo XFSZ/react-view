@@ -149,6 +149,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
                             data-grid={value.point}
                             style={{
                               visibility: renderval(value) === 1 ? 'visible' : 'hidden',
+                              marginTop: '-4px',
                             }}
                           >
                             <DynamicEngine {...value.item} />
