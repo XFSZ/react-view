@@ -23,7 +23,7 @@ const Home = () => {
     if (type === 'H5') {
       history.push('/editor?tid=1');
     } else if (type === 'Preview') {
-      history.push('/preview');
+      history.push('/preview?tid=1');
       //  message.error('该功能暂未开放, 敬请关注...');
     } else {
       history.push('/ide');

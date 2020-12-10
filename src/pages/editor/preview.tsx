@@ -32,7 +32,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
   useEffect(() => {
     if (pstate.pointData.length < 1) {
       const fetchData = async () => {
-        const result = await axios('http://192.168.1.5:3000/getdata');
+        const result = await axios('http://127.0.0.1:3000/getdata');
         const previewdata = result.data.map(item => ({
           ...item,
           point: { ...item.point, isDraggable: false, static: true, isResizable: false },
