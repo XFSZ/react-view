@@ -43,8 +43,9 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         window.location.reload();
       };
       fetchData();
+    } else {
+      setLoading(false);
     }
-    setLoading(false);
   }, []);
   let pointData: any = pstate.pointData || [];
 
