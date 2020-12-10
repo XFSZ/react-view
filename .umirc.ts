@@ -2,11 +2,13 @@ import path from 'path';
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  targets: {
-    // chrome:56,
-    firefox: 51,
-    // opera:43,
-  },
+  // targets: {
+  //   // chrome:56,
+  //   firefox: 51,
+  //   // opera:43,
+  // },
+  // ssr: {},
+  exportStatic: {},
   dynamicImport: {
     loading: '@/components/LoadingCp',
   },
@@ -25,7 +27,7 @@ export default defineConfig({
     {
       exact: false,
       path: '/',
-      // component: '@/layouts/index',
+      //component: '@/layouts/index',
       routes: [
         {
           path: '/',

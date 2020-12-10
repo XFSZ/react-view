@@ -28,6 +28,7 @@ interface PreviewPageProps {
 
 const PreviewPage = memo((props: PreviewPageProps) => {
   const { pstate } = props;
+  console.log('perview : ', pstate);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     if (pstate.pointData.length < 1) {
@@ -46,7 +47,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     setLoading(false);
   }, []);
   let pointData: any = pstate.pointData || [];
-
+  console.log('perview : ', pointData);
   const ref = useRef<HTMLDivElement>(null);
   const refImgDom = useRef<HTMLDivElement>(null);
 
