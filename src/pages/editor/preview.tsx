@@ -34,6 +34,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     if (pstate.pointData.length < 1) {
       const fetchData = async () => {
         const result = await axios('http://127.0.0.1:3000/getdata');
+        localStorage.setItem('userData', JSON.stringify(result.data));
         const previewdata = result.data.map(item => ({
           ...item,
           point: { ...item.point, isDraggable: false, static: true, isResizable: false },
@@ -48,9 +49,11 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     }
   }, []);
   let pointData: any = pstate.pointData || [];
-
+  //  console.log("preview : ",pointData)
   let fireFoxHeight: any = document.body.clientHeight;
+  let fireFoxWidth: any = document.body.clientWidth;
   try {
+    fireFoxWidth = pointData[0].item.config.width;
     fireFoxHeight = pointData[0].item.config.height - 1;
   } catch (e) {}
 
@@ -89,7 +92,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         // height: document.body.clientHeight,
         //  width: document.body.clientWidth,
         // overflow: 'auto',
-        width: pointData[0].item.config.width,
+        width: fireFoxWidth,
         height: fireFoxHeight,
       }}
     >

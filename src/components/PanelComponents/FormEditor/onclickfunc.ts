@@ -32,12 +32,21 @@ const onClick = (clickParams: string, dispatch: Dispatch) => {
             });
           } catch (e) {}
           try {
+            // const previewdata = modifyData.map(item => ({
+            //   ...item,
+            //   point: { ...item.point, isDraggable: false, static: true, isResizable: false },
+            // }));
+
+            const previewdata = {
+              point: { ...modifyData.point, isDraggable: false, static: true, isResizable: false },
+            };
+            //    console.log("previewdata : ",previewdata)
             dispatch({
               type: 'previewModal/modPointData',
               payload: {
                 id: modifyData.id,
                 item: modifyData.item,
-                point: modifyData.point,
+                point: previewdata,
                 status: 'inToCanvas',
               },
             });
