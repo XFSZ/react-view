@@ -42,7 +42,7 @@ function BasicLayout(props) {
   const [loading, setLoading] = React.useState(true);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios('http://192.168.1.5:3000/getdata');
+      const result = await axios('/api/getdata');
       // console.log('response : ', result.data);
       // setUserProps(result.data);
       localStorage.setItem('userData', JSON.stringify(result.data));

@@ -106,6 +106,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   });
 
   const dragStop: ItemCallback = useMemo(() => {
+    console.log('dragStop');
     return (layout, oldItem, newItem, placeholder, e, element) => {
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       // console.log('curPointData : ', curPointData);
@@ -131,7 +132,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
 
   const onDragStart: ItemCallback = useMemo(() => {
     return (layout, oldItem, newItem, placeholder, e, element) => {
-      // console.log(newItem)
+      console.log('onDragStart');
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({
         type: 'editorModal/modPointData',
@@ -154,6 +155,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   }, [dispatch, pointData]);
 
   const onResizeStop: ItemCallback = useMemo(() => {
+    console.log('onResizeStop');
     return (layout, oldItem, newItem, placeholder, e, element) => {
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({
@@ -290,8 +292,8 @@ const SourceBox = memo((props: SourceBoxProps) => {
               style={{
                 transform: `scale(${scaleNum})`,
                 position: 'relative',
-                width: '50%',
-                height: '50%',
+                width: '100%',
+                height: '100%',
               }}
             >
               <div
@@ -322,6 +324,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
                             //autoSize={true}
                             // rowHeight={canvasRect[1] || 2}
                             // isBounded={true}
+                            // useCSSTransforms={true}
                             //useCSSTransforms = {false}
                             //synchronizeLayout={true}
                             preventCollision={true}

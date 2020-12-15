@@ -400,6 +400,7 @@ const Container = (props: {
   });
 
   const mousedownfn = useMemo(() => {
+    console.log('mousedownfn');
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === containerRef.current) {
         setDiffMove({
@@ -414,6 +415,7 @@ const Container = (props: {
   }, []);
 
   const mousemovefn = useMemo(() => {
+    console.log('mousemovefn');
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (diffmove.move) {
         let diffx: number;
@@ -440,6 +442,7 @@ const Container = (props: {
   }, [diffmove.move, diffmove.start.x, diffmove.start.y]);
 
   const mouseupfn = useMemo(() => {
+    console.log('mouseupfn');
     return () => {
       setDiffMove({
         start: { x: 0, y: 0 },

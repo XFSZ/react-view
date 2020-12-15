@@ -71,4 +71,11 @@ export default defineConfig({
     utils: path.resolve(__dirname, 'src/utils/'),
     assets: path.resolve(__dirname, 'src/assets/'),
   },
+  proxy: {
+    '/api': {
+      target: 'http://127.0.0.1:3000/',
+      changeOrigin: true,
+      //'pathRewrite': { '^/api' : '' },
+    },
+  },
 });
