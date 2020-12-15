@@ -107,7 +107,9 @@ const SourceBox = memo((props: SourceBoxProps) => {
 
   const dragStop: ItemCallback = useMemo(() => {
     console.log('dragStop');
+
     return (layout, oldItem, newItem, placeholder, e, element) => {
+      console.log('dragStopelement : ', element);
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       // console.log('curPointData : ', curPointData);
       dispatch({
@@ -133,6 +135,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   const onDragStart: ItemCallback = useMemo(() => {
     return (layout, oldItem, newItem, placeholder, e, element) => {
       console.log('onDragStart');
+      console.log('onDragStartelement : ', element);
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({
         type: 'editorModal/modPointData',
@@ -327,6 +330,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
                             // useCSSTransforms={true}
                             //useCSSTransforms = {false}
                             //synchronizeLayout={true}
+                            transformScale={scaleNum}
                             preventCollision={true}
                             margin={[0, 0]}
                             onDragStop={dragStop}
