@@ -123,7 +123,7 @@ export default {
     *queryData(_: any, { call, put, select }) {
       const puzzle = yield localForage.getItem('userPreviewData');
       yield put({ type: 'initState', payload: JSON.parse(puzzle) });
-      yield console.log(puzzle);
+      //  yield console.log(puzzle);
     },
   },
   subscriptions: {

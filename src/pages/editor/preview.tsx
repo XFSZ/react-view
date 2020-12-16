@@ -17,8 +17,9 @@ import { useGetScrollBarWidth } from '@/utils/tool';
 import { LocationDescriptorObject } from 'history-with-query';
 import { connect } from 'dva';
 import { StateWithHistory } from 'redux-undo';
+import localForage from 'localforage';
 const isMac = navigator.platform.indexOf('Mac') === 0;
-
+localForage.setDriver(localForage.INDEXEDDB);
 interface PreviewPageProps {
   location: LocationDescriptorObject;
   dispatch?: any;
@@ -35,13 +36,21 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     if (pstate.pointData.length < 1) {
       const fetchData = async () => {
         const result = await axios('/api/getdata');
-        localStorage.setItem('userData', JSON.stringify(result.data));
-        const previewdata = result.data.map(item => ({
-          ...item,
-          point: { ...item.point, isDraggable: false, static: true, isResizable: false },
-        }));
-        localStorage.setItem('userPreviewData', JSON.stringify(previewdata));
-        setLoading(false);
+        localForage.setItem('userData', JSON.stringify(result.data)).then(() => {
+          const previewdata = result.data.map(item => ({
+            ...item,
+            point: { ...item.point, isDraggable: false, static: true, isResizable: false },
+          }));
+          localForage.setItem('userPreviewData', JSON.stringify(previewdata)).then(() => {
+            console.log('1', pstate.pointData);
+            if (pstate.pointData.length === 0) {
+              dispatch({
+                type: 'previewModal/queryData',
+              });
+            }
+            setLoading(false);
+          });
+        });
         // window.location.reload();
       };
       fetchData();
@@ -50,14 +59,10 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     }
   }, []);
   let pointData: any = pstate.pointData || [];
-  useEffect(() => {
-    console.log('1', pstate.pointData);
-    if (pstate.pointData.length === 0) {
-      dispatch({
-        type: 'previewModal/queryData',
-      });
-    }
-  });
+  // useEffect(() => {
+  //
+
+  //});
   //  console.log("preview : ",pointData)
   let fireFoxHeight: any = document.body.clientHeight;
   let fireFoxWidth: any = document.body.clientWidth;
