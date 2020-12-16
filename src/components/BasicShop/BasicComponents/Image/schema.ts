@@ -191,7 +191,7 @@ const Image: IImageSchema = {
         uid: '001',
         name: 'image.png',
         status: 'done',
-        url: '/xiao2.png',
+        url: 'http://127.0.0.1:3000/xiao2.png',
       },
     ],
     round: 0,

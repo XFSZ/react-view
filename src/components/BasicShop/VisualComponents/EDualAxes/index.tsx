@@ -8,7 +8,7 @@ import { Dispatch } from 'umi';
 import { connect } from 'dva';
 import { StateWithHistory } from 'redux-undo';
 import DataSet from '@antv/data-set';
-import { DualAxes } from '@antv/g2plot';
+import { DualAxes, DualAxesOptions } from '@antv/g2plot';
 
 //import onClick from '@/components/PanelComponents/FormEditor/onClickFunc';
 interface XEChartProps extends IEChartConfig {
@@ -110,7 +110,7 @@ const EDualAxes = (props: XEChartProps & { dispatch: Dispatch }) => {
   });
   useEffect(() => {
     if (!isTpl) {
-      const chart = new DualAxes(container.current || '', option);
+      const chart = new DualAxes(container.current || '', (option as unknown) as DualAxesOptions);
       chart.render();
       // background:{fill:'#1a212b'},
       // width:500,

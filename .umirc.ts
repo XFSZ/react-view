@@ -7,8 +7,8 @@ export default defineConfig({
   //   firefox: 51,
   //   // opera:43,
   // },
-  // ssr: {},
-  exportStatic: {},
+  // ssr: {}, // 服务端渲染
+  exportStatic: {}, //每个路由都会有一个对应 html
   dynamicImport: {
     loading: '@/components/LoadingCp',
   },

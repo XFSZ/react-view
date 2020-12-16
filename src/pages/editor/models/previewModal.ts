@@ -7,19 +7,35 @@
  * @LastEditTime: 2020-10-08 16:12:26
  */
 import { uuid } from '@/utils/tool';
-const pointData = localStorage.getItem('userPreviewData') || '[]';
+import localForage from 'localforage';
+localForage.setDriver(localForage.INDEXEDDB);
+// localForage.config({
+//   driver: localForage.INDEXEDDB,
+//   name: 'userPreviewData'
+// });
 
+// const pointData = localStorage.getItem('userPreviewData') || '[]';
+//const pointData =  localForage.getItem('userPreviewData').then( result =>{ return result as unknown as string}) ? '[]' : '[]';
+
+// function overSave(name: string, data: any) {
+//   localStorage.setItem(name, JSON.stringify(data));
+// }
 function overSave(name: string, data: any) {
-  localStorage.setItem(name, JSON.stringify(data));
+  localForage.setItem(name, JSON.stringify(data));
 }
-
 export default {
   namespace: 'previewModal',
   state: {
-    pointData: JSON.parse(pointData),
+    pointData: [],
     curPoint: null,
   },
   reducers: {
+    initState(state, { payload }) {
+      return {
+        ...state,
+        pointData: payload,
+      };
+    },
     addPointData(state: any, { payload }: any) {
       let pointData = [...state.pointData, payload];
 
@@ -103,7 +119,13 @@ export default {
       };
     },
   },
-  effects: {},
+  effects: {
+    *queryData(_: any, { call, put, select }) {
+      const puzzle = yield localForage.getItem('userPreviewData');
+      yield put({ type: 'initState', payload: JSON.parse(puzzle) });
+      yield console.log(puzzle);
+    },
+  },
   subscriptions: {
     setup({ dispatch, history }) {
       return history.listen(({ pathname, query }) => {});

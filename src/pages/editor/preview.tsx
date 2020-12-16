@@ -21,13 +21,14 @@ const isMac = navigator.platform.indexOf('Mac') === 0;
 
 interface PreviewPageProps {
   location: LocationDescriptorObject;
+  dispatch?: any;
   pstate: {
     pointData: { id: string; item: any; point: any; isMenu?: any; visibility: string }[];
   };
 }
 
 const PreviewPage = memo((props: PreviewPageProps) => {
-  const { pstate } = props;
+  const { pstate, dispatch } = props;
   // console.log('perview : ', pstate);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -41,7 +42,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
         }));
         localStorage.setItem('userPreviewData', JSON.stringify(previewdata));
         setLoading(false);
-        window.location.reload();
+        // window.location.reload();
       };
       fetchData();
     } else {
@@ -49,6 +50,14 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     }
   }, []);
   let pointData: any = pstate.pointData || [];
+  useEffect(() => {
+    console.log('1', pstate.pointData);
+    if (pstate.pointData.length === 0) {
+      dispatch({
+        type: 'previewModal/queryData',
+      });
+    }
+  });
   //  console.log("preview : ",pointData)
   let fireFoxHeight: any = document.body.clientHeight;
   let fireFoxWidth: any = document.body.clientWidth;
