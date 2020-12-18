@@ -64,6 +64,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
         cellHeight = 2,
         w = item.type === 'Icon' ? 3 : col;
       w = 600;
+      let h = item.h;
       // 转换成网格规则的坐标和大小
       let gridY = Math.ceil(y / cellHeight);
       //  let gridY = pointEnd!.y;
@@ -75,7 +76,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
           payload: {
             id: uid,
             item: itemNew,
-            point: { i: `x-${pointData.length}`, x: 0, y: gridY, w, h: item.h, isBounded: true },
+            point: { i: `x-${pointData.length}`, x: 0, y: gridY, w, h: h, isBounded: true },
             status: 'inToCanvas',
           },
         });
@@ -321,18 +322,18 @@ const SourceBox = memo((props: SourceBoxProps) => {
                             key={`dd${layoutval.id}`}
                             className={styles.layout}
                             cols={9999}
-                            autoSize={true}
+                            // autoSize={true}
                             rowHeight={2}
                             compactType={null}
                             width={canvasRect[0] || 0}
                             //autoSize={true}
                             // rowHeight={canvasRect[1] || 2}
                             // isBounded={true}
-                            useCSSTransforms={true}
+                            // useCSSTransforms={true}
                             // useCSSTransforms = {false}
                             //synchronizeLayout={true}
                             transformScale={scaleNum}
-                            preventCollision={true}
+                            // preventCollision={true}
                             margin={[0, 0]}
                             onDragStop={dragStop}
                             onDragStart={onDragStart}
