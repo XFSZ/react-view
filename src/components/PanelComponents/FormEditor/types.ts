@@ -14,6 +14,24 @@ export type TUploadDefaultType = Array<{
   url: string;
 }>;
 /////////////////
+
+////////////////////
+export interface IImgUploadConfigType {
+  key: string;
+  name: string;
+  type: 'ImgUpload';
+  isCrop?: boolean;
+  cropRate?: number;
+}
+
+export type TImgUploadDefaultType = Array<{
+  uid: string;
+  name: string;
+  status: string;
+  url: string;
+}>;
+/////////////////
+
 export interface ITextConfigType {
   key: string;
   name: string;

@@ -1,6 +1,7 @@
 import React, { memo, RefObject, useEffect } from 'react';
 import { Form, Select, InputNumber, Input, Switch, Radio, Button } from 'antd';
 import Upload from '../Upload';
+import ImgUpload from '../ImgUpload';
 import DataList from '../DataList';
 import MutiText from '../MutiText';
 import Color from '../Color';
@@ -69,7 +70,7 @@ const FormEditor = (props: FormEditorProps) => {
           <React.Fragment key={i}>
             {item.type === 'Number' && (
               <Form.Item label={item.name} name={item.key}>
-                <InputNumber style={{width:'64px'}}   max={item.range && item.range[1]} />
+                <InputNumber style={{ width: '64px' }} max={item.range && item.range[1]} />
               </Form.Item>
             )}
             {item.type === 'Text' && (
@@ -94,7 +95,7 @@ const FormEditor = (props: FormEditorProps) => {
             )}
             {item.type === 'LayerList' && (
               <Form.Item label={item.name} name={item.key}>
-                <LayerList  />
+                <LayerList />
               </Form.Item>
             )}
             {item.type === 'Color' && (
@@ -142,6 +143,16 @@ const FormEditor = (props: FormEditorProps) => {
                 getValueFromEvent={normFile}
               >
                 <Upload cropRate={item.cropRate} isCrop={item.isCrop} />
+              </Form.Item>
+            )}
+            {item.type === 'ImgUpload' && (
+              <Form.Item
+                label={item.name}
+                name={item.key}
+                valuePropName="fileList"
+                getValueFromEvent={normFile}
+              >
+                <ImgUpload cropRate={item.cropRate} isCrop={item.isCrop} />
               </Form.Item>
             )}
             {item.type === 'CardPicker' && (

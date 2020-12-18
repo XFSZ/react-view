@@ -1,8 +1,8 @@
 import {
   INumberConfigType,
-  IUploadConfigType,
+  IImgUploadConfigType,
   TNumberDefaultType,
-  TUploadDefaultType,
+  TImgUploadDefaultType,
   IColorConfigType,
   TColorDefaultType,
   ISelectConfigType,
@@ -18,7 +18,7 @@ export type TTextSelectKeyType = 'left' | 'right' | 'center';
 export type TTextWeightSelectKeyType = '300' | '400' | '500' | '600';
 
 export type TImageEditData = Array<
-  | IUploadConfigType
+  | IImgUploadConfigType
   | INumberConfigType
   | IPosConfigType
   | ISelectConfigType<TTextSelectKeyType | TTextWeightSelectKeyType>
@@ -39,8 +39,8 @@ export interface IImageConfig extends ICommonBaseType {
   subTitColor: TColorDefaultType;
   subTitFontSize: TNumberDefaultType;
   subTitFontWeight: TSelectDefaultType<TTextWeightSelectKeyType>;
-  //imgUrl: TUploadDefaultType;
-  imgUrl: TTextDefaultType;
+  imgUrl: TImgUploadDefaultType;
+  // imgUrl: TTextDefaultType;
   round: TNumberDefaultType;
 }
 
@@ -165,7 +165,7 @@ const SelfImage: IImageSchema = {
     {
       key: 'imgUrl',
       name: '上传图片',
-      type: 'Text',
+      type: 'ImgUpload',
     },
     {
       key: 'round',
@@ -186,8 +186,16 @@ const SelfImage: IImageSchema = {
     subTitFontSize: 16,
     subTitColor: 'rgba(0,0,0,1)',
     subTitFontWeight: '400',
-    imgUrl:
-      'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1509338037,86396524&fm=26&gp=0.jpg',
+    //    imgUrl: 'http://127.0.0.1:3000/xiao2.png',
+    imgUrl: [
+      {
+        uid: '001',
+        name: 'image.png',
+        status: 'done',
+        url: 'http://127.0.0.1:3000/xiao2.png',
+      },
+    ],
+
     round: 0,
     ...baseDefault,
   },

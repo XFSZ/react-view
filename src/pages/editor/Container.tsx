@@ -36,18 +36,11 @@ const Container = (props: {
   cstate?: any;
   dispatch?: any;
 }) => {
-  // const userViewDatas = useContext(userViewData)
-  // console.log("userdata",userViewDatas);
   const [scaleNum, setScale] = useState(1);
   const [collapsed, setCollapsed] = useState(false);
   const [rightColla, setRightColla] = useState(true);
   const { pstate, cstate, dispatch } = props;
   const pointData = pstate ? pstate.pointData : [];
-
-  // useEffect(() => {
-  //  console.log("1",pstate.pointData.length)
-
-  //},[]);
   const cpointData = cstate ? cstate.pointData : [];
 
   const changeCollapse = useMemo(() => {
@@ -93,30 +86,6 @@ const Container = (props: {
   // 指定画布的id
   let canvasId = 'js_canvas';
 
-  // const [panelItem, setPanleItem] = useState({
-  //   type: 'Panel',
-  //   config: schemaH5['Panel' as keyof typeof schemaH5].config,
-  //   h: '0px',
-  //   editableEl: schemaH5['Panel' as keyof typeof schemaH5].editData,
-  //   category: 'basePanel',
-  //   x: 0,
-  //   w: '0px',
-  // });
-
-  // useEffect(() => {
-  //   if (pstate.pointData.length === 0) {
-  //     // pstate.pointData = []
-  //     dispatch({
-  //       type: 'editorModal/addPointData',
-  //       payload: {
-  //         id: '0',
-  //         item: panelItem,
-  //         point: { i: `x-${0}`, x: 0, y: 0, w: 1, h: 1, isBounded: true },
-  //         status: 'initCanvas',
-  //       },
-  //     });
-  //   }
-  // });
   const backSize = () => {
     setScale(1);
     setDragState({ x: 0, y: 0 });
@@ -392,7 +361,6 @@ const Container = (props: {
       );
     }
   }, [canvasId, collapsed, generateHeader, graphTpl, schemaH5, template]);
-  // }, [canvasId, collapsed, generateHeader, graphTpl, mediaTpl, schemaH5, template]);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [diffmove, setDiffMove] = useState({
@@ -401,7 +369,6 @@ const Container = (props: {
   });
 
   const mousedownfn = useMemo(() => {
-    // console.log('mousedownfn');
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === containerRef.current) {
         setDiffMove({
@@ -416,7 +383,6 @@ const Container = (props: {
   }, []);
 
   const mousemovefn = useMemo(() => {
-    // console.log('mousemovefn');
     return (e: React.MouseEvent<HTMLDivElement>) => {
       if (diffmove.move) {
         let diffx: number;
@@ -443,7 +409,6 @@ const Container = (props: {
   }, [diffmove.move, diffmove.start.x, diffmove.start.y]);
 
   const mouseupfn = useMemo(() => {
-    //console.log('mouseupfn');
     return () => {
       setDiffMove({
         start: { x: 0, y: 0 },

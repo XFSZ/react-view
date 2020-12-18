@@ -12,9 +12,9 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/components/LoadingCp',
   },
-  dva: {
-    immer: true,
-  },
+  // dva: {
+  //   immer: true,
+  // },
   devtool: 'source-map',
   antd: {},
   title: '大屏系统',
@@ -73,6 +73,11 @@ export default defineConfig({
   },
   proxy: {
     '/api': {
+      target: 'http://127.0.0.1:3000/',
+      changeOrigin: true,
+      //'pathRewrite': { '^/api' : '' },
+    },
+    '/uploadFile': {
       target: 'http://127.0.0.1:3000/',
       changeOrigin: true,
       //'pathRewrite': { '^/api' : '' },
