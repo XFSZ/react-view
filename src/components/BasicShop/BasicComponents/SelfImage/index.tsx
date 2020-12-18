@@ -74,7 +74,7 @@ const SelfImage = memo((props: IImageConfig) => {
             <img
               src={imgUrl && imgUrl[0].url}
               alt=""
-              style={{ padding: 0, border: 0, marginTop: 0, width: '100%' }}
+              style={{ padding: 0, border: 0, marginTop: 0, width: '100%', height: '100%' }}
             />
             {/* <img src={imgUrl} alt="" style={{ width: '100%' }} /> */}
           </div>

@@ -38,7 +38,6 @@ export default {
     },
     modPointData(state, { payload }) {
       const { id } = payload;
-
       const pointData = state.pointData.map(item => {
         if (item.id === id) {
           return payload;

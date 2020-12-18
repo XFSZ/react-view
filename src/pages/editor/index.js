@@ -22,6 +22,9 @@ function BasicLayout(props) {
           dispatch({
             type: 'editorModal/queryData',
           });
+          dispatch({
+            type: 'previewModal/queryData',
+          });
         }
         const previewdata = result.data.map(item => ({
           ...item,

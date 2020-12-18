@@ -12,9 +12,9 @@ export default defineConfig({
   dynamicImport: {
     loading: '@/components/LoadingCp',
   },
-  // dva: {
-  //   immer: true,
-  // },
+  dva: {
+    immer: true,
+  },
   devtool: 'source-map',
   antd: {},
   title: '大屏系统',

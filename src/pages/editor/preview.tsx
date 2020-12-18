@@ -47,6 +47,9 @@ const PreviewPage = memo((props: PreviewPageProps) => {
               dispatch({
                 type: 'previewModal/queryData',
               });
+              dispatch({
+                type: 'editorModal/queryData',
+              });
             }
             setLoading(false);
           });

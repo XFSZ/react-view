@@ -321,14 +321,15 @@ const SourceBox = memo((props: SourceBoxProps) => {
                             key={`dd${layoutval.id}`}
                             className={styles.layout}
                             cols={9999}
+                            autoSize={true}
                             rowHeight={2}
                             compactType={null}
                             width={canvasRect[0] || 0}
                             //autoSize={true}
                             // rowHeight={canvasRect[1] || 2}
                             // isBounded={true}
-                            // useCSSTransforms={true}
-                            //useCSSTransforms = {false}
+                            useCSSTransforms={true}
+                            // useCSSTransforms = {false}
                             //synchronizeLayout={true}
                             transformScale={scaleNum}
                             preventCollision={true}
