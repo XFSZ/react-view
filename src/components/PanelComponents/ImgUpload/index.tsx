@@ -96,7 +96,6 @@ class PicsWall extends React.Component<PicsWallType> {
 
     if (file.status === 'done') {
       const files = fileList.map(item => {
-        console.log(item);
         const { uid, name, status } = item;
         const url = item.url || item.response.result.url;
         return { uid, name, status, url };
