@@ -46,10 +46,11 @@ const SourceBox = memo((props: SourceBoxProps) => {
   } = props;
   const context = useContext(dooringContext);
   let pointData = pstate ? pstate.pointData : [];
-  //console.log('all : ', pstate);
+
   const cpointData = cstate ? cstate.pointData : [];
   const [canvasRect, setCanvasRect] = useState<number[]>([]);
   const [isShowTip, setIsShowTip] = useState(true);
+  const [viewData, setViewData] = useState<any[]>([]);
   // const [clonePointData, setPointData] = useState(pointData);
   // const [isMenu, setIsMenu] = useState(false);
   const [{ isOver }, drop] = useDrop({
@@ -110,75 +111,31 @@ const SourceBox = memo((props: SourceBoxProps) => {
     // console.log('dragStop');
 
     return (layout, oldItem, newItem, placeholder, e, element) => {
-      //   console.log('dragStopelement : ', element);
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
-      // console.log('curPointData : ', curPointData);
       dispatch({
         type: 'editorModal/modPointData',
         payload: { ...curPointData, point: newItem, status: 'inToCanvas' },
       });
-      // if (context.theme === 'h5') {
-      //   const curPointData = pointData.filter(item => item.id === newItem.i)[0];
-      //   dispatch({
-      //     type: 'editorModal/modPointData',
-      //     payload: { ...curPointData, point: newItem, status: 'inToCanvas' },
-      //   });
-      // } else {
-      //   const curPointData = cpointData.filter(item => item.id === newItem.i)[0];
-      //   dispatch({
-      //     type: 'editorPcModal/modPointData',
-      //     payload: { ...curPointData, point: newItem, status: 'inToCanvas' },
-      //   });
-      // }
     };
   }, [context.theme, cpointData, dispatch, pointData]);
 
   const onDragStart: ItemCallback = useMemo(() => {
     return (layout, oldItem, newItem, placeholder, e, element) => {
-      //  console.log('onDragStart');
-      //  console.log('onDragStartelement : ', element);
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({
         type: 'editorModal/modPointData',
         payload: { ...curPointData, status: 'inToCanvas' },
       });
-      // if (context.theme === 'h5') {
-      //   const curPointData = pointData.filter(item => item.id === newItem.i)[0];
-      //   dispatch({
-      //     type: 'editorModal/modPointData',
-      //     payload: { ...curPointData, status: 'inToCanvas' },
-      //   });
-      // } else {
-      //   const curPointData = cpointData.filter(item => item.id === newItem.i)[0];
-      //   dispatch({
-      //     type: 'editorPcModal/modPointData',
-      //     payload: { ...curPointData, status: 'inToCanvas' },
-      //   });
-      // }
     };
   }, [dispatch, pointData]);
 
   const onResizeStop: ItemCallback = useMemo(() => {
-    //  console.log('onResizeStop');
     return (layout, oldItem, newItem, placeholder, e, element) => {
       const curPointData = pointData.filter(item => item.id === newItem.i)[0];
       dispatch({
         type: 'editorModal/modPointData',
         payload: { ...curPointData, point: newItem, status: 'inToCanvas' },
       });
-      // if (context.theme === 'h5') {
-      //   const curPointData = pointData.filter(item => item.id === newItem.i)[0];
-      //   dispatch({
-      //     type: 'editorModal/modPointData',
-      //     payload: { ...curPointData, point: newItem, status: 'inToCanvas' },
-      //   });
-      // } else {
-      //   const curPointData = cpointData.filter(item => item.id === newItem.i)[0];
-      //   dispatch({
-      //     type: 'editorPcModal/modPointData',
-      //     payload: { ...curPointData, point: newItem, status: 'inToCanvas' },
-      //   });
-      // }
     };
   }, [dispatch, pointData]);
 
@@ -192,31 +149,34 @@ const SourceBox = memo((props: SourceBoxProps) => {
     );
   };
 
-  const handleContextMenuDel = () => {
+  const handleContextMenuDel = useCallback(() => {
     if (pstate.curPoint) {
       dispatch({
         type: 'editorModal/delPointData',
         payload: { id: pstate.curPoint.id },
       });
     }
-  };
+  }, [dispatch, pstate.curPoint]);
 
-  const handleContextMenuCopy = () => {
+  const handleContextMenuCopy = useCallback(() => {
     if (pstate.curPoint) {
       dispatch({
         type: 'editorModal/copyPointData',
         payload: { id: pstate.curPoint.id },
       });
     }
-  };
+  }, [dispatch, pstate.curPoint]);
 
-  const onConTextClick = (type: string) => {
-    if (type === 'del') {
-      handleContextMenuDel();
-    } else if (type === 'copy') {
-      handleContextMenuCopy();
-    }
-  };
+  const onConTextClick = useCallback(
+    (type: string) => {
+      if (type === 'del') {
+        handleContextMenuDel();
+      } else if (type === 'copy') {
+        handleContextMenuCopy();
+      }
+    },
+    [handleContextMenuCopy, handleContextMenuDel],
+  );
 
   const MyAwesomeMenu = useCallback(
     () => (
@@ -245,6 +205,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
   const [panelWidth, setPanelWidth] = useState('1920px');
   const [panelHeight, setPanelHeight] = useState('1080px');
   // const [backgroundColor,setBackgroundColor] = useState('#eee')
+
   useEffect(() => {
     try {
       if (panelData.id && panelData.id === '0') {
@@ -257,27 +218,44 @@ const SourceBox = memo((props: SourceBoxProps) => {
     }
   }, [panelWidth, panelHeight, panelData]);
 
-  // const renderval  = useCallback(()=>{})
+  // 将在同一个 层级的item 放到 一个数组里面
+  //useCallback
 
-  function renderval(value: {
-    id: string;
-    item: any;
-    point: any;
-    isMenu?: any;
-    visibility: string;
-  }) {
-    // console.log("renderval : ",value)
-    if (pstate.pointData[0].item.config.layerList && value.id !== '0') {
-      for (let i = 0; i < pstate.pointData[0].item.config.layerList.length; i++) {
-        const va = pstate.pointData[0].item.config.layerList[i];
-        if (va.zIndex === value.item.config.zIndex) {
-          return va.visibility;
+  useEffect(() => {
+    let newArr: any[] = [];
+    // setViewData(Array<any[]>());
+    pstate.pointData[0].item.config.layerList.map((layoutval: { zIndex: number }) => {
+      let filterData: any = pstate.pointData.filter(value => {
+        return value.item.config.zIndex === layoutval.zIndex;
+      });
+      if (filterData.length > 0) {
+        // a.push(b);
+        let viewDatasignle = {
+          id: `vd${layoutval.zIndex}`,
+          zIndex: layoutval.zIndex,
+          data: filterData,
+        };
+        newArr.push(viewDatasignle);
+      }
+    });
+    setViewData(newArr);
+  }, [pstate.pointData]);
+
+  // 组件是否可见渲染
+  const renderval = useCallback(
+    (value: { id: string; item: any; point: any; isMenu?: any; visibility: string }) => {
+      if (pstate.pointData[0].item.config.layerList && value.id !== '0') {
+        for (let i = 0; i < pstate.pointData[0].item.config.layerList.length; i++) {
+          const va = pstate.pointData[0].item.config.layerList[i];
+          if (va.zIndex === value.item.config.zIndex) {
+            return va.visibility;
+          }
         }
       }
-    }
-    return 0;
-  }
-
+      return 0;
+    },
+    [],
+  );
   const render = useMemo(() => {
     return (
       <Draggable
@@ -311,55 +289,46 @@ const SourceBox = memo((props: SourceBoxProps) => {
                 }}
                 ref={drop}
               >
-                {pointData.length > 0
-                  ? pointData[0].item.config.layerList.map(
-                      (layoutval: { id: string; zIndex: number }) => (
-                        <div
-                          key={layoutval.id}
-                          style={{ position: 'absolute', zIndex: layoutval.zIndex }}
+                {viewData.length > 0
+                  ? viewData.map((layoutval: { id: string; zIndex: number; data: any }) => (
+                      <div
+                        key={layoutval.id}
+                        style={{ position: 'absolute', zIndex: layoutval.zIndex }}
+                      >
+                        <GridLayout
+                          key={`dd${layoutval.id}`}
+                          className={styles.layout}
+                          cols={9999}
+                          rowHeight={2}
+                          compactType={null}
+                          width={canvasRect[0] || 0}
+                          //  rowHeight={canvasRect[1] || 2}
+                          transformScale={scaleNum}
+                          margin={[0, 0]}
+                          onDragStop={dragStop}
+                          onDragStart={onDragStart}
+                          onResizeStop={onResizeStop}
                         >
-                          <GridLayout
-                            key={`dd${layoutval.id}`}
-                            className={styles.layout}
-                            cols={9999}
-                            // autoSize={true}
-                            rowHeight={2}
-                            compactType={null}
-                            width={canvasRect[0] || 0}
-                            //autoSize={true}
-                            // rowHeight={canvasRect[1] || 2}
-                            // isBounded={true}
-                            // useCSSTransforms={true}
-                            // useCSSTransforms = {false}
-                            //synchronizeLayout={true}
-                            transformScale={scaleNum}
-                            // preventCollision={true}
-                            margin={[0, 0]}
-                            onDragStop={dragStop}
-                            onDragStart={onDragStart}
-                            onResizeStop={onResizeStop}
-                          >
-                            {pointData.map(value =>
-                              value.id !== '0' && value.item.config.zIndex === layoutval.zIndex ? (
-                                <div
-                                  className={value.isMenu ? styles.selected : styles.dragItem}
-                                  key={value.id}
-                                  data-grid={value.point}
-                                  style={{
-                                    visibility: renderval(value) === 1 ? 'visible' : 'hidden',
-                                    marginTop: '-4px',
-                                  }}
-                                >
-                                  <DynamicEngine {...value.item} isTpl={false} />
-                                </div>
-                              ) : (
-                                <div key={`dc${value.id}`}></div>
-                              ),
-                            )}
-                          </GridLayout>
-                        </div>
-                      ),
-                    )
+                          {layoutval.data.map((value: any) =>
+                            value.id !== '0' && value.item.config.zIndex === layoutval.zIndex ? (
+                              <div
+                                className={value.isMenu ? styles.selected : styles.dragItem}
+                                key={value.id}
+                                data-grid={value.point}
+                                style={{
+                                  visibility: renderval(value) === 1 ? 'visible' : 'hidden',
+                                  marginTop: '-4px',
+                                }}
+                              >
+                                <DynamicEngine {...value.item} isTpl={false} />
+                              </div>
+                            ) : (
+                              <div key={`dc${value.id}`}></div>
+                            ),
+                          )}
+                        </GridLayout>
+                      </div>
+                    ))
                   : null}
               </div>
             </div>
@@ -373,16 +342,17 @@ const SourceBox = memo((props: SourceBoxProps) => {
     dragState,
     dragStop,
     drop,
+    viewData,
     //  isShowTip,
     onDragStart,
     onResizeStop,
     opacity,
-    pointData,
+    //   pointData,
     scaleNum,
     setDragState,
     panelWidth,
     panelHeight,
-    // renderval,
+    renderval,
   ]);
 
   return (

@@ -30,14 +30,14 @@ interface PreviewPageProps {
 
 const PreviewPage = memo((props: PreviewPageProps) => {
   const { pstate, dispatch } = props;
-  // console.log('perview : ', pstate);
   const [loading, setLoading] = useState(true);
+  const [viewData, setViewData] = useState<any[]>([]);
   useEffect(() => {
     if (pstate.pointData.length < 1) {
       const fetchData = async () => {
         const result = await axios('/api/getdata');
         localForage.setItem('userData', JSON.stringify(result.data)).then(() => {
-          const previewdata = result.data.map(item => ({
+          const previewdata = result.data.map((item: any) => ({
             ...item,
             point: { ...item.point, isDraggable: false, static: true, isResizable: false },
           }));
@@ -62,11 +62,29 @@ const PreviewPage = memo((props: PreviewPageProps) => {
     }
   }, []);
   let pointData: any = pstate.pointData || [];
-  // useEffect(() => {
-  //
-
-  //});
-  //  console.log("preview : ",pointData)
+  useEffect(() => {
+    let newarr: any[] = [];
+    // setViewData(Array<any[]>());
+    try {
+      pstate.pointData[0].item.config.layerList.map((layoutval: { zIndex: number }) => {
+        let filterData: any = pstate.pointData.filter(value => {
+          return value.item.config.zIndex === layoutval.zIndex;
+        });
+        if (filterData.length > 0) {
+          // a.push(b);
+          let viewDatasignle = {
+            id: `vd${layoutval.zIndex}`,
+            zIndex: layoutval.zIndex,
+            data: filterData,
+          };
+          newarr.push(viewDatasignle);
+        }
+      });
+      setViewData(newarr);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [pstate.pointData]);
   let fireFoxHeight: any = document.body.clientHeight;
   let fireFoxWidth: any = document.body.clientWidth;
   try {
@@ -88,6 +106,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
       for (let i = 0; i < pointData[0].item.config.layerList.length; i++) {
         const va = pointData[0].item.config.layerList[i];
         if (va.zIndex === value.item.config.zIndex) {
+          //  console.log( value.item)
           return va.visibility;
         }
       }
@@ -114,8 +133,8 @@ const PreviewPage = memo((props: PreviewPageProps) => {
       }}
     >
       <div ref={refImgDom}>
-        {pointData.length > 0
-          ? pointData[0].item.config.layerList.map((layoutval: { id: string; zIndex: number }) => (
+        {viewData.length > 0
+          ? viewData.map((layoutval: { id: string; zIndex: number; data: any }) => (
               <div
                 key={layoutval.id}
                 style={{ position: 'absolute', zIndex: layoutval.zIndex, marginTop: '-2px' }}
@@ -129,7 +148,7 @@ const PreviewPage = memo((props: PreviewPageProps) => {
                   width={pointData[0].item.config.width}
                   margin={[0, 0]}
                 >
-                  {pointData.map((value: any) =>
+                  {layoutval.data.map((value: any) =>
                     value.id !== '0' && value.item.config.zIndex === layoutval.zIndex ? (
                       <div
                         className={styles.dragItem}
