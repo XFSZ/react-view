@@ -64,14 +64,12 @@ const PreviewPage = memo((props: PreviewPageProps) => {
   let pointData: any = pstate.pointData || [];
   useEffect(() => {
     let newarr: any[] = [];
-    // setViewData(Array<any[]>());
     try {
       pstate.pointData[0].item.config.layerList.map((layoutval: { zIndex: number }) => {
         let filterData: any = pstate.pointData.filter(value => {
           return value.item.config.zIndex === layoutval.zIndex;
         });
         if (filterData.length > 0) {
-          // a.push(b);
           let viewDatasignle = {
             id: `vd${layoutval.zIndex}`,
             zIndex: layoutval.zIndex,
@@ -106,7 +104,6 @@ const PreviewPage = memo((props: PreviewPageProps) => {
       for (let i = 0; i < pointData[0].item.config.layerList.length; i++) {
         const va = pointData[0].item.config.layerList[i];
         if (va.zIndex === value.item.config.zIndex) {
-          //  console.log( value.item)
           return va.visibility;
         }
       }

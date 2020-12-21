@@ -219,17 +219,13 @@ const SourceBox = memo((props: SourceBoxProps) => {
   }, [panelWidth, panelHeight, panelData]);
 
   // 将在同一个 层级的item 放到 一个数组里面
-  //useCallback
-
   useEffect(() => {
     let newArr: any[] = [];
-    // setViewData(Array<any[]>());
     pstate.pointData[0].item.config.layerList.map((layoutval: { zIndex: number }) => {
       let filterData: any = pstate.pointData.filter(value => {
         return value.item.config.zIndex === layoutval.zIndex;
       });
       if (filterData.length > 0) {
-        // a.push(b);
         let viewDatasignle = {
           id: `vd${layoutval.zIndex}`,
           zIndex: layoutval.zIndex,
@@ -301,6 +297,8 @@ const SourceBox = memo((props: SourceBoxProps) => {
                           cols={9999}
                           rowHeight={2}
                           compactType={null}
+                          verticalCompact={false}
+                          preventCollision={true}
                           width={canvasRect[0] || 0}
                           //  rowHeight={canvasRect[1] || 2}
                           transformScale={scaleNum}
