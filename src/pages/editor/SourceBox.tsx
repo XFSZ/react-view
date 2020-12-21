@@ -297,7 +297,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
                           cols={9999}
                           rowHeight={2}
                           compactType={null}
-                          verticalCompact={false}
+                          // verticalCompact={false}
                           preventCollision={true}
                           width={canvasRect[0] || 0}
                           //  rowHeight={canvasRect[1] || 2}
@@ -307,23 +307,19 @@ const SourceBox = memo((props: SourceBoxProps) => {
                           onDragStart={onDragStart}
                           onResizeStop={onResizeStop}
                         >
-                          {layoutval.data.map((value: any) =>
-                            value.id !== '0' && value.item.config.zIndex === layoutval.zIndex ? (
-                              <div
-                                className={value.isMenu ? styles.selected : styles.dragItem}
-                                key={value.id}
-                                data-grid={value.point}
-                                style={{
-                                  visibility: renderval(value) === 1 ? 'visible' : 'hidden',
-                                  marginTop: '-4px',
-                                }}
-                              >
-                                <DynamicEngine {...value.item} isTpl={false} />
-                              </div>
-                            ) : (
-                              <div key={`dc${value.id}`}></div>
-                            ),
-                          )}
+                          {layoutval.data.map((value: any) => (
+                            <div
+                              className={value.isMenu ? styles.selected : styles.dragItem}
+                              key={value.id}
+                              data-grid={value.point}
+                              style={{
+                                visibility: renderval(value) === 1 ? 'visible' : 'hidden',
+                                marginTop: '-4px',
+                              }}
+                            >
+                              <DynamicEngine {...value.item} isTpl={false} />
+                            </div>
+                          ))}
                         </GridLayout>
                       </div>
                     ))
