@@ -253,6 +253,7 @@ const SourceBox = memo((props: SourceBoxProps) => {
     [],
   );
   const render = useMemo(() => {
+    console.log('111');
     return (
       <Draggable
         position={dragState}
@@ -297,10 +298,8 @@ const SourceBox = memo((props: SourceBoxProps) => {
                           cols={9999}
                           rowHeight={2}
                           compactType={null}
-                          // verticalCompact={false}
                           preventCollision={true}
                           width={canvasRect[0] || 0}
-                          //  rowHeight={canvasRect[1] || 2}
                           transformScale={scaleNum}
                           margin={[0, 0]}
                           onDragStop={dragStop}

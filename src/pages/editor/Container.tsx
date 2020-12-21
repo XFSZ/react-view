@@ -222,7 +222,6 @@ const Container = (props: {
             transform: rightColla ? 'translate(100%,0)' : 'translate(0,0)',
           }}
         >
-          {/* {console.log("curPoint : ",curPoint)} */}
           {pointData.length && curPoint ? (
             <>
               <div className={styles.tit}>属性设置</div>
@@ -238,18 +237,7 @@ const Container = (props: {
           ) : (
             <>
               <div className={styles.tit}>属性设置</div>
-              {/* 
-               <>
-              
-            <FormEditor
-              config={pstate.pointData[0].item.editableEl}
-              uid={'0'}
-              defaultValue={pstate.pointData[0].item.config}
-              onSave={handleFormSave}
-              onDel={handleDel}
-              rightPannelRef={ref}
-            />
-          </> */}
+
               <div style={{ paddingTop: '100px' }}>
                 <Result
                   status="404"
@@ -495,7 +483,8 @@ const Container = (props: {
           id="calibration"
           ref={containerRef}
           onMouseDown={mousedownfn}
-          onMouseMove={throttle(mousemovefn, 500)}
+          //  onMouseMove={throttle(mousemovefn, 500)}
+          onMouseMove={mousemovefn}
           onMouseUp={mouseupfn}
           onMouseLeave={mouseupfn}
           onWheel={onwheelFn}
@@ -515,6 +504,12 @@ const Container = (props: {
             panelData={curPoint}
           />
           <CanvasControl scaleNum={scaleNum} handleSlider={handleSlider} backSize={backSize} />
+          {/* <div className={styles.scrollBottom}>
+            <Calibration direction="up" id="calibrationUp" multiple={scaleNum} />
+          </div>
+          <div className={styles.scrollRight}>
+            <Calibration direction="right" id="calibrationRight" multiple={scaleNum} />
+          </div> */}
         </div>
         {renderRight}
         <div

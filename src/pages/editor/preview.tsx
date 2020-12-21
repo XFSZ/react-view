@@ -12,7 +12,7 @@ import DynamicEngine from 'components/DynamicEngine';
 import domtoimage from 'dom-to-image';
 import req from '@/utils/req';
 import axios from 'axios';
-import styles from './index.less';
+import styles from './preindex.less';
 import { useGetScrollBarWidth } from '@/utils/tool';
 import { LocationDescriptorObject } from 'history-with-query';
 import { connect } from 'dva';

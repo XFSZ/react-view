@@ -83,8 +83,11 @@ const ESinglePie = (props: XEChartProps & { dispatch: Dispatch }) => {
     radius: 0.98,
     statistic: {
       title: {
-        style: { color: '#363636', fontSize: '12px', lineHeight: '14px' },
+        style: { color: '#E8EDF3', fontSize: '12px', lineHeight: '14px' },
         formatter: () => `${ringProgressName}`,
+      },
+      content: {
+        style: { color: '#E8EDF3', fontSize: '12px', lineHeight: '14px' },
       },
     },
   });
