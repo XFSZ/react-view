@@ -53,10 +53,20 @@ export default {
       };
     },
     batchModifyPointData(state, { payload }) {
-      overSave('userData', payload);
+      const pointData = state.pointData.map(item => {
+        const payloaditem = payload.filter(modItem => {
+          return modItem.id === item.id;
+        });
+        if (payloaditem.length > 0) {
+          return { ...payloaditem[0] };
+        }
+        return { ...item };
+      });
+      // console.log(pointData)
+      overSave('userData', pointData);
       return {
         ...state,
-        pointData: payload,
+        pointData: pointData,
       };
     },
     importTplData(state, { payload }) {

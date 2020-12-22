@@ -12,7 +12,7 @@ const onClick = (clickParams: string, dispatch: Dispatch) => {
     localForage.getItem('userData').then(value => {
       const userData = value || '[]';
       const userDataJson = JSON.parse(userData as string);
-      //  const previewDatas = [];
+      const userModDatas = [];
       for (let i = 0; i < clickParamsData.length; i++) {
         for (let j = 0; j < userDataJson.length; j++) {
           if (userDataJson[j].id === clickParamsData[i].id) {
@@ -23,21 +23,20 @@ const onClick = (clickParams: string, dispatch: Dispatch) => {
             Object.keys(clickParamsData[i].config).map(
               val => (userDataJson[j].item.config[val] = clickParamsData[i].config[val]),
             );
-            // previewDatas.push(userDataJson[j])
+            userModDatas.push(userDataJson[j]);
           }
         }
       }
       try {
         dispatch({
           type: 'editorModal/batchModifyPointData',
-          payload: userDataJson,
+          payload: userModDatas,
         });
       } catch (e) {
         console.warn(e);
       }
       try {
-        // console.log(previewDatas)
-        const previewdata = userDataJson.map((item: any) => ({
+        const previewdata = userModDatas.map((item: any) => ({
           ...item,
           point: { ...item.point, isDraggable: false, static: true, isResizable: false },
         }));
