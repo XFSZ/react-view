@@ -504,12 +504,6 @@ const Container = (props: {
             panelData={curPoint}
           />
           <CanvasControl scaleNum={scaleNum} handleSlider={handleSlider} backSize={backSize} />
-          {/* <div className={styles.scrollBottom}>
-            <Calibration direction="up" id="calibrationUp" multiple={scaleNum} />
-          </div>
-          <div className={styles.scrollRight}>
-            <Calibration direction="right" id="calibrationRight" multiple={scaleNum} />
-          </div> */}
         </div>
         {renderRight}
         <div

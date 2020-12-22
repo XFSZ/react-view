@@ -44,11 +44,19 @@ export default {
         }
         return { ...item };
       });
+      console.log(pointData);
       overSave('userData', pointData);
       return {
         ...state,
         pointData,
         curPoint: payload,
+      };
+    },
+    batchModifyPointData(state, { payload }) {
+      overSave('userData', payload);
+      return {
+        ...state,
+        pointData: payload,
       };
     },
     importTplData(state, { payload }) {

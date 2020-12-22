@@ -10,60 +10,43 @@ const onClick = (clickParams: string, dispatch: Dispatch) => {
     const clickParamsData = JSON.parse(clickParamsStrData);
     // const userData = localStorage.getItem('userData') || '[]';
     localForage.getItem('userData').then(value => {
-      //console.log(value)
       const userData = value || '[]';
       const userDataJson = JSON.parse(userData as string);
+      //  const previewDatas = [];
       for (let i = 0; i < clickParamsData.length; i++) {
         for (let j = 0; j < userDataJson.length; j++) {
           if (userDataJson[j].id === clickParamsData[i].id) {
-            const modifyData = userDataJson[j];
             if (!clickParamsData[i].config) {
               continue;
             }
-            const keys = Object.keys(clickParamsData[i].config); //获取所有修改的值
-            keys.map(val => (modifyData.item.config[val] = clickParamsData[i].config[val]));
-            try {
-              dispatch({
-                type: 'editorModal/modPointData',
-                payload: {
-                  id: modifyData.id,
-                  item: modifyData.item,
-                  point: modifyData.point,
-                  status: 'inToCanvas',
-                },
-              });
-            } catch (e) {
-              console.warn(e);
-            }
-            try {
-              // const previewdata = modifyData.map(item => ({
-              //   ...item,
-              //   point: { ...item.point, isDraggable: false, static: true, isResizable: false },
-              // }));
-
-              const previewdata = {
-                point: {
-                  ...modifyData.point,
-                  isDraggable: false,
-                  static: true,
-                  isResizable: false,
-                },
-              };
-              //    console.log("previewdata : ",previewdata)
-              dispatch({
-                type: 'previewModal/modPointData',
-                payload: {
-                  id: modifyData.id,
-                  item: modifyData.item,
-                  point: previewdata,
-                  status: 'inToCanvas',
-                },
-              });
-            } catch (e) {
-              console.warn(e);
-            }
+            //获取并修改 所有修改的值
+            Object.keys(clickParamsData[i].config).map(
+              val => (userDataJson[j].item.config[val] = clickParamsData[i].config[val]),
+            );
+            // previewDatas.push(userDataJson[j])
           }
         }
+      }
+      try {
+        dispatch({
+          type: 'editorModal/batchModifyPointData',
+          payload: userDataJson,
+        });
+      } catch (e) {
+        console.warn(e);
+      }
+      try {
+        // console.log(previewDatas)
+        const previewdata = userDataJson.map((item: any) => ({
+          ...item,
+          point: { ...item.point, isDraggable: false, static: true, isResizable: false },
+        }));
+        dispatch({
+          type: 'previewModal/batchModifyPointData',
+          payload: previewdata,
+        });
+      } catch (e) {
+        console.warn(e);
       }
     });
   } catch (err) {
