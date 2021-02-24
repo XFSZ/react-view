@@ -477,34 +477,36 @@ const Container = (props: {
             transition: 'all ease-in-out 0.5s',
           }}
         ></div>
-
-        <div
-          className={styles.tickMark}
-          id="calibration"
-          ref={containerRef}
-          onMouseDown={mousedownfn}
-          //  onMouseMove={throttle(mousemovefn, 500)}
-          onMouseMove={mousemovefn}
-          onMouseUp={mouseupfn}
-          onMouseLeave={mouseupfn}
-          onWheel={onwheelFn}
-        >
-          <div className={styles.tickMarkTop}>
-            <Calibration direction="up" id="calibrationUp" multiple={scaleNum} />
+        <div style={{ position: 'relative', flex: 1, height: '100%', width: '100%' }}>
+          <div
+            className={styles.tickMark}
+            id="calibration"
+            ref={containerRef}
+            onMouseDown={mousedownfn}
+            //  onMouseMove={throttle(mousemovefn, 500)}
+            onMouseMove={mousemovefn}
+            onMouseUp={mouseupfn}
+            onMouseLeave={mouseupfn}
+            onWheel={onwheelFn}
+          >
+            <div className={styles.tickMarkTop}>
+              <Calibration direction="up" id="calibrationUp" multiple={scaleNum} />
+            </div>
+            <div className={styles.tickMarkLeft}>
+              <Calibration direction="right" id="calibrationRight" multiple={scaleNum} />
+            </div>
+            <SourceBox
+              dragState={dragstate}
+              setDragState={setDragState}
+              scaleNum={scaleNum}
+              canvasId={canvasId}
+              allType={allType}
+              panelData={curPoint}
+            />
           </div>
-          <div className={styles.tickMarkLeft}>
-            <Calibration direction="right" id="calibrationRight" multiple={scaleNum} />
-          </div>
-          <SourceBox
-            dragState={dragstate}
-            setDragState={setDragState}
-            scaleNum={scaleNum}
-            canvasId={canvasId}
-            allType={allType}
-            panelData={curPoint}
-          />
           <CanvasControl scaleNum={scaleNum} handleSlider={handleSlider} backSize={backSize} />
         </div>
+
         {renderRight}
         <div
           className={styles.rightcolla}
